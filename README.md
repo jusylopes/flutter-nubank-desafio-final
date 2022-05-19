@@ -64,11 +64,12 @@ Estes itens não são obrigatórios, porém desejáveis.
 - Modularização do projeto
 - Customização do aplicativo utilizando Tema Global
 - Preparação para disponibilizar em pelo menos uma Loja de Aplicativos
+- Cache de imagens
 
 ### 🚨 Informações Importantes
 
 - Layout disponíveis no Figma (https://bit.ly/3PwXizT)
 - Você deve fazer um cadastro no Figma para ter acesso ao layout.
 - Detalhamento das telas (https://bit.ly/3acs698)
-- Navegação e protótipo ()
-- Documentação da API disponível no Swagger ()
+- Navegação e protótipo (https://bit.ly/3wqNJLw)
+- Documentação da API disponível no Swagger (https://bit.ly/3yRGEVR)
