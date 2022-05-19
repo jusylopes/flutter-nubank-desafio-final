@@ -74,3 +74,5 @@ Estes itens não são obrigatórios, porém desejáveis.
 - Detalhamento das telas (https://bit.ly/3acs698)
 - Navegação e protótipo (https://bit.ly/3wqNJLw)
 - Documentação da API disponível no Swagger (https://bit.ly/3yRGEVR)
+- Link Termo de Participação PDF (http://www.africau.edu/images/default/sample.pdf)
+- Número do Whatsapp vocês que escolhe!!!
