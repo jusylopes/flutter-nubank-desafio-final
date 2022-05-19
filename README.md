@@ -65,6 +65,7 @@ Estes itens não são obrigatórios, porém desejáveis.
 - Customização do aplicativo utilizando Tema Global
 - Preparação para disponibilizar em pelo menos uma Loja de Aplicativos
 - Cache de imagens
+- Adicionar animações (use a criatividade)
 
 ### 🚨 Informações Importantes
 
