@@ -2,7 +2,7 @@
 
 # Desafio Final
 
-## ENTREGAR: 08/06/2022
+### DATA DE ENTREGA: 08/06/2022
 
 ### 🎯 Visão do Projeto
 
