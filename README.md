@@ -2,6 +2,8 @@
 
 # Desafio Final
 
+## ENTREGAR: 08/06/2022
+
 ### 🎯 Visão do Projeto
 
 O carnaval de Salvador é um evento usualmente anual e que para acontecer conta com o apoio de diversos comerciantes. Para estabelecer o controle e a segurança é necessário fazer um credenciamento. 
