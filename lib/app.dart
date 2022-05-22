@@ -12,12 +12,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
       theme: ThemeData(
-        primaryColor: LasColors.primaryColor,
-        scaffoldBackgroundColor: LasColors.backgroundColor,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'Roboto'
-      ),
-      home: const HomePage(),
+         
+          scaffoldBackgroundColor: LasColors.backgroundColor,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'Roboto'),
+      home: HomePage(),
     );
   }
 }
