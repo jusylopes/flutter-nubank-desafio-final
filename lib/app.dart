@@ -18,11 +18,11 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.authentication,
+      initialRoute: Routes.login,
       routes: {
         Routes.splash: (context) => const SplashPage(),
         Routes.login: (context) => const LoginPage(),
-        Routes.register: (context) => const AuthenticationPage(),
+        Routes.authentication: (context) => const AuthenticationPage(),
       },
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class LasColors {
   static const colorBackgroundColor = Colors.transparent;
+  
   // texto
   static Color textTitleLoginPage = const Color(0XFF184F8D).withOpacity(0.8);
   static const Color textLoginPage = Color(0XFF555770);
