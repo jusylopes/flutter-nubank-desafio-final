@@ -28,4 +28,17 @@ abstract class LasTextStyle {
     color: LasColors.textLoginPageCreate,
   );
 
+ static const loginRegisterPage = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 38.0,
+    color: LasColors.textRegisterPage
+  );
+
+   static const loginRegisterPageSubtitle = TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: 18.0,
+    color: LasColors.txtLoginRegisterPageSubtitle
+  );
+
+
 }
