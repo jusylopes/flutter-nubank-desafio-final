@@ -4,6 +4,7 @@ import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:flutter/gestures.dart';
 import 'package:projeto_final/ui/views/components/background_page.dart';
+import 'package:projeto_final/ui/views/components/button_widget.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,7 +15,6 @@ class LoginPage extends StatelessWidget {
       children: [
         const BackgroundPage(),
         Scaffold(
-          backgroundColor: Colors.transparent,
           body: SafeArea(
             child: Center(
               child: Column(
@@ -37,20 +37,9 @@ class LoginPage extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  const SizedBox(height: 50),
+                  const SizedBox(height: 40),
                   SizedBox(
-                    height: 50,
-                    width: 260,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          textStyle: LasTextStyle.txtButton,
-                          primary: LasColors.buttonColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(2),
-                          )),
-                      onPressed: () {},
-                      child: Text(Strings.buttonLogin.toUpperCase()),
-                    ),
+                    child: ButtonWidget(colorButton: LasColors.buttonColor, textButton: Strings.buttonInitial, onPressed: (){})
                   ),
                   Container(
                     height: 30,
