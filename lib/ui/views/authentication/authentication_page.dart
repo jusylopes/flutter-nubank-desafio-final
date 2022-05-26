@@ -16,9 +16,16 @@ class AuthenticationPage extends StatefulWidget {
 
 class _AuthenticationPageState extends State<AuthenticationPage> {
   final maskFormatter = MaskTextInputFormatter(mask: '###.###.###-##');
+  bool _isHidden = true;
 
   @override
   Widget build(BuildContext context) {
+    void _passwordView() {
+      setState(() {
+        _isHidden = !_isHidden;
+      });
+    }
+
     return Stack(
       children: [
         const BackgroundPage(),
@@ -72,14 +79,16 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 30.0, vertical: 5.0),
                         child: TextField(
-                          obscureText: true,
+                          obscureText: _isHidden,
                           decoration: InputDecoration(
                               border: const OutlineInputBorder(
                                   borderRadius: BorderRadius.zero),
                               labelText: 'Senha',
                               suffixIcon: IconButton(
-                                icon: const Icon(Icons.visibility),
-                                onPressed: () {},
+                                icon: _isHidden
+                                    ? const Icon(Icons.visibility_off)
+                                    : const Icon(Icons.visibility),
+                                onPressed: _passwordView,
                               )),
                         ),
                       ),
