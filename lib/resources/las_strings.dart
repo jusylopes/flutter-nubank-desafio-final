@@ -9,4 +9,6 @@ abstract class Strings {
   static const buttonLogin = 'ENTRAR';
   static const txtRegisterAlertDialog =
       'Credenciais incorretas, tente novamente';
+       static const txtMyHistoric =
+      'Meus dados';
 }

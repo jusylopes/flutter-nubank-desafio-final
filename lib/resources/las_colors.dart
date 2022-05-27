@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 abstract class LasColors {
   static const colorBackgroundColor = Colors.transparent;
-  
+
   // texto
   static Color textTitleLoginPage = const Color(0XFF184F8D).withOpacity(0.8);
   static const Color textLoginPage = Color(0XFF555770);
@@ -13,4 +13,5 @@ abstract class LasColors {
   // botao
   static const Color buttonColor = Color(0XFF004BA0);
   static const Color textButtonColor = Color(0XFFFFFFFF);
+  static const Color appBarEditProfile = Color(0XFF0175b4);
 }

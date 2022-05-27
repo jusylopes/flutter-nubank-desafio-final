@@ -36,4 +36,11 @@ abstract class LasTextStyle {
       fontWeight: FontWeight.w300,
       fontSize: 18.0,
       color: LasColors.txtLoginRegisterPageSubtitle);
+
+        static const txtEdit= TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.0,
+    color: LasColors.textButtonColor,
+  );
+
 }
