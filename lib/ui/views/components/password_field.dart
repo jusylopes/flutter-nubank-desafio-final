@@ -8,7 +8,6 @@ class PasswordField extends StatefulWidget {
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  final TextEditingController _passwordController = TextEditingController();
   bool _isHidden = true;
 
   _passwordView() {
@@ -20,7 +19,6 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _passwordController,
         obscureText: _isHidden,
         decoration: InputDecoration(
           border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
