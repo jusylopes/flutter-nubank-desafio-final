@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/background_page.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({Key? key}) : super(key: key);
+  const SplashPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -16,6 +19,12 @@ class _SplashPageState extends State<SplashPage> {
 
   void _changeRotation() {
     setState(() => turns += 1.0 / 5.0);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _changeRotation();
   }
 
   @override
@@ -57,10 +66,10 @@ class _SplashPageState extends State<SplashPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: _changeRotation,
-                    child: const Text('Rodar logo'),
-                  ),
+                   ElevatedButton(
+                     onPressed: _changeRotation,
+                     child: const Text('Rodar logo'),
+                   ),
                 ],
               ),
             ),
