@@ -1,25 +1,25 @@
-import 'package:flutter/material.dart';
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CpfField extends StatefulWidget {
-  const CpfField({super.key});
+  final TextEditingController cpfController;
+
+  const CpfField({super.key, required this.cpfController});
 
   @override
   State<CpfField> createState() => _CpfFieldState();
 }
 
 class _CpfFieldState extends State<CpfField> {
-  final TextEditingController _cpfController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        controller: _cpfController,
+        controller: widget.cpfController,
         keyboardType: TextInputType.number,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
-          CpfInputFormatter(),
+          // CpfInputFormatter(),
         ],
         decoration: const InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.zero),

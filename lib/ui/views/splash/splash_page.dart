@@ -44,6 +44,7 @@ class _SplashPageState extends State<SplashPage> {
                           child: SvgPicture.asset('assets/images/Vector1.svg')),
                       Image.asset('assets/images/Vector.png'),
                       SvgPicture.asset('assets/images/las.svg'),
+                      
                     ]),
                   ),
 

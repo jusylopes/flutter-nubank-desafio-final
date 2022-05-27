@@ -1,5 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/login_entity.dart';
+import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
@@ -8,6 +10,7 @@ import 'package:projeto_final/ui/views/components/background_page.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
 import 'package:projeto_final/ui/views/components/cpf_field.dart';
 import 'package:projeto_final/ui/views/components/password_field.dart';
+import 'package:projeto_final/ui/views/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -20,6 +23,11 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonLogin;
+  final _cpfController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final userRepository = SwaggerApiUserRepository();
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -63,31 +71,62 @@ class _LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                          child: const CpfField(),
+                          child: CpfField(
+                            cpfController: _cpfController,
+                          ),
                         ),
                         const SizedBox(height: 20.0),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                          child: const PasswordField(),
-                        ),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 30.0),
+                            child: PasswordField(
+                                passwordController: _passwordController)),
                         const SizedBox(height: 25.0),
                         ButtonWidget(
                           colorButton: _colorButton,
                           textButton: _textButton,
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              setState(() {
-                                _colorButton = LasColors.buttonColorAwait;
-                                _textButton = Strings.buttonAwait;
-                              });
+                          //Isa Removeu
+                          // onPressed: () {
+                          //   if (_formKey.currentState!.validate()) {
+                          //     setState(() {
+                          //       _colorButton = LasColors.buttonColorAwait;
+                          //       _textButton = Strings.buttonAwait;
+                          //     });
+                          //   }
+                          // },
 
-                              // Navigator.of(context).push(
-                              //    MaterialPageRoute(
-                              //     builder: (_) => const HomePage(),
-                              //   ),
-                              // );
-                            }
-                          },
+                          //Isa adicionou
+                          onPressed: () async {
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+                    if (_formKey.currentState!.validate()) {
+                      // bool deuCerto = await login();
+                      //Teste
+                      bool deuCerto = await userRepository.login(
+                        LoginEntity(
+                          cpf: _cpfController.text,
+                          password: _passwordController.text,
+                        ),
+                      );
+                      //Fim do teste
+                      if (!currentFocus.hasPrimaryFocus) {
+                        currentFocus.unfocus();
+                      }
+                      if (deuCerto) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      } else {
+                        _cpfController.clear();
+                        _passwordController.clear();
+                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      }
+                    } else {
+                      print('Deu merda');
+                    }
+                  },
                         ),
                       ],
                     ),
