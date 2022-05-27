@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class CpfField extends StatelessWidget {
-  const CpfField({Key? key}) : super(key: key);
+  final TextEditingController cpfController;
+
+  const CpfField({super.key, required this.cpfController});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+        controller: cpfController,
         keyboardType: TextInputType.number,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,

@@ -20,6 +20,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonLogin;
+  final _cpfController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -63,13 +65,16 @@ class _LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         Container(
                           padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                          child: const CpfField(),
+                          child: CpfField(
+                            cpfController: _cpfController,
+                          ),
                         ),
                         const SizedBox(height: 20.0),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                          child: const PasswordField(),
-                        ),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 30.0),
+                            child: PasswordField(
+                                passwordController: _passwordController)),
                         const SizedBox(height: 25.0),
                         ButtonWidget(
                           colorButton: _colorButton,
@@ -80,12 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                                 _colorButton = LasColors.buttonColorAwait;
                                 _textButton = Strings.buttonAwait;
                               });
-
-                              // Navigator.of(context).push(
-                              //    MaterialPageRoute(
-                              //     builder: (_) => const HomePage(),
-                              //   ),
-                              // );
                             }
                           },
                         ),

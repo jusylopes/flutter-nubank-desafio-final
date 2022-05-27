@@ -7,6 +7,18 @@ class NameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField();
+    return TextFormField(
+        keyboardType: TextInputType.number,
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+          CpfInputFormatter(),
+        ],
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.zero),
+          labelText: 'CPF',
+        ),
+        validator: (String? value) {
+          return value == null || value.isEmpty ? 'Campo obrigatório' : null;
+        });
   }
 }
