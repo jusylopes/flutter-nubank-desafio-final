@@ -1,32 +1,36 @@
 name: projeto_final
 description: A new Flutter project.
-publish_to: 'none' 
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
   sdk: ">=2.17.1 <3.0.0"
 
 dependencies:
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^1.1.0
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.0.1
+  mask_text_input_formatter: ^2.3.0
+  provider: ^6.0.3
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter  
   flutter_lints: ^2.0.0
-
+  flutter_test:
+    sdk: flutter
 
 flutter:
 
- 
   uses-material-design: true
   assets:
     - assets/images/logo.png
     - assets/images/backgroundPage.png
-  
+    - assets/images/Vector1.svg
+    - assets/images/Vector.png
+    - assets/images/las.svg
+
   fonts:
     - family: Roboto
       fonts:
-       - asset: assets/fonts/Roboto-Regular.ttf
-  
+        - asset: assets/fonts/Roboto-Regular.ttf
