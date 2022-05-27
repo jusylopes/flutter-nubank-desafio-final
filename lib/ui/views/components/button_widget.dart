@@ -17,8 +17,8 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+          primary: colorButton,
           textStyle: LasTextStyle.txtButton,
-          // primary: colorButton,
           padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 20),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(0.2),

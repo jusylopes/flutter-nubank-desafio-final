@@ -60,9 +60,9 @@ class _SplashPageState extends State<SplashPage> {
                     height: 150,
                     width: 350,
                     alignment: Alignment.topCenter,
-                    child: Text(
+                    child: const Text(
                       Strings.appName,
-                      style: LasTextStyle.titlePage,
+                      style: LasTextStyle.inicialPage,
                       textAlign: TextAlign.center,
                     ),
                   ),
