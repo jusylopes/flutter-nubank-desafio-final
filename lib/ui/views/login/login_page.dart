@@ -1,12 +1,16 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:projeto_final/data/entity/login_entity.dart';
+import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/background_curve.dart';
 import 'package:projeto_final/ui/views/components/background_page.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
+import 'package:projeto_final/ui/views/components/cpf_field.dart';
+import 'package:projeto_final/ui/views/components/password_field.dart';
+import 'package:projeto_final/ui/views/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -16,14 +20,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final maskFormatterCpf = MaskTextInputFormatter(mask: '###.###.###-##');
-  bool _isHidden = true;
-
-  _passwordView() {
-    setState(() {
-      _isHidden = !_isHidden;
-    });
-  }
+  final _formKey = GlobalKey<FormState>();
+  Color _colorButton = LasColors.buttonColor;
+  String _textButton = Strings.buttonLogin;
+  final _cpfController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final userRepository = SwaggerApiUserRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -61,52 +63,75 @@ class _LoginPageState extends State<LoginPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                  Column(
-                    children: <Widget>[
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                        child: TextField(
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [maskFormatterCpf],
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.zero),
-                            labelText: 'CPF',
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                          child: CpfField(
+                            cpfController: _cpfController,
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 15.0),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 30.0, vertical: 5.0),
-                        child: TextFormField(
-                            obscureText: _isHidden,
-                            decoration: InputDecoration(
-                              border: const OutlineInputBorder(
-                                  borderRadius: BorderRadius.zero),
-                              labelText: 'Senha',
-                              suffixIcon: IconButton(
-                                icon: _isHidden
-                                    ? const Icon(Icons.visibility_off)
-                                    : const Icon(Icons.visibility),
-                                onPressed: _passwordView,
-                              ),
-                            ),
-                            validator: (String? value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Campo obrigatório';
+                        const SizedBox(height: 20.0),
+                        Container(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 30.0),
+                            child: PasswordField(
+                                passwordController: _passwordController)),
+                        const SizedBox(height: 25.0),
+                        ButtonWidget(
+                          colorButton: _colorButton,
+                          textButton: _textButton,
+                          //Isa Removeu
+                          // onPressed: () {
+                          //   if (_formKey.currentState!.validate()) {
+                          //     setState(() {
+                          //       _colorButton = LasColors.buttonColorAwait;
+                          //       _textButton = Strings.buttonAwait;
+                          //     });
+                          //   }
+                          // },
+
+                          //Isa adicionou
+                          onPressed: () async {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (_formKey.currentState!.validate()) {
+                              // bool deuCerto = await login();
+                              //Teste
+                              bool deuCerto = await userRepository.login(
+                                LoginEntity(
+                                  cpf: _cpfController.text
+                                      .replaceAll(".", "")
+                                      .replaceAll("-", ""),
+                                  password: _passwordController.text,
+                                ),
+                              );
+                              //Fim do teste
+                              if (!currentFocus.hasPrimaryFocus) {
+                                currentFocus.unfocus();
                               }
-                              return null;
-                            }),
-                      ),
-                      const SizedBox(height: 25.0),
-                      ButtonWidget(
-                        colorButton: LasColors.buttonColor,
-                        textButton: Strings.buttonLogin,
-                        onPressed: () {},
-                      ),
-                    ],
-                  ),
+                              if (deuCerto) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
+                              } else {
+                                _cpfController.clear();
+                                _passwordController.clear();
+                                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
+                            } else {
+                              print('Deu merda');
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
