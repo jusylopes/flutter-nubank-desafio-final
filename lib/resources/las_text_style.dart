@@ -37,5 +37,29 @@ abstract class LasTextStyle {
       fontSize: 18.0,
       color: LasColors.txtLoginRegisterPageSubtitle);
 
+  static const txtalertWidget = TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 24.0,
+      color: LasColors.txtAlertWidget);
 
+  static const alertWidgetButton = TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 19.0,
+      color: LasColors.textButtonColor);
+
+  static const titlePageRegister = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 38.0,
+    height: 1.5,
+    color: LasColors.textRegisterPage,
+  );
+  static const registerSubtitle = TextStyle(
+      fontWeight: FontWeight.w300,
+      fontSize: 16.0,
+      color: LasColors.txtLoginRegisterPageSubtitle);
+  static const txtEdit = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.0,
+    color: LasColors.textButtonColor,
+  );
 }
