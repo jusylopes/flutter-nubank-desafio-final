@@ -19,7 +19,7 @@ class _CpfFieldState extends State<CpfField> {
         keyboardType: TextInputType.number,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,
-          // CpfInputFormatter(),
+          CpfInputFormatter(),
         ],
         decoration: const InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.zero),

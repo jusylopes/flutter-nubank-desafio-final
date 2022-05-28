@@ -27,8 +27,6 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
 
-  
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -97,36 +95,39 @@ class _LoginPageState extends State<LoginPage> {
 
                           //Isa adicionou
                           onPressed: () async {
-                    FocusScopeNode currentFocus = FocusScope.of(context);
-                    if (_formKey.currentState!.validate()) {
-                      // bool deuCerto = await login();
-                      //Teste
-                      bool deuCerto = await userRepository.login(
-                        LoginEntity(
-                          cpf: _cpfController.text,
-                          password: _passwordController.text,
-                        ),
-                      );
-                      //Fim do teste
-                      if (!currentFocus.hasPrimaryFocus) {
-                        currentFocus.unfocus();
-                      }
-                      if (deuCerto) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const HomePage(),
-                          ),
-                        );
-                      } else {
-                        _cpfController.clear();
-                        _passwordController.clear();
-                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                      }
-                    } else {
-                      print('Deu merda');
-                    }
-                  },
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (_formKey.currentState!.validate()) {
+                              // bool deuCerto = await login();
+                              //Teste
+                              bool deuCerto = await userRepository.login(
+                                LoginEntity(
+                                  cpf: _cpfController.text
+                                      .replaceAll(".", "")
+                                      .replaceAll("-", ""),
+                                  password: _passwordController.text,
+                                ),
+                              );
+                              //Fim do teste
+                              if (!currentFocus.hasPrimaryFocus) {
+                                currentFocus.unfocus();
+                              }
+                              if (deuCerto) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
+                              } else {
+                                _cpfController.clear();
+                                _passwordController.clear();
+                                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
+                            } else {
+                              print('Deu merda');
+                            }
+                          },
                         ),
                       ],
                     ),
