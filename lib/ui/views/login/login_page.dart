@@ -1,4 +1,4 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+
 import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
@@ -103,20 +103,3 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
-showAlertWidget(BuildContext context) {
-  AwesomeDialog(
-    context: context,
-    dialogType: DialogType.NO_HEADER,
-    animType: AnimType.BOTTOMSLIDE,
-    width: MediaQuery.of(context).size.width * 1,
-    padding: const EdgeInsets.only(top: 50, bottom: 50, right: 20, left: 20),
-    title: Strings.txtAuthenticationAlertDialog,
-    titleTextStyle: LasTextStyle.txtalertWidget,
-    btnOkText: Strings.buttonOk,
-    btnOkColor: LasColors.buttonColor,
-    buttonsBorderRadius: BorderRadius.circular(4.0),
-    buttonsTextStyle: LasTextStyle.alertWidgetButton,
-    dismissOnTouchOutside: false,
-    btnOkOnPress: () {},
-  ).show();
-}
