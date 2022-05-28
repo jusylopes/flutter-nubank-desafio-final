@@ -10,45 +10,63 @@ class EditProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: 200,
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        flexibleSpace: ClipPath(
-          clipper: CustomAppbar(),
-          child: Container(
-            height: 150,
-            width: MediaQuery.of(context).size.width,
-            color: LasColors.appBarEditProfile,
-            child: Column(
-              children: const [
-                SizedBox(
-                  height: 20,
-                  width: double.infinity,
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 150,
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            flexibleSpace: ClipPath(
+              clipper: CustomAppbar(),
+              child: Container(
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                color: LasColors.appBarEditProfile,
+                child: Stack(
+                  children: [
+                    Column(
+                      children: const [
+                        SizedBox(
+                          height: 38,
+                          width: double.infinity,
+                        ),
+                        Text(Strings.txtMyHistoric,
+                            style: LasTextStyle.txtEdit,
+                            textAlign: TextAlign.center),
+                        SizedBox(
+                          height: 40,
+                          width: double.infinity,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 40,
+                      width: double.infinity,
+                    ),
+                  ],
                 ),
-                Text(Strings.txtMyHistoric,
-                    style: LasTextStyle.txtEdit, textAlign: TextAlign.center),
-              ],
+              ),
             ),
           ),
+          backgroundColor: LasColors.textButtonColor,
         ),
-      ),
-      backgroundColor: LasColors.textButtonColor,
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              Center(
-                child: SizedBox(
-                    height: 170,
-                    width: 180,
-                    child: SvgPicture.asset('assets/images/Vector1.svg')),
+        Column(
+          children: [
+            const SizedBox(
+              height: 100,
+              width: double.infinity,
+            ),
+            Center(
+              child: SizedBox(
+                height: 140,
+                width: 140,
+                child: SvgPicture.asset('assets/images/Vector1.svg'),
               ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
