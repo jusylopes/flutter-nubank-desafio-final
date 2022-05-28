@@ -15,5 +15,5 @@ abstract class LasColors {
   static const Color buttonColor = Color(0XFF004BA0);
   static const Color buttonColorAwait = Color(0XFF828282);
   static const Color textButtonColor = Color(0XFFFFFFFF);
-  
+
 }
