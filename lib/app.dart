@@ -7,7 +7,6 @@ import 'package:projeto_final/ui/views/initial/inicial_page.dart';
 import 'package:projeto_final/ui/views/login/login_page.dart';
 import 'package:projeto_final/ui/views/splash/splash_page.dart';
 
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.login,
+      initialRoute: Routes.inicial,
       routes: {
         Routes.splash: (context) => const SplashPage(),
         Routes.inicial: (context) => const InitialPage(),
