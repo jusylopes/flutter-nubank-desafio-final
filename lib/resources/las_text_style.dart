@@ -37,5 +37,55 @@ abstract class LasTextStyle {
       fontSize: 18.0,
       color: LasColors.txtLoginRegisterPageSubtitle);
 
+  static const txtalertWidget = TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 24.0,
+      color: LasColors.txtAlertWidget);
 
+  static const alertWidgetButton = TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 19.0,
+      color: LasColors.textButtonColor);
+
+  static const titlePageRegister = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 38.0,
+    height: 1.5,
+    color: LasColors.textRegisterPage,
+  );
+  static const registerSubtitle = TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: 16.0,
+    color: LasColors.txtLoginRegisterPageSubtitle,
+  );
+
+  static const titleAccreditationPage = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.0,
+    color: LasColors.textButtonColor,
+  );
+
+  static const termAccreditationPage = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16.0,
+    color: LasColors.textLoginPage,
+  );
+
+  static const buttonPdfAccreditationPage = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 14.0,
+    color: LasColors.textButtonPdfColor,
+  );
+
+  static const checkAccreditationPage = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 14.0,
+    color: LasColors.textLoginPage,
+  );
+
+  static const buttonAccreditationPage = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16.0,
+    color: LasColors.textButtonColor,
+  );
 }

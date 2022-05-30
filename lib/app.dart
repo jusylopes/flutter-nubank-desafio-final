@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/router/routers.dart';
+import 'package:projeto_final/ui/views/accreditation/accreditation.dart';
 
 import 'package:projeto_final/ui/views/login/login_page.dart';
 import 'package:projeto_final/ui/views/splash/splash_page.dart';
@@ -13,14 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      home: AccreditationPage(),
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
       theme: ThemeData(
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-
-      },
+    
+      
     );
   }
 }
