@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:projeto_final/ui/views/components/background_page.dart';
 import 'package:projeto_final/ui/views/home/home_page.dart';
-import 'package:projeto_final/ui/views/initial/inicial_page.dart';
+import 'package:projeto_final/ui/views/inicial/inicial_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projeto_final/ui/views/components/background.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({
@@ -40,7 +39,7 @@ class _SplashPageState extends State<SplashPage> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const InitialPage(),
+            builder: (context) => const InicialPage(),
           ),
         );
       }
@@ -62,8 +61,7 @@ class _SplashPageState extends State<SplashPage> {
                     height: 100,
                     width: 350,
                   ),
-                  // ignore: sized_box_for_whitespace
-                  Container(
+                  SizedBox(
                     height: 340,
                     child:
                         Stack(alignment: Alignment.center, children: <Widget>[
@@ -75,7 +73,6 @@ class _SplashPageState extends State<SplashPage> {
                       SvgPicture.asset('assets/images/las.svg'),
                     ]),
                   ),
-
                   Container(
                     height: 150,
                     width: 350,

@@ -1,4 +1,3 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
 import 'package:projeto_final/data/entity/user_entity.dart';
@@ -6,11 +5,9 @@ import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/background_curve.dart';
-import 'package:projeto_final/ui/views/components/background_page.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
-import 'package:projeto_final/ui/views/components/cpf_field.dart';
-import 'package:projeto_final/ui/views/components/password_field.dart';
 import 'package:projeto_final/ui/views/home/home_page.dart';
 
 class RegistPage extends StatefulWidget {
