@@ -3,7 +3,6 @@ import 'package:projeto_final/resources/las_colors.dart';
 
 abstract class LasTextStyle {
   static var titleInicialPage = TextStyle(
-    fontWeight: FontWeight.w500,
     fontSize: 28.0,
     height: 1.5,
     color: LasColors.textTitleInitialPage,
@@ -12,7 +11,7 @@ abstract class LasTextStyle {
   static const txtButton = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 16.0,
-    color: LasColors.textButtonColor,
+    color: LasColors.txtButtonColor,
   );
 
   static const inicialPage = TextStyle(
@@ -28,7 +27,7 @@ abstract class LasTextStyle {
   );
 
   static const titleLoginPage = TextStyle(
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.w600,
       fontSize: 38.0,
       color: LasColors.textRegisterPage);
 
@@ -45,10 +44,10 @@ abstract class LasTextStyle {
   static const alertWidgetButton = TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 19.0,
-      color: LasColors.textButtonColor);
+      color: LasColors.txtButtonColor);
 
   static const titlePageRegister = TextStyle(
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w600,
     fontSize: 38.0,
     height: 1.5,
     color: LasColors.textRegisterPage,
@@ -58,10 +57,22 @@ abstract class LasTextStyle {
       fontSize: 16.0,
       color: LasColors.txtLoginRegisterPageSubtitle);
 
+  static const appBarProfile = TextStyle(
+      fontWeight: FontWeight.w500,
+      fontSize: 17.0,
+      color: LasColors.txtAppBarProfile);
+
+  static const txtTitleProfile = TextStyle(
+      fontFamily: 'Roboto-Medium',
+      fontWeight: FontWeight.w500,
+      fontSize: 25.0,
+      color: LasColors.txtTitleProfile,
+      decoration: TextDecoration.none,);
+
   static const txtEdit = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 20.0,
-    color: LasColors.textButtonColor,
+    color: LasColors.txtButtonColor,
   );
 
    static const nameAppbar = TextStyle(

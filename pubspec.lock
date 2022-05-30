@@ -8,13 +8,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
-  awesome_dialog:
-    dependency: "direct main"
-    description:
-      name: awesome_dialog
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.2.1"
   bloc:
     dependency: transitive
     description:
@@ -78,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  easy_mask:
+    dependency: "direct main"
+    description:
+      name: easy_mask
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.1"
   fake_async:
     dependency: transitive
     description:
@@ -99,13 +99,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
-  flare_flutter:
-    dependency: transitive
-    description:
-      name: flare_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "3.0.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -380,13 +373,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  simple_animations:
-    dependency: transitive
-    description:
-      name: simple_animations
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.0.2"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -448,6 +434,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
+  widget_mask:
+    dependency: "direct main"
+    description:
+      name: widget_mask
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0+0"
   win32:
     dependency: transitive
     description:

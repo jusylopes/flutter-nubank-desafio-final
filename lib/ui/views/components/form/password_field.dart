@@ -19,10 +19,17 @@ class _PasswordFieldState extends State<PasswordField> {
   }
 
   @override
+  void dispose() {
+    widget.passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
         controller: widget.passwordController,
         obscureText: _isHidden,
+        obscuringCharacter: "*",
         decoration: InputDecoration(
           border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
           labelText: 'Senha',

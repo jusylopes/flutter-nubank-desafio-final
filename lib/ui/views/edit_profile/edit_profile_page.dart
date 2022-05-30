@@ -73,7 +73,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ),
             ),
           ),
-          backgroundColor: LasColors.textButtonColor,
+          backgroundColor: LasColors.txtButtonColor,
         ),
         Column(
           children: [
