@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
-import 'package:projeto_final/ui/views/components/image_profile.dart';
+import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/menu_profile.dart';
 
 class HomePage extends StatelessWidget {
@@ -11,23 +10,18 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children:  [    
+      children: [
         const BackgroundPage(),
-        const BackgroundProfile(),
         Scaffold(
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(180.0),
+            child: AppBarWidget(),
+          ),
           body: SafeArea(
             child: Center(
               child: Column(
                 children: <Widget>[
-                  const SizedBox(height: 20.0),
-                  const ImageProfile(heightContainer: 200),
-                  Container(
-                    height: 40,
-                    alignment: Alignment.bottomCenter,
-                    child: const Text('Olá, Marlene',
-                        style: LasTextStyle.txtTitleProfile),
-                  ),
-                  const SizedBox(height: 30.0),
+                  const SizedBox(height: 50.0),
                   Expanded(
                     child: GridView.count(
                       primary: false,
@@ -55,6 +49,27 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
+        ),
+        Column(
+          children: [
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              height: 140,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/profileMask.png'),
+                      fit: BoxFit.contain,
+                      alignment: Alignment.bottomCenter)),
+            ),
+            Container(
+              padding: const EdgeInsets.only(top: 20),
+              child: const Center(
+                  child: Text(
+                'Olá, Marlene',
+                style: LasTextStyle.txtTitleProfile,
+              )),
+            )
+          ],
         ),
       ],
     );
