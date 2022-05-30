@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
-import 'package:projeto_final/ui/views/components/background_curve_profile.dart';
+import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/image_profile.dart';
 import 'package:projeto_final/ui/views/components/menu_profile.dart';
 
@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children:  [
+      children:  [    
         const BackgroundPage(),
         const BackgroundProfile(),
         Scaffold(

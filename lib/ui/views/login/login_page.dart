@@ -4,6 +4,7 @@ import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/background_curve.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
@@ -82,13 +83,10 @@ class _LoginPageState extends State<LoginPage> {
                         ButtonWidget(
                           colorButton: _colorButton,
                           textButton: _textButton,
-                          //Isa adicionou
                           onPressed: () async {
                             FocusScopeNode currentFocus =
                                 FocusScope.of(context);
                             if (_formKey.currentState!.validate()) {
-                              // bool deuCerto = await login();
-                              //Teste
                               bool deuCerto = await userRepository.login(
                                 LoginEntity(
                                   cpf: _cpfController.text
@@ -111,7 +109,14 @@ class _LoginPageState extends State<LoginPage> {
                               } else {
                                 _cpfController.clear();
                                 _passwordController.clear();
-                                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                //jusy add
+                                showDialog(
+                                    context: context,
+                                    barrierDismissible: false,
+                                    builder: (BuildContext context) =>
+                                        const Alert(
+                                            bodyAlert: Strings.loginAlertDialog,
+                                            txtButton: Strings.buttonOk));
                               }
                             } else {
                               print('Deu merda');
@@ -130,3 +135,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
