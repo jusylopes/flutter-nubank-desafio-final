@@ -29,6 +29,7 @@ class _PasswordFieldState extends State<PasswordField> {
     return TextFormField(
         controller: widget.passwordController,
         obscureText: _isHidden,
+        obscuringCharacter: "*",
         decoration: InputDecoration(
           border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
           labelText: 'Senha',

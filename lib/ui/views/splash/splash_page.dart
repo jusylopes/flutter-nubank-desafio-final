@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:projeto_final/ui/views/components/background_page.dart';
+import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashPage extends StatefulWidget {
@@ -33,7 +33,7 @@ class _SplashPageState extends State<SplashPage> {
                     height: 100,
                     width: 350,
                   ),
-                  // ignore: sized_box_for_whitespace
+                  
                   Container(
                     height: 340,
                     child:
@@ -44,6 +44,7 @@ class _SplashPageState extends State<SplashPage> {
                           child: SvgPicture.asset('assets/images/Vector1.svg')),
                       Image.asset('assets/images/Vector.png'),
                       SvgPicture.asset('assets/images/las.svg'),
+                      
                     ]),
                   ),
 

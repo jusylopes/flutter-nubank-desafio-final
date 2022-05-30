@@ -1,21 +1,17 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-class NameField extends StatelessWidget {
-  const NameField({Key? key}) : super(key: key);
+class EmailField extends StatelessWidget {
+  final TextEditingController emailController;
+
+  const EmailField({super.key, required this.emailController});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        keyboardType: TextInputType.number,
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          CpfInputFormatter(),
-        ],
+        controller: emailController,
         decoration: const InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.zero),
-          labelText: 'CPF',
+          labelText: 'Email',
         ),
         validator: (String? value) {
           return value == null || value.isEmpty ? 'Campo obrigatório' : null;

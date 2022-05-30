@@ -15,7 +15,9 @@ abstract class Strings {
 
 //strings pagina register
   static const txtTitleRegister = 'Registre-se';
+  static const  buttonRegister = 'REGISTRAR';
   static const txtSubtitleRegister =
       'Preencha o formulário para criar sua conta';
   static const txtRegisterAlertWidget = 'CPF já cadastrado.';
+  
 }

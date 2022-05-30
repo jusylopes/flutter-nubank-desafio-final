@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/router/routers.dart';
-import 'package:projeto_final/ui/views/initial/inicial_page.dart';
+import 'package:projeto_final/ui/views/home/home_page.dart';
+import 'package:projeto_final/ui/views/inicial/inicial_page.dart';
+
 import 'package:projeto_final/ui/views/login/login_page.dart';
+import 'package:projeto_final/ui/views/register/register_page.dart';
 import 'package:projeto_final/ui/views/splash/splash_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -18,12 +21,13 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.login,
+      initialRoute: Routes.home,
       routes: {
-      //  Routes.splash: (context) => const SplashPage(),
-        Routes.inicial: (context) => const InitialPage(),
+        Routes.splash: (context) => const SplashPage(),
+        Routes.inicial: (context) => const InicialPage(),
         Routes.login: (context) => const LoginPage(),
-      //  Routes.register: (context) => const RegisterPage(),
+        Routes.register: (context) => const RegisterPage(),
+        Routes.home: (context) => const HomePage(),
       },
     );
   }
