@@ -19,4 +19,5 @@ abstract class LasColors {
   static const Color txtButtonColor = Color(0XFFFFFFFF);
   static const Color txtAppBarProfile = Color(0XFFF2F2F2);
   static const Color txtTitleProfile = Color(0XFF555770);
+  static const Color appBarEditProfile = Color(0XFF0175b4);
 }
