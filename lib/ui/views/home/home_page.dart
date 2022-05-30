@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
@@ -72,4 +73,15 @@ class HomePage extends StatelessWidget {
       ],
     );
   }
+
+  Future<void> token() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+  }
+
+  // Future<bool> logout() async {
+  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  //   await sharedPreferences.clear();
+  //   return true;
+  // }
 }
