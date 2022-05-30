@@ -73,4 +73,6 @@ abstract class LasTextStyle {
     fontSize: 20.0,
     color: LasColors.txtButtonColor,
   );
+
+
 }

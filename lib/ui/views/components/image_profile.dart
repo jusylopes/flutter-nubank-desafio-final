@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:widget_mask/widget_mask.dart';
 
 class ImageProfile extends StatelessWidget {
   final double heightContainer;
@@ -10,7 +9,6 @@ class ImageProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.topCenter,
-      
     );
   }
 }
