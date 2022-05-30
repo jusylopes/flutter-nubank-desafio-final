@@ -4,11 +4,10 @@ import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:projeto_final/ui/views/components/background_curve.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
+import 'package:projeto_final/ui/views/components/background_curve.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
 import 'package:projeto_final/ui/views/components/form/cpf_field.dart';
-import 'package:projeto_final/ui/views/components/logo_app.dart';
 import 'package:projeto_final/ui/views/components/form/password_field.dart';
 import 'package:projeto_final/ui/views/home/home_page.dart';
 
@@ -38,7 +37,14 @@ class _LoginPageState extends State<LoginPage> {
             child: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  const LogoApp(heightContainer: 300),
+                  Container(
+                    height: 250,
+                    decoration: const BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/logo.png'),
+                            fit: BoxFit.contain,
+                            alignment: Alignment.topCenter)),
+                  ),
                   Container(
                     alignment: Alignment.topCenter,
                     child: const Text(
@@ -49,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 90, vertical: 25),
+                        horizontal: 90, vertical: 20),
                     child: const Text(
                       Strings.txtSubtitleLogin,
                       style: LasTextStyle.loginSubtitle,
@@ -58,53 +64,61 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   Form(
                     key: _formKey,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 30.0),
-                      child: Column(
-                        children: <Widget>[
-                          CpfField(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+                          child: CpfField(
                             cpfController: _cpfController,
                           ),
-                          const SizedBox(height: 30.0),
-                          PasswordField(
-                              passwordController: _passwordController),
-                          const SizedBox(height: 30.0),
-                          ButtonWidget(
-                            colorButton: _colorButton,
-                            textButton: _textButton,
-                            onPressed: () async {
-                              FocusScopeNode currentFocus =
-                                  FocusScope.of(context);
-                              if (_formKey.currentState!.validate()) {
-                                bool deuCerto = await userRepository.login(
-                                  LoginEntity(
-                                    cpf: _cpfController.text,
-                                    password: _passwordController.text,
+                        ),
+                        const SizedBox(height: 20.0),
+                        Container(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 30.0),
+                            child: PasswordField(
+                                passwordController: _passwordController)),
+                        const SizedBox(height: 25.0),
+                        ButtonWidget(
+                          colorButton: _colorButton,
+                          textButton: _textButton,
+                          //Isa adicionou
+                          onPressed: () async {
+                            FocusScopeNode currentFocus =
+                                FocusScope.of(context);
+                            if (_formKey.currentState!.validate()) {
+                              // bool deuCerto = await login();
+                              //Teste
+                              bool deuCerto = await userRepository.login(
+                                LoginEntity(
+                                  cpf: _cpfController.text
+                                      .replaceAll(".", "")
+                                      .replaceAll("-", ""),
+                                  password: _passwordController.text,
+                                ),
+                              );
+                              //Fim do teste
+                              if (!currentFocus.hasPrimaryFocus) {
+                                currentFocus.unfocus();
+                              }
+                              if (deuCerto) {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
                                   ),
                                 );
-
-                                if (!currentFocus.hasPrimaryFocus) {
-                                  currentFocus.unfocus();
-                                }
-                                if (deuCerto) {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const HomePage(),
-                                    ),
-                                  );
-                                } else {
-                                  _cpfController.clear();
-                                  _passwordController.clear();
-                                  // ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                }
                               } else {
-                                print('Deu merda');
+                                _cpfController.clear();
+                                _passwordController.clear();
+                                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
                               }
-                            },
-                          ),
-                        ],
-                      ),
+                            } else {
+                              print('Deu merda');
+                            }
+                          },
+                        ),
+                      ],
                     ),
                   )
                 ],

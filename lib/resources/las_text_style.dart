@@ -67,4 +67,10 @@ abstract class LasTextStyle {
       fontWeight: FontWeight.w500,
       fontSize: 24.0,
       color: LasColors.txtTitleProfile);
+
+  static const txtEdit = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.0,
+    color: LasColors.txtButtonColor,
+  );
 }
