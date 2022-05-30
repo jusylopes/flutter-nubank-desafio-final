@@ -17,6 +17,9 @@ dependencies:
   brasil_fields: ^1.4.4
   shared_preferences: ^2.0.15
   http: ^0.13.4
+  image_picker: ^0.8.5+3
+
+
   
 
 
@@ -32,6 +35,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/backgroundPage.png
     - assets/images/Vector1.svg
+    - assets/images/VectorApp.svg
     - assets/images/Vector.png
     - assets/images/las.svg
 

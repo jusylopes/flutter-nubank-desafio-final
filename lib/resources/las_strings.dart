@@ -18,6 +18,7 @@ abstract class Strings {
   static const txtSubtitleRegister =
       'Preencha o formulário para criar sua conta';
   static const txtRegisterAlertWidget = 'CPF já cadastrado.';
-   static const txtMyHistoric =
-      'Meus dados';
+  static const txtMyHistoric = 'Meus dados';
+  static const nameAppBar = 'Meu nome';
+  static const changePhoto = 'Aterar foto';
 }
