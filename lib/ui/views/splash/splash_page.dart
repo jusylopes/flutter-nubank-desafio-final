@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:projeto_final/ui/views/components/background_page.dart';
+import 'package:projeto_final/ui/views/components/background.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({
@@ -42,8 +41,7 @@ class _SplashPageState extends State<SplashPage> {
                     height: 100,
                     width: 350,
                   ),
-                  // ignore: sized_box_for_whitespace
-                  Container(
+                  SizedBox(
                     height: 340,
                     child:
                         Stack(alignment: Alignment.center, children: <Widget>[
@@ -53,10 +51,8 @@ class _SplashPageState extends State<SplashPage> {
                           child: SvgPicture.asset('assets/images/Vector1.svg')),
                       Image.asset('assets/images/Vector.png'),
                       SvgPicture.asset('assets/images/las.svg'),
-                      
                     ]),
                   ),
-
                   Container(
                     height: 150,
                     width: 350,
@@ -67,10 +63,10 @@ class _SplashPageState extends State<SplashPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                   ElevatedButton(
-                     onPressed: _changeRotation,
-                     child: const Text('Rodar logo'),
-                   ),
+                  ElevatedButton(
+                    onPressed: _changeRotation,
+                    child: const Text('Rodar logo'),
+                  ),
                 ],
               ),
             ),

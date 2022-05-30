@@ -49,7 +49,7 @@ class EditProfilePage extends StatelessWidget {
               ),
             ),
           ),
-          backgroundColor: LasColors.textButtonColor,
+          backgroundColor: LasColors.txtButtonColor,
         ),
         Column(
           children: [
