@@ -48,7 +48,7 @@ class SwaggerApiUserRepository implements UserRepository {
     if (respostaUser.statusCode == 201) {
       return true;
     } else {
-      print('Deu merda no registro');
+      print('Deu merda no registro ');
     }
     return false;
   }
