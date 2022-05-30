@@ -4,6 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/background_page.dart';
+import 'package:projeto_final/ui/views/home/home_page.dart';
+import 'package:projeto_final/ui/views/initial/inicial_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({
@@ -24,7 +27,24 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    _changeRotation();
+    // _changeRotation();
+    verificarToken().then((value) {
+      if (value) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const InitialPage(),
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -53,7 +73,6 @@ class _SplashPageState extends State<SplashPage> {
                           child: SvgPicture.asset('assets/images/Vector1.svg')),
                       Image.asset('assets/images/Vector.png'),
                       SvgPicture.asset('assets/images/las.svg'),
-                      
                     ]),
                   ),
 
@@ -67,10 +86,10 @@ class _SplashPageState extends State<SplashPage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-                   ElevatedButton(
-                     onPressed: _changeRotation,
-                     child: const Text('Rodar logo'),
-                   ),
+                  ElevatedButton(
+                    onPressed: _changeRotation,
+                    child: const Text('Rodar logo'),
+                  ),
                 ],
               ),
             ),
@@ -78,5 +97,15 @@ class _SplashPageState extends State<SplashPage> {
         ),
       ],
     );
+  }
+
+  Future<bool> verificarToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await Future.delayed(const Duration(seconds: 5));
+    if (sharedPreferences.getString('token') == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

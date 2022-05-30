@@ -122,7 +122,8 @@ class _LoginPageState extends State<LoginPage> {
                               } else {
                                 _cpfController.clear();
                                 _passwordController.clear();
-                                // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
                               }
                             } else {
                               print('Deu merda');
@@ -140,6 +141,11 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
+
+  final snackBar = const SnackBar(
+    content: Text('CPF ou Senha inválidos'),
+    backgroundColor: Colors.redAccent,
+  );
 }
 
 showAlertWidget(BuildContext context) {

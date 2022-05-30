@@ -5,6 +5,8 @@ import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:flutter/gestures.dart';
 import 'package:projeto_final/ui/views/components/background_page.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
+import 'package:projeto_final/ui/views/initial/register_page.dart';
+import 'package:projeto_final/ui/views/login/login_page.dart';
 
 class InitialPage extends StatelessWidget {
   const InitialPage({Key? key}) : super(key: key);
@@ -39,10 +41,19 @@ class InitialPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   SizedBox(
-                      child: ButtonWidget(
-                          colorButton: LasColors.buttonColor,
-                          textButton: Strings.buttonInitial,
-                          onPressed: () {})),
+                    child: ButtonWidget(
+                      colorButton: LasColors.buttonColor,
+                      textButton: Strings.buttonInitial,
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginPage(),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
                   Container(
                     height: 30,
                     alignment: Alignment.bottomCenter,
@@ -52,9 +63,18 @@ class InitialPage extends StatelessWidget {
                         style: LasTextStyle.inicialPage,
                         children: <TextSpan>[
                           TextSpan(
-                              text: Strings.txtPageLoginCreate,
-                              style: LasTextStyle.loginCreate,
-                              recognizer: TapGestureRecognizer()..onTap = () {})
+                            text: Strings.txtPageLoginCreate,
+                            style: LasTextStyle.loginCreate,
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const RegistPage(),
+                                  ),
+                                );
+                              },
+                          ),
                         ],
                       ),
                     ),
