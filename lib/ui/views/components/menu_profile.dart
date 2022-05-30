@@ -21,9 +21,9 @@ class MenuProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical:12),
                   child: Icon(iconMenu,
-                      size: 50.0, color: LasColors.txtAppBarProfile)),
+                      size: 52.0, color: LasColors.txtAppBarProfile)),
               Text(textAppBar, style: LasTextStyle.appBarProfile),
             ]),
       ),

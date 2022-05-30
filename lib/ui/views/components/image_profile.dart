@@ -1,14 +1,24 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:widget_mask/widget_mask.dart';
 
 class ImageProfile extends StatelessWidget {
-  final double heightContainer;
-
-  const ImageProfile({super.key, required this.heightContainer});
+  const ImageProfile({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.topCenter,
+    return Center(
+      child: WidgetMask(
+        blendMode: BlendMode.dstIn,
+        childSaveLayer: true,
+        mask: Image.asset(
+          'assets/images/profileMask.png',
+         
+        ),
+        child: Image.asset(
+          'assets/images/teste.jpg',
+        
+        ),
+      ),
     );
   }
 }

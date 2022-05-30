@@ -65,8 +65,9 @@ abstract class LasTextStyle {
   static const txtTitleProfile = TextStyle(
       fontFamily: 'Roboto-Medium',
       fontWeight: FontWeight.w500,
-      fontSize: 24.0,
-      color: LasColors.txtTitleProfile);
+      fontSize: 25.0,
+      color: LasColors.txtTitleProfile,
+      decoration: TextDecoration.none,);
 
   static const txtEdit = TextStyle(
     fontWeight: FontWeight.w500,
