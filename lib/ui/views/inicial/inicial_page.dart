@@ -27,7 +27,7 @@ class InicialPage extends StatelessWidget {
                     height: 150,
                     width: 350,
                     alignment: Alignment.bottomCenter,
-                    child: Text(
+                    child: const Text(
                       Strings.appName,
                       style: LasTextStyle.titleInicialPage,
                       textAlign: TextAlign.center,

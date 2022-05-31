@@ -30,6 +30,10 @@ class MyApp extends StatelessWidget {
         Routes.editProfile: (context) => const EditProfilePage(),
         Routes.register: (context) => const RegisterPage(),
         Routes.home: (context) => const HomePage(),
+        Routes.editProfile: (context) => const EditProfilePage(),
+        // Routes.event: (context) => const EventPage(),
+        Routes.credential: (context) => const HomePage(),
+        // Routes.historic: (context) => const HistoricPage(),
       },
     );
   }

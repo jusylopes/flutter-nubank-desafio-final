@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 
-class NameField extends StatelessWidget {
-  final TextEditingController nameController;
+class RgField extends StatelessWidget {
+  final TextEditingController rgController;
 
-  const NameField({super.key, required this.nameController});
+  const RgField({super.key, required this.rgController});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        controller: nameController,         
+        controller: rgController,
+        keyboardType: TextInputType.number,       
         decoration: const InputDecoration(
           border: OutlineInputBorder(borderRadius: BorderRadius.zero),
-          labelText: 'Name',
+          labelText: 'RG',
         ),
         validator: (String? value) {
           return value == null || value.isEmpty ? 'Campo obrigatório' : null;

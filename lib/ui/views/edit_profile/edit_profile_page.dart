@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/views/components/app_bar.dart';
+import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
-import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:projeto_final/ui/views/components/custom_appBar.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import 'dart:io';
@@ -36,44 +37,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 150,
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            flexibleSpace: ClipPath(
-              clipper: CustomAppbar(),
-              child: Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                color: LasColors.appBarEditProfile,
-                child: Stack(
-                  children: [
-                    Column(
-                      children: const [
-                        SizedBox(
-                          height: 38,
-                          width: double.infinity,
-                        ),
-                        Text(Strings.txtMyHistoric,
-                            style: LasTextStyle.txtEdit,
-                            textAlign: TextAlign.center),
-                        SizedBox(
-                          height: 40,
-                          width: double.infinity,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 40,
-                      width: double.infinity,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+        const BackgroundPage(),
+        const Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(180.0),
+            child: AppBarWidget(),
           ),
-          backgroundColor: LasColors.txtButtonColor,
         ),
         Column(
           children: [
@@ -154,6 +123,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       }),
               ),
             ),
+            Container(
+              padding: const EdgeInsets.only(top: 15),
+              child: const Center(
+                  child: Text(
+                'Olá, Juliana',
+                style: LasTextStyle.txtTitleProfile,
+              )),
+            )
           ],
         ),
       ],

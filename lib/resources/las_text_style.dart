@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 
 abstract class LasTextStyle {
-  static var titleInicialPage = TextStyle(
-    fontSize: 28.0,
-    height: 1.5,
+  static const titleInicialPage = TextStyle(
+    fontWeight: FontWeight.w600,
+    fontSize: 29.0,
     color: LasColors.textTitleInitialPage,
   );
 
@@ -63,11 +63,12 @@ abstract class LasTextStyle {
       color: LasColors.txtAppBarProfile);
 
   static const txtTitleProfile = TextStyle(
-      fontFamily: 'Roboto-Medium',
-      fontWeight: FontWeight.w500,
-      fontSize: 25.0,
-      color: LasColors.txtTitleProfile,
-      decoration: TextDecoration.none,);
+    fontFamily: 'Roboto-Medium',
+    fontWeight: FontWeight.w500,
+    fontSize: 25.0,
+    color: LasColors.txtTitleProfile,
+    decoration: TextDecoration.none,
+  );
 
   static const txtEdit = TextStyle(
     fontWeight: FontWeight.w500,

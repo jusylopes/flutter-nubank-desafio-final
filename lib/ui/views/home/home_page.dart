@@ -3,6 +3,7 @@ import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/ui/views/splash/splash_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/image_profile.dart';
@@ -36,18 +37,43 @@ class HomePage extends StatelessWidget {
                       mainAxisSpacing: 12,
                       crossAxisCount: 2,
                       childAspectRatio: (1 / .6),
-                      children: const <Widget>[
-                        MenuProfile(
-                            textAppBar: 'Eventos',
-                            iconMenu: Icons.calendar_month_outlined),
-                        MenuProfile(
-                            textAppBar: 'Meus dados',
-                            iconMenu: Icons.account_circle),
-                        MenuProfile(
-                            textAppBar: 'Meu histórico',
-                            iconMenu: Icons.chrome_reader_mode),
-                        MenuProfile(
-                            textAppBar: 'Contato', iconMenu: Icons.message),
+                      children: <Widget>[
+                        Material(
+                          borderRadius: BorderRadius.zero,
+                          child: InkWell(
+                            onTap: () { Navigator.pushNamed(context, Routes.event);},
+                            child: const MenuProfile(
+                                textAppBar: 'Eventos',
+                                iconMenu: Icons.calendar_month_outlined),
+                          ),
+                        ),
+                        Material(
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.editProfile);
+                            },
+                            child: const MenuProfile(
+                                textAppBar: 'Meus dados',
+                                iconMenu: Icons.account_circle),
+                          ),
+                        ),
+                        Material(
+                          child: InkWell(
+                            onTap: () {},
+                            borderRadius: BorderRadius.zero,
+                            child: const MenuProfile(
+                                textAppBar: 'Meu histórico',
+                                iconMenu: Icons.chrome_reader_mode),
+                          ),
+                        ),
+                        Material(
+                          child: InkWell(
+                            onTap: () {},
+                            borderRadius: BorderRadius.zero,
+                            child: const MenuProfile(
+                                textAppBar: 'Contato', iconMenu: Icons.message),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -83,7 +109,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 15),
               child: const Center(
                   child: Text(
-                'Olá, Marlene',
+                'Olá, Juliana',
                 style: LasTextStyle.txtTitleProfile,
               )),
             )

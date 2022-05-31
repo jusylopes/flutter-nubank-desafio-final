@@ -42,6 +42,7 @@ class _PasswordFieldState extends State<PasswordField> {
         ),
         validator: (String? value) {
           return value == null || value.isEmpty ? 'Campo obrigatório' : null;
+          
         });
   }
 }
