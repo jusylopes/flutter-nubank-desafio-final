@@ -14,6 +14,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Future<void> token() async {
+    //   SharedPreferences sharedPreferences =
+    //       await SharedPreferences.getInstance();
+    //   var token = sharedPreferences.getString('token');
+    // }
+
     final userRepository = SwaggerApiUserRepository();
     return Stack(
       children: [
@@ -81,6 +87,19 @@ class HomePage extends StatelessWidget {
                   //Isa adicionou
                   TextButton(
                     onPressed: () async {
+                      final todo = await userRepository.getDetailsUser();
+                      print(todo.fullName);
+
+                      // final list = await userRepository.getDetailsUser();
+                      // print(list);
+                    },
+                    child: const Text('Testar'),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextButton(
+                    onPressed: () async {
                       bool saiu = await userRepository.logout();
                       if (saiu) {
                         Navigator.pushReplacement(
@@ -117,11 +136,6 @@ class HomePage extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  Future<void> token() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString('token');
   }
 
   // Future<bool> logout() async {

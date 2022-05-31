@@ -97,7 +97,7 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
 
   Future<bool> verificarToken() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    await Future.delayed(const Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 2));
     if (sharedPreferences.getString('token') == null) {
       return false;
     } else {

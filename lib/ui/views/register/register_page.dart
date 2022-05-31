@@ -4,6 +4,7 @@ import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/background_curve.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
@@ -106,16 +107,17 @@ class _RegisterPageState extends State<RegisterPage> {
                                   _cpfController.clear();
                                   _emailController.clear();
                                   _passwordController.clear();
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar);
+                                  // ScaffoldMessenger.of(context)
+                                  //     .showSnackBar(snackBar);
                                   //jusy add
-                                  // showDialog(
-                                  //     context: context,
-                                  //     barrierDismissible: false,
-                                  //     builder: (BuildContext context) =>
-                                  //         const Alert(
-                                  //             bodyAlert: Strings.loginAlertDialog,
-                                  //             txtButton: Strings.buttonOk));
+                                  showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (BuildContext context) =>
+                                          const Alert(
+                                              bodyAlert:
+                                                  Strings.loginAlertDialog,
+                                              txtButton: Strings.buttonOk));
                                 }
                               } else {
                                 print('Deu merda');
