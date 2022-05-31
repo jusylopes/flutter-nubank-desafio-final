@@ -26,6 +26,7 @@ abstract class Strings {
   static const txtTitleAccreditation = 'Credenciamento \n Carnaval 2021';
   static const txtTermAccreditation = 'Termo de\n participação';
   static const txtButtonPdfAccreditation = 'Ver arquivo';
-   static const txtcheckAccreditation = 'Li e concordo com os termos';
-    static const txtButtonAccreditation = 'CREDENCIAR';
+  static const txtcheckAccreditation = 'Li e concordo com os termos';
+  static const txtButtonAccreditation = 'CREDENCIAR';
+  static const txtmsgconfirmAccreditation = 'Seu credenciamento foi realizado com sucesso.';
 }

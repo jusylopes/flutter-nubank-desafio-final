@@ -88,4 +88,12 @@ abstract class LasTextStyle {
     fontSize: 16.0,
     color: LasColors.textButtonColor,
   );
+
+  static const msgConfirmAccreditation = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 24.0,
+    color: LasColors.texmsgconfirmAccreditation,
+  );
+
+  
 }

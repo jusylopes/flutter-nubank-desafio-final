@@ -2,11 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:projeto_final/ui/views/components/background_page.dart';
-
-import '../../../resources/las_colors.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../../resources/las_strings.dart';
 import '../../../resources/las_text_style.dart';
 import '../components/custom_appBar.dart';
+
+var url = 'http://www.africau.edu/images/default/sample.pdf';
 
 class AccreditationPage extends StatefulWidget {
   const AccreditationPage({super.key});
@@ -104,14 +105,11 @@ class _AccreditationPageState extends State<AccreditationPage> {
                             Border.all(color: Color(0xFF979797), width: 0.2)),
                     width: 237.2,
                     height: 40.0,
-                    child: Container(
-                      padding: EdgeInsets.only(top: 12.0),
-                      child: Text(
-                        Strings.txtButtonPdfAccreditation,
-                        style: LasTextStyle.buttonPdfAccreditationPage,
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
+                    child: TextButton(
+                        child: Text(Strings.txtButtonPdfAccreditation,
+                            style: LasTextStyle.buttonPdfAccreditationPage,
+                            textAlign: TextAlign.center),
+                        onPressed: () => {launch(url)}),
                   )
                 ],
               ),
@@ -166,31 +164,56 @@ class _AccreditationPageState extends State<AccreditationPage> {
               height: 50.0,
               child: ElevatedButton(
                 onPressed: (isChecked == false)
-                    ? () => ''
+                    ? null
                     : () => showDialog(
                           context: context,
-                          builder: (BuildContext context) => Container(
-                            width: 328.0,
-                            height: 257.0,
-                            child: AlertDialog(
-                              title: const Text(
-                                  'Seu credenciamento foi realizado com sucesso.'),
-                              actions: <Widget>[
-                                Container(
-                                  width: 85.0,
-                                  height: 37.0,
-                                  child: ElevatedButton(
-                                    style: ButtonStyle(
-                                        backgroundColor:
-                                            MaterialStateProperty.all(
-                                                Color(0xff004BA0))),
-                                    onPressed: () =>
-                                        Navigator.pop(context, 'OK'),
-                                    child: const Text('OK'),
-                                  ),
-                                ),
-                              ],
-                            ),
+                          builder: (BuildContext context) => Dialog(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15.0))),
+                            child: Container(
+                                alignment: Alignment.center,
+                                width: 328.0,
+                                height: 257.0,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    color: Color(0xFFFFFFFF),
+                                    border: Border.all(
+                                      width: 2.0,
+                                      color: Color.fromRGBO(0, 0, 0, 0.25),
+                                      style: BorderStyle.solid,
+                                    )),
+                                child: Column(
+                                  children: [
+                                    SizedBox(height: 61.0),
+                                    SizedBox(
+                                      width: 280.0,
+                                      height: 56.0,
+                                      child: const Text(
+                                        Strings.txtmsgconfirmAccreditation,
+                                        style: LasTextStyle
+                                            .msgConfirmAccreditation,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    SizedBox(height: 57.0),
+                                    SizedBox(
+                                      width: 85.0,
+                                      height: 37.0,
+                                      child: ElevatedButton(
+                                        style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all(
+                                                    Color(0xff004BA0))),
+                                        onPressed: () => Navigator.pop(context),
+                                        child: const Text(
+                                          'OK',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
                           ),
                         ),
                 style: ButtonStyle(
