@@ -27,6 +27,7 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     // _changeRotation();
+    // AnimationController
     verificarToken().then((value) {
       if (value) {
         Navigator.pushReplacement(
