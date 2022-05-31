@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
+import 'package:projeto_final/ui/views/components/spinning_logo.dart';
+import 'package:projeto_final/ui/views/historic/historic_page.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({
-    Key? key,
-  }) : super(key: key);
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
-  double turns = 0.0;
-
-  void _changeRotation() {
-    setState(() => turns += 1.0 / 5.0);
-  }
+class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(
+    duration: const Duration(seconds: 10),
+    vsync: this,
+  )..repeat();
 
   @override
-  void initState() {
-    super.initState();
-    _changeRotation();
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -38,18 +37,15 @@ class _SplashPageState extends State<SplashPage> {
               child: Column(
                 children: <Widget>[
                   const SizedBox(
-                    height: 100,
+                    height: 150,
                     width: 350,
                   ),
                   SizedBox(
                     height: 340,
                     child:
                         Stack(alignment: Alignment.center, children: <Widget>[
-                      AnimatedRotation(
-                          turns: turns,
-                          duration: const Duration(seconds: 2),
-                          child: SvgPicture.asset('assets/images/Vector1.svg')),
-                      Image.asset('assets/images/Vector.png'),
+                      SpinningLogo(controller: _controller),
+                      Image.asset('assets/images/Vector.png', ),
                       SvgPicture.asset('assets/images/las.svg'),
                     ]),
                   ),
@@ -59,13 +55,9 @@ class _SplashPageState extends State<SplashPage> {
                     alignment: Alignment.topCenter,
                     child: const Text(
                       Strings.appName,
-                      style: LasTextStyle.inicialPage,
+                      style: LasTextStyle.titleInicialPage,
                       textAlign: TextAlign.center,
                     ),
-                  ),
-                  ElevatedButton(
-                    onPressed: _changeRotation,
-                    child: const Text('Rodar logo'),
                   ),
                 ],
               ),

@@ -63,7 +63,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.only(top: 15),
               child: const Center(
                   child: Text(
-                'Olá, Marlene',
+                'Olá, Juliana',
                 style: LasTextStyle.txtTitleProfile,
               )),
             )

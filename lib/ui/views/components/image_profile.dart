@@ -12,11 +12,9 @@ class ImageProfile extends StatelessWidget {
         childSaveLayer: true,
         mask: Image.asset(
           'assets/images/profileMask.png',
-         
         ),
         child: Image.asset(
           'assets/images/teste.jpg',
-        
         ),
       ),
     );
