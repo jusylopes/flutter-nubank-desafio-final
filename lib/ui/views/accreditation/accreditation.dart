@@ -58,7 +58,7 @@ class _AccreditationPageState extends State<AccreditationPage> {
                   Icons.arrow_back_ios_new,
                   size: 22.5,
                 ),
-                onPressed: () => '',
+                onPressed: () => Navigator.pop(context),
               ),
             ),
           ),
@@ -122,18 +122,32 @@ class _AccreditationPageState extends State<AccreditationPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Checkbox(
-                    shape: const CircleBorder(),
-                    side:
-                        const BorderSide(color: Color(0xFF2977E1), width: 1.0),
-                    activeColor: Colors.transparent,
-                    checkColor: const Color(0XFF5FD855),
-                    value: isChecked,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        isChecked = value!;
-                      });
-                    }),
+                Container(
+                  width: 20.0,
+                  height: 20.0,
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: Color(0xFF2977E1),
+                        width: 1.0,
+                        style: BorderStyle.solid,
+                      )),
+                  child: Checkbox(
+                      shape: CircleBorder(),
+                      side: BorderSide(
+                          color: Colors.transparent,
+                          width: 1.0,
+                          style: BorderStyle.solid),
+                      activeColor: Colors.transparent,
+                      checkColor: const Color(0XFF5FD855),
+                      value: isChecked,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          isChecked = value!;
+                        });
+                      }),
+                ),
+                SizedBox(width: 5.0),
                 SizedBox(
                   width: 189.0,
                   height: 16.0,
@@ -151,9 +165,39 @@ class _AccreditationPageState extends State<AccreditationPage> {
               width: 259.0,
               height: 50.0,
               child: ElevatedButton(
-                onPressed: () => "",
+                onPressed: (isChecked == false)
+                    ? () => ''
+                    : () => showDialog(
+                          context: context,
+                          builder: (BuildContext context) => Container(
+                            width: 328.0,
+                            height: 257.0,
+                            child: AlertDialog(
+                              title: const Text(
+                                  'Seu credenciamento foi realizado com sucesso.'),
+                              actions: <Widget>[
+                                Container(
+                                  width: 85.0,
+                                  height: 37.0,
+                                  child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStateProperty.all(
+                                                Color(0xff004BA0))),
+                                    onPressed: () =>
+                                        Navigator.pop(context, 'OK'),
+                                    child: const Text('OK'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFF828282)),
+                  backgroundColor: MaterialStateProperty.all(
+                      (isChecked == false)
+                          ? Color(0xFF828282)
+                          : Color(0xff004BA0)),
                 ),
                 child: Text(Strings.txtButtonAccreditation,
                     style: LasTextStyle.buttonAccreditationPage),
