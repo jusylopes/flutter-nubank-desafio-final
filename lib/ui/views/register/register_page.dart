@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
@@ -11,6 +12,7 @@ import 'package:projeto_final/ui/views/components/form/email_field.dart';
 import 'package:projeto_final/ui/views/components/logo_app.dart';
 import 'package:projeto_final/ui/views/components/form/name_field.dart';
 import 'package:projeto_final/ui/views/components/form/password_field.dart';
+import 'package:projeto_final/ui/views/home/home_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -76,7 +78,49 @@ class _RegisterPageState extends State<RegisterPage> {
                           ButtonWidget(
                             colorButton: _colorButton,
                             textButton: _textButton,
-                            onPressed: () {},
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                FocusScopeNode currentFocus =
+                                    FocusScope.of(context);
+                                bool tudoCerto = await userRepository.register(
+                                  RegisterEntity(
+                                      fullName: _nameController.text,
+                                      email: _emailController.text,
+                                      cpf: _cpfController.text
+                                          .replaceAll(".", "")
+                                          .replaceAll("-", ""),
+                                      password: _passwordController.text),
+                                );
+                                if (!currentFocus.hasPrimaryFocus) {
+                                  currentFocus.unfocus();
+                                }
+                                if (tudoCerto) {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const HomePage(),
+                                    ),
+                                  );
+                                } else {
+                                  _nameController.clear();
+                                  _cpfController.clear();
+                                  _emailController.clear();
+                                  _passwordController.clear();
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
+                                  //jusy add
+                                  // showDialog(
+                                  //     context: context,
+                                  //     barrierDismissible: false,
+                                  //     builder: (BuildContext context) =>
+                                  //         const Alert(
+                                  //             bodyAlert: Strings.loginAlertDialog,
+                                  //             txtButton: Strings.buttonOk));
+                                }
+                              } else {
+                                print('Deu merda');
+                              }
+                            },
                           ),
                         ],
                       ),
@@ -91,3 +135,8 @@ class _RegisterPageState extends State<RegisterPage> {
     );
   }
 }
+
+final snackBar = const SnackBar(
+  content: Text('CPF ou Senha inválidos'),
+  backgroundColor: Colors.redAccent,
+);

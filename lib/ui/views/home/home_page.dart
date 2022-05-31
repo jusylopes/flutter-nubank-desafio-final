@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/external/swagger_api_user_repository.dart';
+import 'package:projeto_final/ui/views/splash/splash_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
@@ -11,6 +13,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userRepository = SwaggerApiUserRepository();
     return Stack(
       children: [
         const BackgroundPage(),
@@ -47,6 +50,22 @@ class HomePage extends StatelessWidget {
                             textAppBar: 'Contato', iconMenu: Icons.message),
                       ],
                     ),
+                  ),
+
+                  //Isa adicionou
+                  TextButton(
+                    onPressed: () async {
+                      bool saiu = await userRepository.logout();
+                      if (saiu) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SplashPage(),
+                          ),
+                        );
+                      }
+                    },
+                    child: const Text('Sair'),
                   ),
                 ],
               ),

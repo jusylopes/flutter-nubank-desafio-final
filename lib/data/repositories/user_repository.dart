@@ -1,4 +1,4 @@
-import 'package:projeto_final/data/entity/user_entity.dart';
+import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
 
 abstract class UserRepository {
@@ -9,7 +9,7 @@ abstract class UserRepository {
 
   Future<void> login(LoginEntity login);
 
-  Future<void> register(UserEntity credentials);
+  Future<void> register(RegisterEntity register);
 
   Future<bool> logout();
 }

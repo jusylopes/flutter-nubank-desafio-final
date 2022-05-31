@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:projeto_final/data/entity/user_entity.dart';
+import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/data/entity/details_user_entity.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
 import 'package:projeto_final/data/entity/token_entity.dart';
 import 'package:projeto_final/data/repositories/user_repository.dart';
 import 'package:projeto_final/external/login_mapper.dart';
-import 'package:projeto_final/external/user_mapper.dart';
+import 'package:projeto_final/external/register_mapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
@@ -38,14 +38,17 @@ class SwaggerApiUserRepository implements UserRepository {
   }
 
   @override
-  Future<bool> register(UserEntity user) async {
+  Future<bool> register(RegisterEntity register) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var url = Uri.parse('https://cubos-las-api.herokuapp.com/auth/user');
+    var url = Uri.parse('https://cubos-las-api.herokuapp.com/user');
     var respostaUser = await http.post(
       url,
-      body: UserMapper.toReplitMap(user),
+      body: RegisterMapper.toReplitMap(register),
     );
+    print(jsonDecode(respostaUser.body));
+    print(register.cpf);
     if (respostaUser.statusCode == 201) {
+      print('Registro OK');
       return true;
     } else {
       print('Deu merda no registro ');
