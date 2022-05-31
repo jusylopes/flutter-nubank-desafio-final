@@ -86,8 +86,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   RegisterEntity(
                                       fullName: _nameController.text,
                                       email: _emailController.text,
-                                      cpf: _cpfController.text.replaceAll(".", "")
-                                      .replaceAll("-", ""),
+                                      cpf: _cpfController.text
+                                          .replaceAll(".", "")
+                                          .replaceAll("-", ""),
                                       password: _passwordController.text),
                                 );
                                 if (!currentFocus.hasPrimaryFocus) {
