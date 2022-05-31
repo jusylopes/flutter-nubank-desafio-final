@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                         Material(
                           borderRadius: BorderRadius.zero,
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () { Navigator.pushNamed(context, Routes.event);},
                             child: const MenuProfile(
                                 textAppBar: 'Eventos',
                                 iconMenu: Icons.calendar_month_outlined),

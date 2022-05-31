@@ -4,6 +4,7 @@ import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/background_curve.dart';
@@ -100,12 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                                 currentFocus.unfocus();
                               }
                               if (deuCerto) {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const HomePage(),
-                                  ),
-                                );
+                                 Navigator.pushReplacementNamed(context, Routes.home);
                               } else {
                                 _cpfController.clear();
                                 _passwordController.clear();
