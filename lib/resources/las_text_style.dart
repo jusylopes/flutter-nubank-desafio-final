@@ -75,4 +75,10 @@ abstract class LasTextStyle {
     fontSize: 20.0,
     color: LasColors.txtButtonColor,
   );
+
+   static const nameAppbar = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.0,
+    color: LasColors.textLoginPage,
+  );
 }

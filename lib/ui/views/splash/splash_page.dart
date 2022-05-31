@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/views/home/home_page.dart';
+import 'package:projeto_final/ui/views/inicial/inicial_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/spinning_logo.dart';
 
@@ -22,6 +25,29 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    verificarToken().then((value) {
+      if (value) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const InicialPage(),
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -67,5 +93,15 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
         ),
       ],
     );
+  }
+
+  Future<bool> verificarToken() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    await Future.delayed(const Duration(seconds: 5));
+    if (sharedPreferences.getString('token') == null) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }

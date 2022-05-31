@@ -15,6 +15,10 @@ dependencies:
   flutter_bloc: ^8.0.1
   flutter_svg: ^1.1.0
   http: ^0.13.4
+  image_picker: ^0.8.5+3
+
+
+  
   provider: ^6.0.3
   shared_preferences: ^2.0.15
   widget_mask: ^1.0.0+0
@@ -32,6 +36,7 @@ flutter:
     - assets/images/logo.png
     - assets/images/backgroundPage.png
     - assets/images/Vector1.svg
+    - assets/images/VectorApp.svg
     - assets/images/Vector.png
     - assets/images/las.svg
     - assets/images/profileMask.png

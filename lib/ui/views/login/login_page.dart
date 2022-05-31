@@ -134,4 +134,9 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
+
+  final snackBar = const SnackBar(
+    content: Text('CPF ou Senha inválidos'),
+    backgroundColor: Colors.redAccent,
+  );
 }

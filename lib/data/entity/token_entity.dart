@@ -1,7 +1,7 @@
-class UserEntity {
+class TokenEntity {
   final String token;
 
-  UserEntity({
+  TokenEntity({
     required this.token,
   });
 }
