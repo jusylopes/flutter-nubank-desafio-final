@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.splash,
+      initialRoute: Routes.home,
       routes: {
         Routes.splash: (context) => const SplashPage(),
         Routes.inicial: (context) => const InicialPage(),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:projeto_final/resources/las_colors.dart';
-import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:projeto_final/ui/views/components/custom_appBar.dart';
+import 'package:projeto_final/ui/views/components/app_bar.dart';
+import 'package:projeto_final/ui/views/components/background.dart';
+import 'package:projeto_final/ui/views/components/image_profile.dart';
 
 class EditProfilePage extends StatelessWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -12,58 +11,28 @@ class EditProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 150,
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            flexibleSpace: ClipPath(
-              clipper: CustomAppbar(),
-              child: Container(
-                height: 200,
-                width: MediaQuery.of(context).size.width,
-                color: LasColors.appBarEditProfile,
-                child: Stack(
-                  children: [
-                    Column(
-                      children: const [
-                        SizedBox(
-                          height: 38,
-                          width: double.infinity,
-                        ),
-                        Text(Strings.txtMyHistoric,
-                            style: LasTextStyle.txtEdit,
-                            textAlign: TextAlign.center),
-                        SizedBox(
-                          height: 40,
-                          width: double.infinity,
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 40,
-                      width: double.infinity,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+        const BackgroundPage(),
+        const Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(180.0),
+            child: AppBarWidget(),
           ),
-          backgroundColor: LasColors.txtButtonColor,
         ),
         Column(
           children: [
-            const SizedBox(
-              height: 100,
-              width: double.infinity,
+            Container(
+              margin: const EdgeInsets.only(top: 40),
+              height: 180,
+              child: const ImageProfile(),
             ),
-            Center(
-              child: SizedBox(
-                height: 140,
-                width: 140,
-                child: SvgPicture.asset('assets/images/Vector1.svg'),
-              ),
-            ),
+            Container(
+              padding: const EdgeInsets.only(top: 15),
+              child: const Center(
+                  child: Text(
+                'Olá, Juliana',
+                style: LasTextStyle.txtTitleProfile,
+              )),
+            )
           ],
         ),
       ],
