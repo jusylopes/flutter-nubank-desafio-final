@@ -4,7 +4,6 @@ import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/spinning_logo.dart';
-import 'package:projeto_final/ui/views/historic/historic_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
@@ -45,7 +44,9 @@ class _SplashPageState extends State<SplashPage> with TickerProviderStateMixin {
                     child:
                         Stack(alignment: Alignment.center, children: <Widget>[
                       SpinningLogo(controller: _controller),
-                      Image.asset('assets/images/Vector.png', ),
+                      Image.asset(
+                        'assets/images/Vector.png',
+                      ),
                       SvgPicture.asset('assets/images/las.svg'),
                     ]),
                   ),
