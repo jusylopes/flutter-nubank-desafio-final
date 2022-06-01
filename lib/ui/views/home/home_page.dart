@@ -136,15 +136,16 @@ class _HomePageState extends State<HomePage> {
             Container(
               padding: const EdgeInsets.only(top: 15),
               child: Center(
-                  child: (fullName != null)
-                      ? Text(
-                          'Olá, $fullName',
-                          style: LasTextStyle.txtTitleProfile,
-                        )
-                      : const Text(
-                          'carregando...',
-                          style: LasTextStyle.txtTitleProfile,
-                        )),
+                child: (fullName != null)
+                    ? Text(
+                        'Olá, $fullName',
+                        style: LasTextStyle.txtTitleProfile,
+                      )
+                    : const Text(
+                        'carregando...',
+                        style: LasTextStyle.txtTitleProfile,
+                      ),
+              ),
             )
           ],
         ),

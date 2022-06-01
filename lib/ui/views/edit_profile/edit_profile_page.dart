@@ -1,10 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:image_picker/image_picker.dart';
@@ -21,9 +21,26 @@ class EditProfilePage extends StatefulWidget {
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
+  final userRepository = SwaggerApiUserRepository();
   File? imageProfile;
+  String? fullName;
 
-  //upload de imagem na api
+  void loadUser() async {
+    final user = await userRepository.getDetailsUser();
+    setState(() {
+      fullName = user.fullName;
+    });
+  }
+
+  void getName() {}
+
+  @override
+  void initState() {
+    super.initState();
+    loadUser();
+  }
+
+  //upload de imagem - alice
   Future pickImage(ImageSource source) async {
     try {
       final imageProfile = await ImagePicker().pickImage(source: source);
@@ -31,7 +48,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       final imageTemporary = File(imageProfile.path);
       setState(() => this.imageProfile = imageTemporary);
     } on PlatformException catch (e) {
-       debugPrint('Falha ao pegar a imagem : $e');
+      debugPrint('Falha ao pegar a imagem : $e');
     }
   }
 
@@ -48,25 +65,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
         ),
         Column(
           children: [
-            const SizedBox(
-              height: 100,
-              width: double.infinity,
-            ),
             Stack(
               children: [
-                Center(
-                  child: SizedBox(
-                    height: 140,
-                    width: 140,
-                    child: SvgPicture.asset('assets/images/VectorApp.svg'),
-                  ),
-                ),
-                Center(
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 40),
-                    height: 180,
-                    child: const ImageProfile(),
-                  ),
+                const SizedBox(height: 90.0),
+                Container(
+                  margin: const EdgeInsets.only(top: 40),
+                  height: 180,
+                  child: Stack(alignment: Alignment.center, children: <Widget>[
+                    Image.asset(
+                      'assets/images/Vector1.png',
+                      height: 175,
+                    ),
+                    const ImageProfile(),
+                  ]),
                 ),
               ],
             ),
@@ -74,8 +85,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
               height: 30,
               alignment: Alignment.bottomCenter,
               child: RichText(
-                text: const TextSpan(
-                  text: Strings.nameAppBar,
+                text: TextSpan(
+                  text: (fullName != null) ? '$fullName' : 'carregando...',
                   style: LasTextStyle.nameAppbar,
                 ),
               ),
@@ -118,14 +129,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       }),
               ),
             ),
-            Container(
-              padding: const EdgeInsets.only(top: 15),
-              child: const Center(
-                  child: Text(
-                'Olá, Juliana',
-                style: LasTextStyle.txtTitleProfile,
-              )),
-            )
           ],
         ),
       ],
