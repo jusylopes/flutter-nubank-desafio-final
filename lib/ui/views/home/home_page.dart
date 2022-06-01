@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final userRepository = SwaggerApiUserRepository();
+  final userRepository = SwaggerApiUserRepository();  
   String? fullName;
   bool loading = false;
 
@@ -39,8 +39,6 @@ class _HomePageState extends State<HomePage> {
       fullName = user.fullName;
     });
   }
-
-  void getName() {}
 
   @override
   void initState() {

@@ -22,4 +22,9 @@ abstract class Strings {
   static const nameAppBar = 'Meu nome';
   static const changePhoto = 'Aterar foto';
   static const registerAlertDialog = 'CPF já cadastrado.';
+
+  //strings pagina editprofile
+   static const txtDados = 'Dados Pessoais';
+   static const txtContact = 'Contato';
+   static const txtAddress = 'Endereço';
 }
