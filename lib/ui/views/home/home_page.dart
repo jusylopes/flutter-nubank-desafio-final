@@ -76,30 +76,26 @@ class _HomePageState extends State<HomePage> {
                         MenuProfile(
                           textAppBar: 'Eventos',
                           iconMenu: Icons.calendar_month_outlined,
-                          route: () {
-                            Navigator.pushNamed(context, Routes.event);
-                          },
+                          context: context,
+                          route: Routes.event,
                         ),
                         MenuProfile(
                           textAppBar: 'Meus dados',
                           iconMenu: Icons.account_circle,
-                          route: () {
-                            Navigator.pushNamed(context, Routes.editProfile);
-                          },
+                          context: context,
+                          route: Routes.editProfile,
                         ),
                         MenuProfile(
                           textAppBar: 'Meu histórico',
                           iconMenu: Icons.chrome_reader_mode,
-                          route: () {
-                            Navigator.pushNamed(context, Routes.historic);
-                          },
+                          context: context,
+                          route: Routes.historic,
                         ),
                         MenuProfile(
                           textAppBar: 'Contato',
                           iconMenu: Icons.message,
-                          route: () {
-                            Navigator.pushNamed(context, Routes.historic);
-                          },
+                          context: context,
+                          route: Routes.contact,
                         ),
                       ],
                     ),
@@ -129,7 +125,13 @@ class _HomePageState extends State<HomePage> {
             Container(
               margin: const EdgeInsets.only(top: 40),
               height: 180,
-              child: const ImageProfile(),
+              child: Stack(alignment: Alignment.center, children: <Widget>[
+                Image.asset(
+                  'assets/images/Vector1.png',
+                  height: 175,
+                ),
+                const ImageProfile(),
+              ]),
             ),
             Container(
               padding: const EdgeInsets.only(top: 15),

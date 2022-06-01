@@ -31,7 +31,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       final imageTemporary = File(imageProfile.path);
       setState(() => this.imageProfile = imageTemporary);
     } on PlatformException catch (e) {
-      print('Falha ao pegar a imagem : $e');
+       debugPrint('Falha ao pegar a imagem : $e');
     }
   }
 

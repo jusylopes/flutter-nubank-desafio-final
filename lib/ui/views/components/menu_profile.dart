@@ -5,20 +5,21 @@ import 'package:projeto_final/resources/las_text_style.dart';
 class MenuProfile extends StatelessWidget {
   final String textAppBar;
   final IconData iconMenu;
-  final Function route;
+  final BuildContext context;
+  final String route;
 
   const MenuProfile(
       {super.key,
       required this.textAppBar,
       required this.iconMenu,
-      required this.route});
+      required this.route, required this.context});
 
   @override
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
         onTap: () {
-          route;
+          Navigator.pushNamed(context, route);
         },
         child: Card(
           shape: const RoundedRectangleBorder(

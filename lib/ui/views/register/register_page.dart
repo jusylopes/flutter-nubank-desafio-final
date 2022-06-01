@@ -32,13 +32,13 @@ class _RegisterPageState extends State<RegisterPage> {
   final userRepository = SwaggerApiUserRepository();
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
-  
-  void submit() async {
+
+  void validateSuccess() async {
     setState(() {
       _colorButton = LasColors.buttonColorAwait;
       _textButton = Strings.buttonAwait;
     });
-    
+
     if (_formKey.currentState!.validate()) {
       FocusScopeNode currentFocus = FocusScope.of(context);
       bool validateSucess = await userRepository.register(
@@ -67,19 +67,20 @@ class _RegisterPageState extends State<RegisterPage> {
         _cpfController.clear();
         _emailController.clear();
         _passwordController.clear();
-        getAlert();
       }
     } else {
       debugPrint('errooo');
     }
   }
 
-  void getAlert() {
+  //chamar no caso de cpf já cadastrado
+  void showAlert() {
     showDialog(
         context: context,
         barrierDismissible: false,
         builder: (BuildContext context) => const Alert(
-            bodyAlert: Strings.loginAlertDialog, txtButton: Strings.buttonOk));
+            bodyAlert: Strings.txtRegisterAlertWidget,
+            txtButton: Strings.buttonOk));
   }
 
   @override
@@ -129,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ButtonWidget(
                             colorButton: _colorButton,
                             textButton: _textButton,
-                            onPressed: submit,
+                            onPressed: validateSuccess,
                           ),
                         ],
                       ),

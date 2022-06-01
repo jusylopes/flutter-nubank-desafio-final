@@ -10,7 +10,7 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PreferredSize(
-      preferredSize: Size.fromHeight(180.0),
+      preferredSize: const Size.fromHeight(180.0),
       child: AppBar(
         backgroundColor: Colors.transparent,
         automaticallyImplyLeading: back,
