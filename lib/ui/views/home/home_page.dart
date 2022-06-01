@@ -21,6 +21,7 @@ class HomePage extends StatelessWidget {
     // }
 
     final userRepository = SwaggerApiUserRepository();
+
     return Stack(
       children: [
         const BackgroundPage(),
@@ -47,7 +48,9 @@ class HomePage extends StatelessWidget {
                         Material(
                           borderRadius: BorderRadius.zero,
                           child: InkWell(
-                            onTap: () { Navigator.pushNamed(context, Routes.event);},
+                            onTap: () {
+                              Navigator.pushNamed(context, Routes.event);
+                            },
                             child: const MenuProfile(
                                 textAppBar: 'Eventos',
                                 iconMenu: Icons.calendar_month_outlined),
@@ -88,10 +91,7 @@ class HomePage extends StatelessWidget {
                   TextButton(
                     onPressed: () async {
                       final todo = await userRepository.getDetailsUser();
-                      print(todo.fullName);
-
-                      // final list = await userRepository.getDetailsUser();
-                      // print(list);
+                      print(todo.cpf);
                     },
                     child: const Text('Testar'),
                   ),

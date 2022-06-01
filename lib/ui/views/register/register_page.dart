@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/login_entity.dart';
 import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
@@ -92,6 +93,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                           .replaceAll("-", ""),
                                       password: _passwordController.text),
                                 );
+                                await userRepository.login(LoginEntity(
+                                    cpf: _cpfController.text
+                                        .replaceAll(".", "")
+                                        .replaceAll("-", ""),
+                                    password: _passwordController.text));
                                 if (!currentFocus.hasPrimaryFocus) {
                                   currentFocus.unfocus();
                                 }
@@ -107,9 +113,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                   _cpfController.clear();
                                   _emailController.clear();
                                   _passwordController.clear();
-                                  // ScaffoldMessenger.of(context)
-                                  //     .showSnackBar(snackBar);
-                                  //jusy add
                                   showDialog(
                                       context: context,
                                       barrierDismissible: false,
