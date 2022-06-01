@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_final/external/swagger_api_user_repository.dart';
-import 'package:projeto_final/ui/views/splash/splash_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
@@ -9,25 +8,53 @@ import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/image_profile.dart';
 import 'package:projeto_final/ui/views/components/menu_profile.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // Future<void> token() async {
-    //   SharedPreferences sharedPreferences =
-    //       await SharedPreferences.getInstance();
-    //   var token = sharedPreferences.getString('token');
-    // }
+  State<HomePage> createState() => _HomePageState();
+}
 
-    final userRepository = SwaggerApiUserRepository();
+class _HomePageState extends State<HomePage> {
+  final userRepository = SwaggerApiUserRepository();  
+  String? fullName;
+  bool loading = false;
+
+  void logout() async {
+    try {
+      await userRepository.logout();
+      //para retirar erro de gap
+      if (!mounted) return;
+      Navigator.of(context).popAndPushNamed(Routes.login);
+    } catch (error) {
+      debugPrint('$error');
+    }
+  }
+
+  void loadUser() async {
+    setState(() => loading = true);
+    final user = await userRepository.getDetailsUser();
+    setState(() {
+      loading = false;
+      fullName = user.fullName;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadUser();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         const BackgroundPage(),
         Scaffold(
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(180.0),
-            child: AppBarWidget(),
+            child: AppBarWidget(back: false),
           ),
           body: SafeArea(
             child: Center(
@@ -44,73 +71,47 @@ class HomePage extends StatelessWidget {
                       crossAxisCount: 2,
                       childAspectRatio: (1 / .6),
                       children: <Widget>[
-                        Material(
-                          borderRadius: BorderRadius.zero,
-                          child: InkWell(
-                            onTap: () { Navigator.pushNamed(context, Routes.event);},
-                            child: const MenuProfile(
-                                textAppBar: 'Eventos',
-                                iconMenu: Icons.calendar_month_outlined),
-                          ),
+                        MenuProfile(
+                          textAppBar: 'Eventos',
+                          iconMenu: Icons.calendar_month_outlined,
+                          context: context,
+                          route: Routes.event,
                         ),
-                        Material(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.editProfile);
-                            },
-                            child: const MenuProfile(
-                                textAppBar: 'Meus dados',
-                                iconMenu: Icons.account_circle),
-                          ),
+                        MenuProfile(
+                          textAppBar: 'Meus dados',
+                          iconMenu: Icons.account_circle,
+                          context: context,
+                          route: Routes.editProfile,
                         ),
-                        Material(
-                          child: InkWell(
-                            onTap: () {},
-                            borderRadius: BorderRadius.zero,
-                            child: const MenuProfile(
-                                textAppBar: 'Meu histórico',
-                                iconMenu: Icons.chrome_reader_mode),
-                          ),
+                        MenuProfile(
+                          textAppBar: 'Meu histórico',
+                          iconMenu: Icons.chrome_reader_mode,
+                          context: context,
+                          route: Routes.historic,
                         ),
-                        Material(
-                          child: InkWell(
-                            onTap: () {},
-                            borderRadius: BorderRadius.zero,
-                            child: const MenuProfile(
-                                textAppBar: 'Contato', iconMenu: Icons.message),
-                          ),
+                        MenuProfile(
+                          textAppBar: 'Contato',
+                          iconMenu: Icons.message,
+                          context: context,
+                          route: Routes.contact,
                         ),
                       ],
                     ),
                   ),
-
-                  //Isa adicionou
-                  TextButton(
-                    onPressed: () async {
-                      final todo = await userRepository.getDetailsUser();
-                      print(todo.fullName);
-
-                      // final list = await userRepository.getDetailsUser();
-                      // print(list);
-                    },
-                    child: const Text('Testar'),
-                  ),
                   const SizedBox(
                     height: 20,
                   ),
-                  TextButton(
-                    onPressed: () async {
-                      bool saiu = await userRepository.logout();
-                      if (saiu) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SplashPage(),
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text('Sair'),
+                  TextButton.icon(
+                    onPressed: logout,
+                    icon: const Icon(
+                      Icons.logout,
+                      size: 25,
+                      color: LasColors.buttonColor,
+                    ),
+                    label: const Text(
+                      'Sair',
+                      style: TextStyle(color: LasColors.buttonColor),
+                    ),
                   ),
                 ],
               ),
@@ -122,25 +123,31 @@ class HomePage extends StatelessWidget {
             Container(
               margin: const EdgeInsets.only(top: 40),
               height: 180,
-              child: const ImageProfile(),
+              child: Stack(alignment: Alignment.center, children: <Widget>[
+                Image.asset(
+                  'assets/images/Vector1.png',
+                  height: 175,
+                ),
+                const ImageProfile(),
+              ]),
             ),
             Container(
               padding: const EdgeInsets.only(top: 15),
-              child: const Center(
-                  child: Text(
-                'Olá, Juliana',
-                style: LasTextStyle.txtTitleProfile,
-              )),
+              child: Center(
+                child: (fullName != null)
+                    ? Text(
+                        'Olá, $fullName',
+                        style: LasTextStyle.txtTitleProfile,
+                      )
+                    : const Text(
+                        'carregando...',
+                        style: LasTextStyle.txtTitleProfile,
+                      ),
+              ),
             )
           ],
         ),
       ],
     );
   }
-
-  // Future<bool> logout() async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   await sharedPreferences.clear();
-  //   return true;
-  // }
 }

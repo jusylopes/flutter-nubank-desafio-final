@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class HistoricPage extends StatelessWidget {
-  const HistoricPage({Key? key}) : super(key: key);
+class ContactPage extends StatelessWidget {
+  const ContactPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
