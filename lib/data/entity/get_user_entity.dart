@@ -22,6 +22,5 @@ class GetUserEntity {
     // required this.contacts,
     required this.email,
   });
-
-  
 }
+

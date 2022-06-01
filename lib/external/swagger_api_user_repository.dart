@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:projeto_final/data/entity/get_user_entity.dart';
 import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
 import 'package:projeto_final/data/repositories/user_repository.dart';
@@ -53,7 +54,7 @@ class SwaggerApiUserRepository implements UserRepository {
   }
 
   @override
-  Future<Todo> getDetailsUser() async {
+  Future<GetUserEntity> getDetailsUser() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
     var urlUser = Uri.parse('https://cubos-las-api.herokuapp.com/user');
@@ -65,7 +66,7 @@ class SwaggerApiUserRepository implements UserRepository {
       },
     );
     final json = jsonDecode(respostaGetUser.body);
-    final todo = Todo(
+    final todo = GetUserEntity(
       id: json['id'],
       fullName: json['fullName'],
       rg: json['rg'],
@@ -82,28 +83,3 @@ class SwaggerApiUserRepository implements UserRepository {
   }
 }
 
-class Todo {
-  final int id;
-  final String fullName;
-  final String? rg;
-  final String cpf;
-  final String? profilePictureUrl;
-  final String? birthDate;
-  final String? createdAt;
-  final String? email;
-  // final String address;
-  // final String contacts;
-
-  Todo({
-    required this.id,
-    required this.fullName,
-    required this.rg,
-    required this.cpf,
-    required this.profilePictureUrl,
-    required this.birthDate,
-    required this.createdAt,
-    // required this.address,
-    // required this.contacts,
-    required this.email,
-  });
-}
