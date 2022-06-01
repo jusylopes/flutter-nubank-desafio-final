@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_final/external/swagger_api_user_repository.dart';
 import 'package:projeto_final/ui/views/splash/splash_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
@@ -14,12 +13,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Future<void> token() async {
-    //   SharedPreferences sharedPreferences =
-    //       await SharedPreferences.getInstance();
-    //   var token = sharedPreferences.getString('token');
-    // }
-
     final userRepository = SwaggerApiUserRepository();
 
     return Stack(
@@ -86,8 +79,6 @@ class HomePage extends StatelessWidget {
                       ],
                     ),
                   ),
-
-                  //Isa adicionou
                   TextButton(
                     onPressed: () async {
                       final todo = await userRepository.getDetailsUser();
