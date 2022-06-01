@@ -10,7 +10,8 @@ import 'package:projeto_final/resources/las_strings.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:async';
 import 'dart:io';
-import 'package:projeto_final/ui/views/edit_profile/triangle_clip.dart';
+
+import 'package:projeto_final/ui/views/components/image_profile.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -22,6 +23,7 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   File? imageProfile;
 
+  //upload de imagem na api
   Future pickImage(ImageSource source) async {
     try {
       final imageProfile = await ImagePicker().pickImage(source: source);
@@ -41,7 +43,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         const Scaffold(
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(180.0),
-            child: AppBarWidget(),
+            child: AppBarWidget(back: true),
           ),
         ),
         Column(
@@ -60,18 +62,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   ),
                 ),
                 Center(
-                  child: imageProfile != null
-                      ? ClipPath(
-                          clipper: TriangleClipper(),
-                          child: Image.file(
-                            imageProfile!,
-                            height: 150,
-                            width: 150,
-                          ),
-                        )
-                      : Image.asset(
-                          'assets/images/logo.png',
-                        ),
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 40),
+                    height: 180,
+                    child: const ImageProfile(),
+                  ),
                 ),
               ],
             ),

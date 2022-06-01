@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_final/external/swagger_api_user_repository.dart';
-import 'package:projeto_final/ui/views/splash/splash_page.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
@@ -13,21 +11,16 @@ class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    // Future<void> token() async {
-    //   SharedPreferences sharedPreferences =
-    //       await SharedPreferences.getInstance();
-    //   var token = sharedPreferences.getString('token');
-    // }
-
+  Widget build(BuildContext context) { 
     final userRepository = SwaggerApiUserRepository();
+
     return Stack(
       children: [
-        const BackgroundPage(),
+        const BackgroundPage(),        
         Scaffold(
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(180.0),
-            child: AppBarWidget(),
+            child: AppBarWidget(back: false),
           ),
           body: SafeArea(
             child: Center(
@@ -44,47 +37,31 @@ class HomePage extends StatelessWidget {
                       crossAxisCount: 2,
                       childAspectRatio: (1 / .6),
                       children: <Widget>[
-                        Material(
-                          borderRadius: BorderRadius.zero,
-                          child: InkWell(
-                            onTap: () { Navigator.pushNamed(context, Routes.event);},
-                            child: const MenuProfile(
-                                textAppBar: 'Eventos',
-                                iconMenu: Icons.calendar_month_outlined),
-                          ),
+                        MenuProfile(
+                          textAppBar: 'Eventos',
+                          iconMenu: Icons.calendar_month_outlined,
+                          route:  () {Navigator.pushNamed(context, Routes.event);},                              ,
                         ),
-                        Material(
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, Routes.editProfile);
-                            },
-                            child: const MenuProfile(
-                                textAppBar: 'Meus dados',
-                                iconMenu: Icons.account_circle),
-                          ),
+                        MenuProfile(
+                          textAppBar: 'Meus dados',
+                          iconMenu: Icons.account_circle,
+                          route:  () {Navigator.pushNamed(context, Routes.editProfile);},                              ,
                         ),
-                        Material(
-                          child: InkWell(
-                            onTap: () {},
-                            borderRadius: BorderRadius.zero,
-                            child: const MenuProfile(
-                                textAppBar: 'Meu histórico',
-                                iconMenu: Icons.chrome_reader_mode),
-                          ),
+                        MenuProfile(
+                          textAppBar: 'Meu histórico',
+                          iconMenu: Icons.chrome_reader_mode,
+                          route:  ()  {Navigator.pushNamed(context, Routes.historic);},                              ,
                         ),
-                        Material(
-                          child: InkWell(
-                            onTap: () {},
-                            borderRadius: BorderRadius.zero,
-                            child: const MenuProfile(
-                                textAppBar: 'Contato', iconMenu: Icons.message),
-                          ),
+                        MenuProfile(
+                          textAppBar: 'Contato',
+                          iconMenu: Icons.message,
+                          route:  ()  {Navigator.pushNamed(context, Routes.historic);},                              ,
                         ),
                       ],
                     ),
                   ),
 
-                  //Isa adicionou
+
                   TextButton(
                     onPressed: () async {
                       final todo = await userRepository.getDetailsUser();
@@ -102,12 +79,7 @@ class HomePage extends StatelessWidget {
                     onPressed: () async {
                       bool saiu = await userRepository.logout();
                       if (saiu) {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SplashPage(),
-                          ),
-                        );
+                        Navigator.pushNamed(context, Routes.splash);
                       }
                     },
                     child: const Text('Sair'),
@@ -137,6 +109,14 @@ class HomePage extends StatelessWidget {
       ],
     );
   }
+
+
+getNome async {
+                      final todo = await userRepository.getDetailsUser();
+                      print(todo.fullName);
+
+
+}
 
   // Future<bool> logout() async {
   //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();

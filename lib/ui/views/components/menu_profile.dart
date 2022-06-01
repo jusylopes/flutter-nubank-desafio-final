@@ -5,27 +5,38 @@ import 'package:projeto_final/resources/las_text_style.dart';
 class MenuProfile extends StatelessWidget {
   final String textAppBar;
   final IconData iconMenu;
+  final Function route;
 
   const MenuProfile(
-      {super.key, required this.textAppBar, required this.iconMenu});
+      {super.key,
+      required this.textAppBar,
+      required this.iconMenu,
+      required this.route});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.zero,
-      ),
-      color: LasColors.menuProfile,
-      child: Center(
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                  padding: const EdgeInsets.symmetric(vertical:12),
-                  child: Icon(iconMenu,
-                      size: 52.0, color: LasColors.txtAppBarProfile)),
-              Text(textAppBar, style: LasTextStyle.appBarProfile),
-            ]),
+    return Material(
+      child: InkWell(
+        onTap: () {
+          route;
+        },
+        child: Card(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
+          color: LasColors.menuProfile,
+          child: Center(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                      padding: const EdgeInsets.symmetric(vertical: 12),
+                      child: Icon(iconMenu,
+                          size: 52.0, color: LasColors.txtAppBarProfile)),
+                  Text(textAppBar, style: LasTextStyle.appBarProfile),
+                ]),
+          ),
+        ),
       ),
     );
   }
