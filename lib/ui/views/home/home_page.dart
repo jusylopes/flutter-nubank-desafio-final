@@ -65,10 +65,7 @@ class HomePage extends StatelessWidget {
                   TextButton(
                     onPressed: () async {
                       final todo = await userRepository.getDetailsUser();
-                      print(todo.fullName);
-
-                      // final list = await userRepository.getDetailsUser();
-                      // print(list);
+                      print(todo.cpf);
                     },
                     child: const Text('Testar'),
                   ),
@@ -111,16 +108,7 @@ class HomePage extends StatelessWidget {
   }
 
 
-getNome async {
-                      final todo = await userRepository.getDetailsUser();
-                      print(todo.fullName);
 
 
-}
 
-  // Future<bool> logout() async {
-  //   SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-  //   await sharedPreferences.clear();
-  //   return true;
-  // }
 }
