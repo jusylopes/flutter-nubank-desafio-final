@@ -7,20 +7,23 @@ environment:
   sdk: ">=2.17.1 <3.0.0"
 
 dependencies:
+  brasil_fields: ^1.4.4
   cupertino_icons: ^1.0.2
-  flutter_svg: ^1.1.0
+  easy_mask: ^2.0.1
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  mask_text_input_formatter: ^2.3.0
-  provider: ^6.0.3
-  awesome_dialog: ^2.2.1
-  url_launcher: ^6.1.2
-flutter_pdfview: ^1.2.2
-http: ^0.13.4 
+  flutter_svg: ^1.1.0
+  http: ^0.13.4
+  image_picker: ^0.8.5+3
+  
 
-permission_handler: ^9.2.0 
-url_launcher: ^6.1.2 
+
+  
+  provider: ^6.0.3
+  shared_preferences: ^2.0.15
+  url_launcher: ^6.1.2
+  widget_mask: ^1.0.0+0
 
 
 dev_dependencies:
@@ -35,10 +38,14 @@ flutter:
     - assets/images/logo.png
     - assets/images/backgroundPage.png
     - assets/images/Vector1.svg
+    - assets/images/VectorApp.svg
     - assets/images/Vector.png
     - assets/images/las.svg
+    - assets/images/profileMask.png
+    - assets/images/teste.jpg
 
   fonts:
     - family: Roboto
       fonts:
-        - asset: assets/fonts/Roboto-Regular.ttf
+        - asset: assets/fonts/Roboto.ttf
+        - asset: assets/fonts/Roboto-Medium.ttf

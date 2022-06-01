@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-
 class CustomAppbar extends CustomClipper<Path> {
   @override
   Path getClip(Size size) {
@@ -9,7 +8,7 @@ class CustomAppbar extends CustomClipper<Path> {
 
     var path = Path();
     path.lineTo(0, height);
-    path.quadraticBezierTo(width * 0.5, height - 60, width, height);
+    path.quadraticBezierTo(width * 0.5, height - 70, width, height);
     path.lineTo(width, 0);
     path.close();
 

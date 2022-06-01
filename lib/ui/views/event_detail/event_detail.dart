@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final/ui/views/components/background_page.dart';
+
 import 'package:projeto_final/ui/views/components/custom_appbar.dart';
 
 class EventDetailPage extends StatelessWidget {
@@ -9,7 +9,7 @@ class EventDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        BackgroundPage(),
+        
         Scaffold(
           appBar: AppBar(
             toolbarHeight: 200.0,

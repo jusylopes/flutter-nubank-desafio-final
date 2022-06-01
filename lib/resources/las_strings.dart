@@ -12,8 +12,7 @@ abstract class Strings {
       'Entre com seus dados para acessar o app.';
   static const buttonLogin = 'ENTRAR';
   static const buttonAwait = 'AGUARDE';
-  static const txtAuthenticationAlertDialog =
-      'Credenciais incorretas, tente novamente';
+  static const loginAlertDialog = 'Credenciais incorretas, tente novamente';
   static const buttonOk = 'OK';
 
 //strings pagina register
@@ -29,4 +28,11 @@ abstract class Strings {
   static const txtcheckAccreditation = 'Li e concordo com os termos';
   static const txtButtonAccreditation = 'CREDENCIAR';
   static const txtmsgconfirmAccreditation = 'Seu credenciamento foi realizado com sucesso.';
+  static const buttonRegister = 'REGISTRAR';
+ 
+ 
+  static const txtMyHistoric = 'Meus dados';
+  static const nameAppBar = 'Meu nome';
+  static const changePhoto = 'Aterar foto';
+  static const registerAlertDialog = 'CPF já cadastrado.';
 }

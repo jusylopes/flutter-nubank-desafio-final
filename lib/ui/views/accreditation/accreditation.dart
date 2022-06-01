@@ -1,10 +1,12 @@
-// ignore_for_file: prefer_const_constructors
+
 
 import 'package:flutter/material.dart';
-import 'package:projeto_final/ui/views/components/background_page.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+
 import '../../../resources/las_strings.dart';
 import '../../../resources/las_text_style.dart';
+import '../components/background.dart';
 import '../components/custom_appBar.dart';
 
 var url = 'http://www.africau.edu/images/default/sample.pdf';
