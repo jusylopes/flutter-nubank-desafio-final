@@ -7,30 +7,33 @@ class EventDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(children: [
-      BackgroundPage(),
-      Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 200.0,
-          backgroundColor: Colors.transparent,
-          elevation: 0.0,
-          flexibleSpace: ClipPath(
-            clipper: CustomAppbar(),
-            child: Container(height: 150.0,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.blue,
-            child: Column(
-              children: const[
-                SizedBox(
-                  height: 44.0,
-                  width: double.infinity,
-              
-                )
-              ],
-            ),),
+    return Stack(
+      children: [
+        BackgroundPage(),
+        Scaffold(
+          appBar: AppBar(
+            toolbarHeight: 200.0,
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            flexibleSpace: ClipPath(
+              clipper: CustomAppbar(),
+              child: Container(
+                height: 150.0,
+                width: MediaQuery.of(context).size.width,
+                color: Colors.blue,
+                child: Column(
+                  children: const [
+                    SizedBox(
+                      height: 44.0,
+                      width: double.infinity,
+                    )
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
-      )
-    ],);
+        )
+      ],
+    );
   }
 }
