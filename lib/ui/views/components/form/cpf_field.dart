@@ -11,6 +11,7 @@ class CpfField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
         controller: cpfController,
+        autofocus: false,
         keyboardType: TextInputType.number,
         inputFormatters: [
           FilteringTextInputFormatter.digitsOnly,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:projeto_final/data/entity/get_user_entity.dart';
 import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
@@ -45,10 +46,10 @@ class SwaggerApiUserRepository implements UserRepository {
       body: RegisterMapper.toReplitMap(register),
     );
     if (respostaRegister.statusCode == 201) {
-      print('Registro OK');
+      debugPrint('Registro OK');
       return true;
     } else {
-      print('Deu merda no registro ');
+       debugPrint('Deu merda no registro ');
     }
     return false;
   }

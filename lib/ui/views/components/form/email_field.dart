@@ -14,7 +14,10 @@ class EmailField extends StatelessWidget {
           labelText: 'Email',
         ),
         validator: (String? value) {
-          return value == null || value.isEmpty ? 'Campo obrigatório' : null;
+           if (value!.isEmpty || !value.contains('@')) {
+                      return 'E-mail invalido';
+                    }
+                    return null;
         });
   }
 }

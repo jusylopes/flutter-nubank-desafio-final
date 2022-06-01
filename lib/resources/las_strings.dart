@@ -19,7 +19,8 @@ abstract class Strings {
   static const txtTitleRegister = 'Registre-se';
   static const txtSubtitleRegister =
       'Preencha o formulário para criar sua conta';
-  static const txtRegisterAlertWidget = 'CPF já cadastrado.';
+  static const txtRegisterAlertWidget = 'CPF ou Senha inválidos';
+  
 
   //strings pagina accreditation
   static const txtTitleAccreditation = 'Credenciamento \n Carnaval 2021';
@@ -35,4 +36,9 @@ abstract class Strings {
   static const nameAppBar = 'Meu nome';
   static const changePhoto = 'Aterar foto';
   static const registerAlertDialog = 'CPF já cadastrado.';
+
+  //strings pagina editprofile
+   static const txtDados = 'Dados Pessoais';
+   static const txtContact = 'Contato';
+   static const txtAddress = 'Endereço';
 }
