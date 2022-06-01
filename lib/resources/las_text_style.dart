@@ -116,9 +116,15 @@ abstract class LasTextStyle {
     color: LasColors.txtButtonColor,
   );
 
-   static const nameAppbar = TextStyle(
+  static const nameAppbar = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 20.0,
+    fontSize: 21.0,
+    color: LasColors.textLoginPage,
+  );
+
+  static const txtEditDados = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 19.0,
     color: LasColors.textLoginPage,
   );
 }
