@@ -13,6 +13,10 @@ abstract class LasColors {
   static const Color txtAlertWidget = Color(0XFF555770);
   static const Color buttonColor = Color(0XFF004BA0);
   static const Color buttonColorAwait = Color(0XFF828282);
+  static const Color textButtonColor = Color(0XFFFFFFFF);
+  static const Color textButtonPdfColor = Color(0XFF2977E1);
+  static const Color texmsgconfirmAccreditation = Color(0XFF555770);
+
   static const Color txtButtonColor = Color(0XFFFFFFFF);
   static const Color txtAppBarProfile = Color(0XFFF2F2F2);
   static const Color txtTitleProfile = Color(0XFF555770);
