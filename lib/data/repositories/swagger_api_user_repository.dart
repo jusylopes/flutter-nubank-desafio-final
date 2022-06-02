@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:projeto_final/data/entity/get_address_details.dart';
-import 'package:projeto_final/data/entity/get_user_contacts.dart';
-import 'package:projeto_final/data/entity/get_user_details.dart';
+import 'package:projeto_final/data/entity/get/get_address_details.dart';
+import 'package:projeto_final/data/entity/get/get_user_contacts.dart';
+import 'package:projeto_final/data/entity/get/get_user_details.dart';
+import 'package:projeto_final/data/entity/patch/patch_register_entity.dart';
 import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
 import 'package:projeto_final/data/repositories/user_repository.dart';
 import 'package:projeto_final/external/login_mapper.dart';
+import 'package:projeto_final/external/patch_register_mapper.dart';
 import 'package:projeto_final/external/register_mapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -23,7 +25,6 @@ class SwaggerApiUserRepository implements UserRepository {
     if (respostaLogin.statusCode == 201) {
       await sharedPreferences.setString(
           'token', '${jsonDecode(respostaLogin.body)["token"]}');
-
       return true;
     } else {
       return false;
@@ -76,7 +77,6 @@ class SwaggerApiUserRepository implements UserRepository {
       birthDate: json['birthDate'],
       createdAt: json['createdAt'],
     );
-
     return user;
   }
 
@@ -102,7 +102,6 @@ class SwaggerApiUserRepository implements UserRepository {
       city: json['city'],
       state: json['state'],
     );
-
     return address;
   }
 
@@ -125,7 +124,28 @@ class SwaggerApiUserRepository implements UserRepository {
       phone: json['phone'],
       mobilePhone: json['mobilePhone'],
     );
-
     return contacts;
+  }
+
+  @override
+  Future<bool> patchRegister(PatchRegisterEntity patchRegister) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var url = Uri.parse('https://cubos-las-api.herokuapp.com/user');
+    var respostaPatchRegister = await http.patch(
+      url,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: PatchRegisterMapper.toReplitMap(patchRegister),
+    );
+    if (respostaPatchRegister.statusCode == 201) {
+      debugPrint('Patch Registro OK');
+      return true;
+    } else {
+      debugPrint('Deu merda no Patch');
+    }
+    return false;
   }
 }
