@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:projeto_final/data/entity/get_user_entity.dart';
+import 'package:projeto_final/data/entity/get_address_details.dart';
+import 'package:projeto_final/data/entity/get_user_contacts.dart';
+import 'package:projeto_final/data/entity/get_user_details.dart';
 import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
 import 'package:projeto_final/data/repositories/user_repository.dart';
@@ -21,8 +23,6 @@ class SwaggerApiUserRepository implements UserRepository {
     if (respostaLogin.statusCode == 201) {
       await sharedPreferences.setString(
           'token', '${jsonDecode(respostaLogin.body)["token"]}');
-      // final token = jsonDecode(respostaLogin.body)['token'];
-      // print(token);
 
       return true;
     } else {
@@ -49,13 +49,13 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Registro OK');
       return true;
     } else {
-       debugPrint('Deu merda no registro ');
+      debugPrint('Deu merda no registro ');
     }
     return false;
   }
 
   @override
-  Future<GetUserEntity> getDetailsUser() async {
+  Future<GetUserDetails> getUserDetails() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
     var urlUser = Uri.parse('https://cubos-las-api.herokuapp.com/user');
@@ -67,7 +67,7 @@ class SwaggerApiUserRepository implements UserRepository {
       },
     );
     final json = jsonDecode(respostaGetUser.body);
-    final todo = GetUserEntity(
+    final user = GetUserDetails(
       id: json['id'],
       fullName: json['fullName'],
       rg: json['rg'],
@@ -75,12 +75,57 @@ class SwaggerApiUserRepository implements UserRepository {
       profilePictureUrl: json['profilePictureUrl'],
       birthDate: json['birthDate'],
       createdAt: json['createdAt'],
-      // address: json['address'],
-      // contacts: json['contacts'],
-      email: json['contacts']['email'],
     );
 
-    return todo;
+    return user;
+  }
+
+  @override
+  Future<GetAddressDetails> getAddressDetails() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var urlUser = Uri.parse('https://cubos-las-api.herokuapp.com/user/address');
+    var respostaGetDetails = await http.get(
+      urlUser,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    final json = jsonDecode(respostaGetDetails.body);
+    final address = GetAddressDetails(
+      cep: json['cep'],
+      street: json['street'],
+      number: json['number'],
+      complement: json['complement'],
+      district: json['district'],
+      city: json['city'],
+      state: json['state'],
+    );
+
+    return address;
+  }
+
+  @override
+  Future<GetUserContacts> getUserContacts() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var urlUser =
+        Uri.parse('https://cubos-las-api.herokuapp.com/user/contacts');
+    var respostaGetContacts = await http.get(
+      urlUser,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    final json = jsonDecode(respostaGetContacts.body);
+    final contacts = GetUserContacts(
+      email: json['email'],
+      phone: json['phone'],
+      mobilePhone: json['mobilePhone'],
+    );
+
+    return contacts;
   }
 }
-

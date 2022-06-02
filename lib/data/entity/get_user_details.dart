@@ -1,4 +1,4 @@
-class GetUserEntity {
+class GetUserDetails {
   final int id;
   final String fullName;
   final String? rg;
@@ -6,11 +6,8 @@ class GetUserEntity {
   final String? profilePictureUrl;
   final String? birthDate;
   final String? createdAt;
-  final String? email;
-  // final String address;
-  // final String contacts;
 
-  GetUserEntity({
+  GetUserDetails({
     required this.id,
     required this.fullName,
     required this.rg,
@@ -18,9 +15,5 @@ class GetUserEntity {
     required this.profilePictureUrl,
     required this.birthDate,
     required this.createdAt,
-    // required this.address,
-    // required this.contacts,
-    required this.email,
   });
 }
-
