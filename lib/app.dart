@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.home,
+      initialRoute: Routes.editProfile,
       routes: {
         Routes.splash: (context) => const SplashPage(),
         Routes.inicial: (context) => const InicialPage(),
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         Routes.home: (context) => const HomePage(),
         Routes.event: (context) => const EventPage(),
         Routes.accreditation: (context) => const AccreditationPage(),
-        Routes.historic: (context) => const HistoricPage(),
+       // Routes.historic: (context) => const HistoricPage(),
         Routes.contact: (context) => const ContactPage(),
       },
     );

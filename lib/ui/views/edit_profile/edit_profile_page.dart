@@ -8,7 +8,11 @@ import 'package:flutter/services.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:projeto_final/ui/views/components/form/birthday_date.dart';
+import 'package:projeto_final/ui/views/components/form/cpf_field.dart';
 import 'package:projeto_final/ui/views/components/form/name_field.dart';
+import 'package:projeto_final/ui/views/components/form/rg_field.dart';
+import 'package:projeto_final/ui/views/components/text_title_form.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -23,23 +27,34 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _nameController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _dateController = TextEditingController();
+  final _rgController = TextEditingController();
+  final _cpfController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _mobileController = TextEditingController();
+  final _emailController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
 
   File? imageProfile;
-  String name = 'carregando';
+  String? fullName = 'carregando...';
+  String? cpf;
 
   void loadUser() async {
     final user = await userRepository.getDetailsUser();
+    fullName = user.fullName;
+    cpf = user.cpf;
+
     setState(() {
-      name = user.fullName;
-      _nameController.text = name.toString();
+      _nameController.text = fullName.toString();
+      _cpfController.text = cpf.toString();
     });
   }
 
   @override
   void initState() {
     super.initState();
+
     loadUser();
   }
 
@@ -98,32 +113,47 @@ class _EditProfilePageState extends State<EditProfilePage> {
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 100.0),
-                Container(
-                  padding: const EdgeInsets.only(right: 220.0),
-                  child: const Text(
-                    Strings.txtDados,
-                    style: LasTextStyle.txtEditDados,
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-                const SizedBox(height: 12.0),
+                const TextTileForm(textTitleForm: Strings.txtDados),
+                
                 Form(
                   key: _formKey,
                   child: Container(
-                    height: 200,
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
                       children: <Widget>[
-                        NameField(
-                          nameController: _nameController,
-                          // initialValue: fullName,
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: NameField(
+                            nameController: _nameController,
+                          ),
                         ),
-                        const SizedBox(height: 15.0),
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: BirthdayDate(
+                            dateController: _dateController,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: RgField(
+                            rgController: _rgController,
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(6.0),
+                          child: CpfField(
+                            cpfController: _cpfController,
+                          ),
+                        ),
+                        const TextTileForm(textTitleForm: Strings.txtDados),
+                
+                        
                       ],
                     ),
                   ),
                 )
               ],
+              
             ),
           ),
         ),
@@ -145,7 +175,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               alignment: Alignment.bottomCenter,
               child: RichText(
                 text: TextSpan(
-                  text: (name != null) ? name : 'carregando...',
+                  text: (fullName != null) ? fullName : 'carregando...',
                   style: LasTextStyle.nameAppbar,
                 ),
               ),
