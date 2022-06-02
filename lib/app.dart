@@ -18,20 +18,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
       theme: ThemeData(
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.editProfile,
+      initialRoute: Routes.splash,
       routes: {
         Routes.splash: (context) => const SplashPage(),
         Routes.inicial: (context) => const InicialPage(),
         Routes.login: (context) => const LoginPage(),
         Routes.register: (context) => const RegisterPage(),
-        Routes.editProfile: (context) => const EditProfilePage(),        
+        Routes.editProfile: (context) => const EditProfilePage(),
         Routes.home: (context) => const HomePage(),
         Routes.event: (context) => const EventPage(),
         Routes.credential: (context) => const HomePage(),
