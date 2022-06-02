@@ -44,11 +44,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String? cpf;
 
   void loadUser() async {
-
-    final user = await userRepository.getDetailsUser();
+    final user = await userRepository.getUserDetails();
     fullName = user.fullName;
     cpf = user.cpf;
-
 
     setState(() {
       _nameController.text = fullName.toString();
@@ -127,7 +125,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       NameField(
                         nameController: _nameController,
                       ),
-                       const SizedBox(height: 15.0),
+                      const SizedBox(height: 15.0),
                       BirthdayDate(
                         dateController: _dateController,
                       ),
@@ -139,8 +137,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       CpfField(
                         cpfController: _cpfController,
                       ),
-
-                      const TextTileForm(textTitleForm: Strings.txtContact),                      
+                      const TextTileForm(textTitleForm: Strings.txtContact),
                       PhoneField(
                         phoneController: _phoneController,
                       ),
@@ -148,7 +145,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ButtonWidget(
                           colorButton: LasColors.buttonColor,
                           textButton: Strings.buttonChange,
-                          onPressed: (){})
+                          onPressed: () {})
                     ],
                   ),
                 ),
