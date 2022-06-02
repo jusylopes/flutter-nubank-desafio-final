@@ -8,11 +8,18 @@ import 'package:flutter/services.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:projeto_final/ui/views/components/button_widget.dart';
+import 'package:projeto_final/ui/views/components/form/birthday_date.dart';
+import 'package:projeto_final/ui/views/components/form/cpf_field.dart';
 import 'package:projeto_final/ui/views/components/form/name_field.dart';
+import 'package:projeto_final/ui/views/components/form/rg_field.dart';
+import 'package:projeto_final/ui/views/components/text_title_form.dart';
 import 'dart:async';
 import 'dart:io';
 
 import 'package:projeto_final/ui/views/components/image_profile.dart';
+
+import '../components/form/phone_field.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -24,23 +31,35 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
+  final _dateController = TextEditingController();
+  final _rgController = TextEditingController();
+  final _cpfController = TextEditingController();
+  final _phoneController = TextEditingController();
+  final _mobileController = TextEditingController();
+  final _emailController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
 
   File? imageProfile;
-  String? fullName;
+  String? fullName = 'carregando...';
+  String? cpf;
 
   void loadUser() async {
-    final user = await userRepository.getUserDetails();
+
+    final user = await userRepository.getDetailsUser();
+    fullName = user.fullName;
+    cpf = user.cpf;
+
+
     setState(() {
-      fullName = user.fullName;
+      _nameController.text = fullName.toString();
+      _cpfController.text = cpf.toString();
     });
   }
-
-  void getName() {}
 
   @override
   void initState() {
     super.initState();
+
     loadUser();
   }
 
@@ -95,34 +114,46 @@ class _EditProfilePageState extends State<EditProfilePage> {
             preferredSize: Size.fromHeight(180.0),
             child: AppBarWidget(back: true),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                const SizedBox(height: 100.0),
-                const Text(
-                  Strings.txtDados,
-                  style: LasTextStyle.txtEditDados,
-                  textAlign: TextAlign.end,
-                ),
-                const SizedBox(height: 10.0),
-                Form(
-                  key: _formKey,
-                  child: Container(
-                    height: 200,
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      children: <Widget>[
-                        NameField(
-                          nameController: _nameController,
-                          textTextField: fullName,
-                        ),
-                        const SizedBox(height: 15.0),
-                      ],
-                    ),
+          body: Column(
+            children: <Widget>[
+              const SizedBox(height: 90.0),
+              Form(
+                key: _formKey,
+                child: Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    children: <Widget>[
+                      const TextTileForm(textTitleForm: Strings.txtDados),
+                      NameField(
+                        nameController: _nameController,
+                      ),
+                       const SizedBox(height: 15.0),
+                      BirthdayDate(
+                        dateController: _dateController,
+                      ),
+                      const SizedBox(height: 15.0),
+                      RgField(
+                        rgController: _rgController,
+                      ),
+                      const SizedBox(height: 15.0),
+                      CpfField(
+                        cpfController: _cpfController,
+                      ),
+
+                      const TextTileForm(textTitleForm: Strings.txtContact),                      
+                      PhoneField(
+                        phoneController: _phoneController,
+                      ),
+                      const SizedBox(height: 15.0),
+                      ButtonWidget(
+                          colorButton: LasColors.buttonColor,
+                          textButton: Strings.buttonChange,
+                          onPressed: (){})
+                    ],
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
         ),
         Column(
@@ -143,7 +174,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               alignment: Alignment.bottomCenter,
               child: RichText(
                 text: TextSpan(
-                  text: (fullName != null) ? '$fullName' : 'carregando...',
+                  text: (fullName != null) ? fullName : 'carregando...',
                   style: LasTextStyle.nameAppbar,
                 ),
               ),

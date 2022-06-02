@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/router/routers.dart';
+import 'package:projeto_final/ui/views/accreditation/accreditation.dart';
 import 'package:projeto_final/ui/views/contact/contact_page.dart';
 import 'package:projeto_final/ui/views/edit_profile/edit_profile_page.dart';
 import 'package:projeto_final/ui/views/event/event_page.dart';
@@ -33,8 +34,8 @@ class MyApp extends StatelessWidget {
         Routes.editProfile: (context) => const EditProfilePage(),
         Routes.home: (context) => const HomePage(),
         Routes.event: (context) => const EventPage(),
-        Routes.credential: (context) => const HomePage(),
-        Routes.historic: (context) => const HistoricPage(),
+        Routes.accreditation: (context) => const AccreditationPage(),
+       // Routes.historic: (context) => const HistoricPage(),
         Routes.contact: (context) => const ContactPage(),
       },
     );
