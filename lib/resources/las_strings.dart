@@ -30,6 +30,7 @@ abstract class Strings {
   static const txtButtonAccreditation = 'CREDENCIAR';
   static const txtmsgconfirmAccreditation = 'Seu credenciamento foi realizado com sucesso.';
   static const buttonRegister = 'REGISTRAR';
+  static const buttonChange = 'ALTERAR';
  
  
   static const txtMyHistoric = 'Meus dados';
@@ -39,6 +40,6 @@ abstract class Strings {
 
   //strings pagina editprofile
    static const txtDados = 'Dados Pessoais';
-   static const txtContact = 'Contato';
+   static const txtContact = 'Contatos';
    static const txtAddress = 'Endereço';
 }

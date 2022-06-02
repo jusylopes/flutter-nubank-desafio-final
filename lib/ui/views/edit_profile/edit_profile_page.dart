@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:projeto_final/ui/views/components/button_widget.dart';
 import 'package:projeto_final/ui/views/components/form/birthday_date.dart';
 import 'package:projeto_final/ui/views/components/form/cpf_field.dart';
 import 'package:projeto_final/ui/views/components/form/name_field.dart';
@@ -17,6 +18,8 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:projeto_final/ui/views/components/image_profile.dart';
+
+import '../components/form/phone_field.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -109,52 +112,46 @@ class _EditProfilePageState extends State<EditProfilePage> {
             preferredSize: Size.fromHeight(180.0),
             child: AppBarWidget(back: true),
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                const SizedBox(height: 100.0),
-                const TextTileForm(textTitleForm: Strings.txtDados),
-                
-                Form(
-                  key: _formKey,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: NameField(
-                            nameController: _nameController,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: BirthdayDate(
-                            dateController: _dateController,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: RgField(
-                            rgController: _rgController,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(6.0),
-                          child: CpfField(
-                            cpfController: _cpfController,
-                          ),
-                        ),
-                        const TextTileForm(textTitleForm: Strings.txtDados),
-                
-                        
-                      ],
-                    ),
+          body: Column(
+            children: <Widget>[
+              const SizedBox(height: 90.0),
+              Form(
+                key: _formKey,
+                child: Expanded(
+                  child: ListView(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    children: <Widget>[
+                      const TextTileForm(textTitleForm: Strings.txtDados),
+                      NameField(
+                        nameController: _nameController,
+                      ),
+                       const SizedBox(height: 15.0),
+                      BirthdayDate(
+                        dateController: _dateController,
+                      ),
+                      const SizedBox(height: 15.0),
+                      RgField(
+                        rgController: _rgController,
+                      ),
+                      const SizedBox(height: 15.0),
+                      CpfField(
+                        cpfController: _cpfController,
+                      ),
+
+                      const TextTileForm(textTitleForm: Strings.txtContact),                      
+                      PhoneField(
+                        phoneController: _phoneController,
+                      ),
+                      const SizedBox(height: 15.0),
+                      ButtonWidget(
+                          colorButton: LasColors.buttonColor,
+                          textButton: Strings.buttonChange,
+                          onPressed: (){})
+                    ],
                   ),
-                )
-              ],
-              
-            ),
+                ),
+              )
+            ],
           ),
         ),
         Column(

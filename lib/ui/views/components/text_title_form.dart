@@ -9,11 +9,11 @@ class TextTileForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 205.0, top: 10, bottom: 10),
+      padding: const EdgeInsets.only( top: 20, bottom: 20),
       child: Text(
         textTitleForm,
         style: LasTextStyle.txtEditDados,
-        textAlign: TextAlign.end,
+        textAlign: TextAlign.left
       ),
     );
   }
