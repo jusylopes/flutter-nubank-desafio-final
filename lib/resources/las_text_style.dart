@@ -62,6 +62,7 @@ abstract class LasTextStyle {
     fontWeight: FontWeight.w500,
     fontSize: 20.0,
     color: LasColors.textButtonColor,
+    fontFamily: 'Roboto-Medium',
   );
 
   static const termAccreditationPage = TextStyle(
@@ -94,9 +95,6 @@ abstract class LasTextStyle {
     color: LasColors.texmsgconfirmAccreditation,
   );
 
-  
-     
-
   static const appBarProfile = TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 17.0,
@@ -116,7 +114,7 @@ abstract class LasTextStyle {
     color: LasColors.txtButtonColor,
   );
 
-   static const nameAppbar = TextStyle(
+  static const nameAppbar = TextStyle(
     fontWeight: FontWeight.w500,
     fontSize: 20.0,
     color: LasColors.textLoginPage,

@@ -35,4 +35,9 @@ abstract class Strings {
   static const nameAppBar = 'Meu nome';
   static const changePhoto = 'Aterar foto';
   static const registerAlertDialog = 'CPF já cadastrado.';
+
+  static const txtTitleEventDetail = 'Detalhes do Evento';
+   static const buttonAccreditation = 'CREDENCIAR';
+
+  
 }
