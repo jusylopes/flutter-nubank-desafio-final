@@ -23,20 +23,19 @@ class EditProfilePage extends StatefulWidget {
 
 class _EditProfilePageState extends State<EditProfilePage> {
   final _formKey = GlobalKey<FormState>();
-  final _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
 
   File? imageProfile;
-  String? fullName;
+  String name = 'carregando';
 
   void loadUser() async {
     final user = await userRepository.getDetailsUser();
     setState(() {
-      fullName = user.fullName;
+      name = user.fullName;
+      _nameController.text = name.toString();
     });
   }
-
-  void getName() {}
 
   @override
   void initState() {
@@ -99,12 +98,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
             child: Column(
               children: <Widget>[
                 const SizedBox(height: 100.0),
-                const Text(
-                  Strings.txtDados,
-                  style: LasTextStyle.txtEditDados,
-                  textAlign: TextAlign.end,
+                Container(
+                  padding: const EdgeInsets.only(right: 220.0),
+                  child: const Text(
+                    Strings.txtDados,
+                    style: LasTextStyle.txtEditDados,
+                    textAlign: TextAlign.left,
+                  ),
                 ),
-                const SizedBox(height: 10.0),
+                const SizedBox(height: 12.0),
                 Form(
                   key: _formKey,
                   child: Container(
@@ -114,7 +116,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       children: <Widget>[
                         NameField(
                           nameController: _nameController,
-                          textTextField: fullName,
+                          // initialValue: fullName,
                         ),
                         const SizedBox(height: 15.0),
                       ],
@@ -143,7 +145,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               alignment: Alignment.bottomCenter,
               child: RichText(
                 text: TextSpan(
-                  text: (fullName != null) ? '$fullName' : 'carregando...',
+                  text: (name != null) ? name : 'carregando...',
                   style: LasTextStyle.nameAppbar,
                 ),
               ),

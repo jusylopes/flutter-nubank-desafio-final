@@ -2,20 +2,19 @@ import 'package:flutter/material.dart';
 
 class NameField extends StatelessWidget {
   final TextEditingController nameController;
-  final String? textTextField;
+  final String? initialValue;
 
-  const NameField(
-      {super.key, required this.nameController, this.textTextField});
+  const NameField({super.key, required this.nameController, this.initialValue});
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
         controller: nameController,
-        autofocus: true,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
-          hintText: textTextField,
-          labelText: 'Name',
+        autofocus: false,
+        initialValue: initialValue,
+        decoration: const InputDecoration(
+          border: OutlineInputBorder(borderRadius: BorderRadius.zero),
+          labelText: 'Nome Completo',
           filled: true,
         ),
         validator: (String? value) {
