@@ -9,7 +9,6 @@ class EventDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        
         Scaffold(
           appBar: AppBar(
             toolbarHeight: 200.0,

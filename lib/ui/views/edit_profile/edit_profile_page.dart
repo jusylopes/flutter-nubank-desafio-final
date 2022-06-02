@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_final/external/swagger_api_user_repository.dart';
+import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
@@ -44,9 +44,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String? cpf;
 
   void loadUser() async {
+
     final user = await userRepository.getDetailsUser();
     fullName = user.fullName;
     cpf = user.cpf;
+
 
     setState(() {
       _nameController.text = fullName.toString();

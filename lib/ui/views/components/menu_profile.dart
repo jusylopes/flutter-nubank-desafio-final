@@ -12,7 +12,8 @@ class MenuProfile extends StatelessWidget {
       {super.key,
       required this.textAppBar,
       required this.iconMenu,
-      required this.route, required this.context});
+      required this.route,
+      required this.context});
 
   @override
   Widget build(BuildContext context) {
