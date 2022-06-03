@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/patch/patch_contacts_register_entity.dart';
 import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
@@ -44,19 +45,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String? fullName = 'carregando...';
   String? cpf;
   String? email;
-  String? mobile;
+  String? phone;
+  String? rg;
+  String? birthDate;
 
   void loadUser() async {
     final user = await userRepository.getUserDetails();
     final address = await userRepository.getAddressDetails();
     final contacts = await userRepository.getUserContacts();
+    rg = user.rg;
     email = contacts.email;
     fullName = user.fullName;
     cpf = user.cpf;
+    phone = contacts.phone;
+    birthDate = user.birthDate;
 
     setState(() {
       _nameController.text = fullName.toString();
+      _rgController.text = rg.toString();
       _cpfController.text = cpf.toString();
+      _phoneController.text = phone.toString();
+      _dateController.text = birthDate.toString();
     });
   }
 
@@ -68,19 +77,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     if (_formKey.currentState!.validate()) {
       FocusScopeNode currentFocus = FocusScope.of(context);
-      bool validateSucess = await userRepository.patchUserRegister(
+      bool validateUserSucess = await userRepository.patchUserRegister(
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
+          rg: _rgController.text,
+          birthDate: _dateController.text.replaceAll("/", ""),
         ),
       );
-
+      bool validateContactsSucess = await userRepository
+          .patchContactsRegister(PatchContactsRegisterEntity(
+        phone: _phoneController.text
+            .replaceAll("(", "")
+            .replaceAll(")", "")
+            .replaceAll("-", ""),
+      ));
       await userRepository.getUserDetails();
       loadUser();
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
       }
-      if (validateSucess) {
+      if (validateUserSucess && validateContactsSucess) {
         //para retirar erro de gap
         if (!mounted) return;
         showAlertPatch();
