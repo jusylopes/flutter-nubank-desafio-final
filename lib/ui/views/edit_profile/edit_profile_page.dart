@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter/services.dart';
@@ -16,9 +18,7 @@ import 'package:projeto_final/ui/views/components/form/rg_field.dart';
 import 'package:projeto_final/ui/views/components/text_title_form.dart';
 import 'dart:async';
 import 'dart:io';
-
 import 'package:projeto_final/ui/views/components/image_profile.dart';
-
 import '../components/form/phone_field.dart';
 
 class EditProfilePage extends StatefulWidget {
@@ -38,22 +38,61 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _mobileController = TextEditingController();
   final _emailController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
-
+  Color _colorButton = LasColors.buttonColor;
+  String _textButton = Strings.buttonRegister;
   File? imageProfile;
   String? fullName = 'carregando...';
   String? cpf;
+  String? email;
+  String? mobile;
 
   void loadUser() async {
-
-    final user = await userRepository.getDetailsUser();
+    final user = await userRepository.getUserDetails();
+    final address = await userRepository.getAddressDetails();
+    final contacts = await userRepository.getUserContacts();
+    email = contacts.email;
     fullName = user.fullName;
     cpf = user.cpf;
-
 
     setState(() {
       _nameController.text = fullName.toString();
       _cpfController.text = cpf.toString();
     });
+  }
+
+  void validateSuccess() async {
+    setState(() {
+      _colorButton = LasColors.buttonColorAwait;
+      _textButton = Strings.buttonAwait;
+    });
+
+    if (_formKey.currentState!.validate()) {
+      FocusScopeNode currentFocus = FocusScope.of(context);
+      bool validateSucess = await userRepository.patchUserRegister(
+        PatchUserRegisterEntity(
+          fullName: _nameController.text,
+          cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
+        ),
+      );
+
+      await userRepository.getUserDetails();
+      loadUser();
+      if (!currentFocus.hasPrimaryFocus) {
+        currentFocus.unfocus();
+      }
+      if (validateSucess) {
+        //para retirar erro de gap
+        if (!mounted) return;
+        showAlertPatch();
+      } else {
+        setState(() {
+          _colorButton = LasColors.buttonColor;
+          _textButton = Strings.buttonRegister;
+        });
+      }
+    } else {
+      debugPrint('errooo');
+    }
   }
 
   @override
@@ -104,6 +143,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
+  void showAlertPatch() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => const Alert(
+            bodyAlert: Strings.txtPatchSuccess, txtButton: Strings.buttonOk));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -112,7 +159,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
         Scaffold(
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(180.0),
-            child: AppBarWidget(back: true),
+            child: AppBarWidget(
+              back: true,
+            ),
           ),
           body: Column(
             children: <Widget>[
@@ -127,7 +176,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       NameField(
                         nameController: _nameController,
                       ),
-                       const SizedBox(height: 15.0),
+                      const SizedBox(height: 15.0),
                       BirthdayDate(
                         dateController: _dateController,
                       ),
@@ -139,16 +188,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       CpfField(
                         cpfController: _cpfController,
                       ),
-
-                      const TextTileForm(textTitleForm: Strings.txtContact),                      
+                      const TextTileForm(textTitleForm: Strings.txtContact),
                       PhoneField(
                         phoneController: _phoneController,
                       ),
                       const SizedBox(height: 15.0),
                       ButtonWidget(
-                          colorButton: LasColors.buttonColor,
-                          textButton: Strings.buttonChange,
-                          onPressed: (){})
+                        colorButton: LasColors.buttonColor,
+                        textButton: Strings.buttonChange,
+                        onPressed: validateSuccess,
+                      ),
                     ],
                   ),
                 ),
