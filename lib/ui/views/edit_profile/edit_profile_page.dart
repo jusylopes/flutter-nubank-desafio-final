@@ -14,6 +14,7 @@ import 'package:projeto_final/ui/views/components/form/birthday_date.dart';
 import 'package:projeto_final/ui/views/components/form/cpf_field.dart';
 import 'package:projeto_final/ui/views/components/form/custom_text_field.dart';
 import 'package:projeto_final/ui/views/components/form/email_field.dart';
+import 'package:projeto_final/ui/views/components/form/mobile_fiel.dart';
 import 'package:projeto_final/ui/views/components/form/name_field.dart';
 import 'package:projeto_final/ui/views/components/form/rg_field.dart';
 import 'package:projeto_final/ui/views/components/text_title_form.dart';
@@ -165,6 +166,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       const TextTileForm(textTitleForm: Strings.txtContact),
                       PhoneField(
                         phoneController: _phoneController,
+                      ),
+                      const SizedBox(height: 15.0),
+                       MobileField(
+                        mobileController: _mobileController,
                       ),
                       const SizedBox(height: 15.0),
                       EmailField(
