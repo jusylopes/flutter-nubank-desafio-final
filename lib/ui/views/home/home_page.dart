@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final/external/swagger_api_user_repository.dart';
+import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
@@ -16,7 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final userRepository = SwaggerApiUserRepository();  
+  final userRepository = SwaggerApiUserRepository();
   String? fullName;
   bool loading = false;
 
@@ -33,7 +33,8 @@ class _HomePageState extends State<HomePage> {
 
   void loadUser() async {
     setState(() => loading = true);
-    final user = await userRepository.getDetailsUser();
+    final user = await userRepository.getUserDetails();
+
     setState(() {
       loading = false;
       fullName = user.fullName;

@@ -10,13 +10,4 @@ class RegisterEntity {
     required this.cpf,
     required this.password,
   });
-
-  // factory RegisterEntity.fromJson(Map json) {
-  //   return RegisterEntity(
-  //     fullName: json['fullName'],
-  //     cpf: json['cpf'],
-  //     email: json['email'],
-  //     password: json['password'],
-  //   );
-  // }
 }
