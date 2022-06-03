@@ -25,9 +25,9 @@ class _BirthdayDateState extends State<BirthdayDate> {
         suffixIcon: Icon(Icons.calendar_month),
         border: OutlineInputBorder(borderRadius: BorderRadius.zero),
         labelText: 'Data de Nascimento',
-        filled: true,
+       
       ),
-      readOnly: true,
+      
       onTap: () async {},
     );
   }
