@@ -3,12 +3,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:projeto_final/data/entity/get/get_address_details.dart';
 import 'package:projeto_final/data/entity/get/get_user_contacts.dart';
 import 'package:projeto_final/data/entity/get/get_user_details.dart';
-import 'package:projeto_final/data/entity/patch/patch_register_entity.dart';
+import 'package:projeto_final/data/entity/patch/patch_address_register.dart';
+import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
 import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
 import 'package:projeto_final/data/repositories/user_repository.dart';
 import 'package:projeto_final/external/login_mapper.dart';
-import 'package:projeto_final/external/patch_register_mapper.dart';
+import 'package:projeto_final/external/patch_address_register_mapper.dart';
+import 'package:projeto_final/external/patch_user_register_mapper.dart';
 import 'package:projeto_final/external/register_mapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -128,19 +130,43 @@ class SwaggerApiUserRepository implements UserRepository {
   }
 
   @override
-  Future<bool> patchRegister(PatchRegisterEntity patchRegister) async {
+  Future<bool> patchUserRegister(PatchUserRegisterEntity patchUserRegister) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
     var url = Uri.parse('https://cubos-las-api.herokuapp.com/user');
-    var respostaPatchRegister = await http.patch(
+    var respostaPatchUserRegister = await http.patch(
       url,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
+        // 'Content-Type': 'application/json; charset=UTF-8',
+
         'Authorization': 'Bearer $token',
       },
-      body: PatchRegisterMapper.toReplitMap(patchRegister),
+      body: PatchUserRegisterMapper.toReplitMap(patchUserRegister),
     );
-    if (respostaPatchRegister.statusCode == 201) {
+    if (respostaPatchUserRegister.statusCode == 200) {
+      debugPrint('Patch Registro OK');
+      return true;
+    } else {
+      debugPrint('Deu merda no Patch');
+    }
+    return false;
+  }
+
+  @override
+  Future<bool> patchAddressRegister(PatchAddressRegisterEntity patchAddressRegister) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var url = Uri.parse('https://cubos-las-api.herokuapp.com/user');
+    var respostaPatchAddressRegister = await http.patch(
+      url,
+      headers: {
+        // 'Content-Type': 'application/json; charset=UTF-8',
+
+        'Authorization': 'Bearer $token',
+      },
+      body: PatchAddressRegisterMapper.toReplitMap(patchAddressRegister),
+    );
+    if (respostaPatchAddressRegister.statusCode == 200) {
       debugPrint('Patch Registro OK');
       return true;
     } else {
