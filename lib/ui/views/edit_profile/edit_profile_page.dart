@@ -45,7 +45,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   void loadUser() async {
 
-    final user = await userRepository.getDetailsUser();
+    final user = await userRepository.getUserDetails();
     fullName = user.fullName;
     cpf = user.cpf;
 
@@ -75,34 +75,34 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
-  showDialogImage() {
-    showDialog<ImageSource>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Alterar foto'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.photo_camera,
-              size: 35.0,
-              color: LasColors.buttonColor,
-            ),
-            onPressed: () {
-              //  Navigator.pop(context, 'Camera');
-              pickImage(ImageSource.camera);
-            },
-          ),
-          IconButton(
-              icon: const Icon(Icons.image,
-                  size: 35.0, color: LasColors.buttonColor),
-              onPressed: () {
-                // Navigator.pop(context, 'Galeria');
-                pickImage(ImageSource.gallery);
-              }),
-        ],
-      ),
-    );
-  }
+  // showDialogImage() {
+  //   showDialog<ImageSource>(
+  //     context: context,
+  //     builder: (BuildContext context) => AlertDialog(
+  //       title: const Text('Alterar foto'),
+  //       actions: <Widget>[
+  //         IconButton(
+  //           icon: const Icon(
+  //             Icons.photo_camera,
+  //             size: 35.0,
+  //             color: LasColors.buttonColor,
+  //           ),
+  //           onPressed: () {
+  //             //  Navigator.pop(context, 'Camera');
+  //             pickImage(ImageSource.camera);
+  //           },
+  //         ),
+  //         IconButton(
+  //             icon: const Icon(Icons.image,
+  //                 size: 35.0, color: LasColors.buttonColor),
+  //             onPressed: () {
+  //               // Navigator.pop(context, 'Galeria');
+  //               pickImage(ImageSource.gallery);
+  //             }),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -187,8 +187,38 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     text: Strings.changePhoto,
                     style: LasTextStyle.loginCreate,
                     recognizer: TapGestureRecognizer()
-                      ..onTap = showDialogImage),
+                      ..onTap = (){
+                           showDialog<ImageSource>(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            title: const Text('Alterar foto'),
+                            actions: <Widget>[
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.photo_camera,
+                                  size: 35.0,
+                                  color: LasColors.buttonColor,
+                                ),
+                                onPressed: () {
+                                  //  Navigator.pop(context, 'Camera');
+                                  pickImage(ImageSource.camera);
+                                },
+                              ),
+                              IconButton(
+                                  icon: const Icon(Icons.image,
+                                      size: 35.0, color: LasColors.buttonColor),
+                                  onPressed: () {
+                                    // Navigator.pop(context, 'Galeria');
+                                    pickImage(ImageSource.gallery);
+                                  },
+                              ),
+                            ],
+                          ),
+                        );
+                      
+                      },
               ),
+            ),
             ),
           ],
         ),
