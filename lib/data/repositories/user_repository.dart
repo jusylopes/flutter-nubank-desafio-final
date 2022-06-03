@@ -13,7 +13,8 @@ abstract class UserRepository {
 
   Future<void> patchUserRegister(PatchUserRegisterEntity patchUserRegister);
 
-  Future<void> patchAddressRegister(PatchAddressRegisterEntity patchAddressRegister);
+  Future<void> patchAddressRegister(
+      PatchAddressRegisterEntity patchAddressRegister);
 
   Future<bool> logout();
 
@@ -23,4 +24,3 @@ abstract class UserRepository {
 
   Future<GetUserContacts> getUserContacts();
 }
-

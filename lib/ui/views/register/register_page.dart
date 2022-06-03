@@ -90,6 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
         const BackgroundPage(),
         const BackgroundCurve(),
         Scaffold(
+         
           body: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -132,6 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             textButton: _textButton,
                             onPressed: validateSuccess,
                           ),
+                          const SizedBox(height: 25.0),
                         ],
                       ),
                     ),

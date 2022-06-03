@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   final _cpfController = TextEditingController();
   final _passwordController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
+ 
 
   void submit() async {
     setState(() {
@@ -140,7 +141,6 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
-
 
   //Usar o showAlert
   final snackBar = const SnackBar(

@@ -1,6 +1,7 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mask/mask/mask.dart';
+import 'package:mask/models/hashtag_is.dart';
 import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
@@ -43,15 +44,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _emailController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
   final _cepController = TextEditingController();
-  final _addressController = TextEditingController();
+  final _streetController = TextEditingController();
   final _numberController = TextEditingController();
   final _neighborhoodController = TextEditingController();
-  final _countryController = TextEditingController();
+  final _stateController = TextEditingController();
   final _cityController = TextEditingController();
   final _complementController = TextEditingController();
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
-
+  final TextEditingController _controller = TextEditingController();
+  String? resultado;
   File? imageProfile;
   String? fullName = 'carregando...';
   String? cpf,
@@ -61,15 +63,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
       mobile,
       email,
       cep,
-      address,
-      number,
+      street,
       neighborhood,
-      country,
+      state,
       city,
       complement;
-  
-  
-  
+  int? number;
 
   void loadUser() async {
     final user = await userRepository.getUserDetails();
@@ -79,11 +78,41 @@ class _EditProfilePageState extends State<EditProfilePage> {
     fullName = user.fullName;
     cpf = user.cpf;
     rg = user.rg;
+    date = user.birthDate;
+    phone = contacts.phone;
+    mobile = contacts.mobilePhone;
+    email = contacts.email;
+    cep = address.cep;
+    street = address.street;
+    number = address.number;
+    complement = address.complement;
+    neighborhood = address.district;
+    city = address.city;
+    state = address.state;
 
     setState(() {
+      // dados obrigatorios
       _nameController.text = fullName.toString();
       _cpfController.text = cpf.toString();
-      _rgController.text = rg.toString();
+      _emailController.text = email.toString();
+      _rgController.text =
+          rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
+      //dados opcionais
+      _dateController.text =
+          date.toString().replaceAll('T00:00:00.000Z', '').replaceAll('-', '/');
+      phone != null ? _phoneController.text = phone.toString() : '';
+      mobile != null ? _mobileController.text = mobile.toString() : '';
+      cep != null ? _cepController.text = cep.toString() : '';
+      street != null ? _streetController.text = street.toString() : '';
+      number != null ? _numberController.text = number.toString() : '';
+      complement != null
+          ? _complementController.text = complement.toString()
+          : '';
+      neighborhood != null
+          ? _neighborhoodController.text = neighborhood.toString()
+          : '';
+      state != null ? _stateController.text = state.toString() : '';
+      city != null ? _cityController.text = city.toString() : '';
     });
   }
 
@@ -120,6 +149,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
     } else {
       debugPrint('errooo');
     }
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -221,8 +256,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         phoneController: _phoneController,
                       ),
                       const SizedBox(height: 15.0),
-                       MobileField(
+                      MobileField(
                         mobileController: _mobileController,
+                         
                       ),
                       const SizedBox(height: 15.0),
                       EmailField(
@@ -236,23 +272,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           label: 'CEP',
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
-                            CepInputFormatter(),
+                            Mask.generic(
+                              masks: ['#####-###'],
+                              hashtag: Hashtag.numbers, // optional field
+                            ),
                           ]),
                       const SizedBox(height: 15.0),
                       CustomTextField(
-                        controller: _addressController,
+                        controller: _controller,
                         label: 'Endereço',
                       ),
+                      const SizedBox(height: 15.0),
                       Row(
                         children: [
-                          CustomTextField(
-                            controller: _numberController,
-                            keyboardType: TextInputType.number,
-                            label: 'Número',
+                          SizedBox(
+                            width: 100.0,
+                            child: CustomTextField(
+                              controller: _numberController,
+                              label: 'Número',
+                            ),
                           ),
-                          CustomTextField(
-                            controller: _neighborhoodController,
-                            label: 'Bairro',
+                          const SizedBox(width: 15.0),
+                          Expanded(
+                            child: CustomTextField(
+                              controller: _neighborhoodController,
+                              label: 'Bairro',
+                            ),
                           ),
                         ],
                       ),
@@ -264,22 +309,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       const SizedBox(height: 15.0),
                       Row(
                         children: [
-                          CustomTextField(
-                            controller: _cityController,
-                            label: 'Cidade',
+                          Expanded(
+                            child: CustomTextField(
+                              controller: _cityController,
+                              label: 'Cidade',
+                            ),
                           ),
-                          CustomTextField(
-                            controller: _countryController,
-                            label: 'Estado',
+                          const SizedBox(width: 15.0),
+                          SizedBox(
+                            width: 100.0,
+                            child: CustomTextField(
+                              controller: _stateController,
+                              label: 'Estado',
+                            ),
                           ),
                         ],
                       ),
-
+                      const SizedBox(height: 20.0),
                       ButtonWidget(
                         colorButton: LasColors.buttonColor,
                         textButton: Strings.buttonChange,
                         onPressed: validateSuccess,
                       ),
+                      const SizedBox(height: 20.0),
                     ],
                   ),
                 ),

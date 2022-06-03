@@ -1,6 +1,7 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mask/mask/mask.dart';
+import 'package:mask/models/hashtag_is.dart';
 
 class MobileField extends StatelessWidget {
   final TextEditingController mobileController;
@@ -10,16 +11,19 @@ class MobileField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        controller: mobileController,
-        keyboardType: TextInputType.number,  
-        inputFormatters: [
-          FilteringTextInputFormatter.digitsOnly,
-          TelefoneInputFormatter(),
-        ],     
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(borderRadius: BorderRadius.zero),
-          labelText: 'Celular',
+      controller: mobileController,
+      keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        Mask.generic(
+          masks: ['(##) #####-####'],
+          hashtag: Hashtag.numbers, // optional field
         ),
-        );
+      ],
+      decoration: const InputDecoration(
+        border: OutlineInputBorder(borderRadius: BorderRadius.zero),
+        labelText: 'Celular',
+      ),
+    );
   }
 }

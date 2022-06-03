@@ -25,7 +25,6 @@ class CustomTextField extends StatelessWidget {
         border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
         labelText: label,
       ),
-    
     );
   }
 }
