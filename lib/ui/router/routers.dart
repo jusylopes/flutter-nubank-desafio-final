@@ -6,6 +6,7 @@ abstract class Routes {
   static const home = '/home';
   static const editProfile = '/edit_profile';
   static const event = '/event';
-  static const credential = '/credential';
+  static const accreditation = '/accreditation';
   static const historic = '/historic';
+  static const contact = '/contact';
 }

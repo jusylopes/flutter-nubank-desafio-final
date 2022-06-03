@@ -1,8 +1,5 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 import '../../../resources/las_strings.dart';
 import '../../../resources/las_text_style.dart';
@@ -53,11 +50,11 @@ class _AccreditationPageState extends State<AccreditationPage> {
               ),
             ),
             leading: Container(
-              padding: EdgeInsets.fromLTRB(22.0, 35.17, 86.98, 324.11),
+              padding: const EdgeInsets.fromLTRB(22.0, 35.17, 86.98, 324.11),
               width: 13.89,
               height: 22.5,
               child: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back_ios_new,
                   size: 22.5,
                 ),
@@ -73,7 +70,8 @@ class _AccreditationPageState extends State<AccreditationPage> {
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(8.0),
-                  border: Border.all(color: Color(0xFF979797), width: 0.2)),
+                  border:
+                      Border.all(color: const Color(0xFF979797), width: 0.2)),
               width: 237.2,
               height: 126.0,
               child: Column(
@@ -87,28 +85,28 @@ class _AccreditationPageState extends State<AccreditationPage> {
                         Container(
                           width: 38.4,
                           height: 48,
-                          padding: EdgeInsets.only(left: 16),
-                          child: Icon(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: const Icon(
                             Icons.insert_drive_file,
                             color: Color(0xFF555770),
                             size: 48.0,
                           ),
                         ),
                         Container(
-                            padding: EdgeInsets.only(left: 34.0, top: 8),
-                            child: Text(Strings.txtTermAccreditation,
+                            padding: const EdgeInsets.only(left: 34.0, top: 8),
+                            child: const Text(Strings.txtTermAccreditation,
                                 style: LasTextStyle.termAccreditationPage)),
                       ],
                     ),
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Color(0xFF979797), width: 0.2)),
+                        border: Border.all(
+                            color: const Color(0xFF979797), width: 0.2)),
                     width: 237.2,
                     height: 40.0,
                     child: TextButton(
-                        child: Text(Strings.txtButtonPdfAccreditation,
+                        child: const Text(Strings.txtButtonPdfAccreditation,
                             style: LasTextStyle.buttonPdfAccreditationPage,
                             textAlign: TextAlign.center),
                         onPressed: () => {launch(url)}),
@@ -128,13 +126,13 @@ class _AccreditationPageState extends State<AccreditationPage> {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
-                        color: Color(0xFF2977E1),
+                        color: const Color(0xFF2977E1),
                         width: 1.0,
                         style: BorderStyle.solid,
                       )),
                   child: Checkbox(
-                      shape: CircleBorder(),
-                      side: BorderSide(
+                      shape: const CircleBorder(),
+                      side: const BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                           style: BorderStyle.solid),
@@ -147,8 +145,8 @@ class _AccreditationPageState extends State<AccreditationPage> {
                         });
                       }),
                 ),
-                SizedBox(width: 5.0),
-                SizedBox(
+                const SizedBox(width: 5.0),
+                const SizedBox(
                   width: 189.0,
                   height: 16.0,
                   child: Text(
@@ -170,7 +168,7 @@ class _AccreditationPageState extends State<AccreditationPage> {
                     : () => showDialog(
                           context: context,
                           builder: (BuildContext context) => Dialog(
-                            shape: RoundedRectangleBorder(
+                            shape: const RoundedRectangleBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15.0))),
                             child: Container(
@@ -178,28 +176,29 @@ class _AccreditationPageState extends State<AccreditationPage> {
                                 width: 328.0,
                                 height: 257.0,
                                 decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(15)),
-                                    color: Color(0xFFFFFFFF),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(15)),
+                                    color: const Color(0xFFFFFFFF),
                                     border: Border.all(
                                       width: 2.0,
-                                      color: Color.fromRGBO(0, 0, 0, 0.25),
+                                      color:
+                                          const Color.fromRGBO(0, 0, 0, 0.25),
                                       style: BorderStyle.solid,
                                     )),
                                 child: Column(
                                   children: [
-                                    SizedBox(height: 61.0),
-                                    SizedBox(
+                                    const SizedBox(height: 61.0),
+                                    const SizedBox(
                                       width: 280.0,
                                       height: 56.0,
-                                      child: const Text(
+                                      child: Text(
                                         Strings.txtmsgconfirmAccreditation,
                                         style: LasTextStyle
                                             .msgConfirmAccreditation,
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
-                                    SizedBox(height: 57.0),
+                                    const SizedBox(height: 57.0),
                                     SizedBox(
                                       width: 85.0,
                                       height: 37.0,
@@ -207,7 +206,7 @@ class _AccreditationPageState extends State<AccreditationPage> {
                                         style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
-                                                    Color(0xff004BA0))),
+                                                    const Color(0xff004BA0))),
                                         onPressed: () => Navigator.pop(context),
                                         child: const Text(
                                           'OK',
@@ -221,10 +220,10 @@ class _AccreditationPageState extends State<AccreditationPage> {
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                       (isChecked == false)
-                          ? Color(0xFF828282)
-                          : Color(0xff004BA0)),
+                          ? const Color(0xFF828282)
+                          : const Color(0xff004BA0)),
                 ),
-                child: Text(Strings.txtButtonAccreditation,
+                child: const Text(Strings.txtButtonAccreditation,
                     style: LasTextStyle.buttonAccreditationPage),
               ),
             )
