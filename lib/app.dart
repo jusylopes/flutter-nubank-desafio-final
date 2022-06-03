@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/router/routers.dart';
+import 'package:projeto_final/ui/views/accreditation/accreditation.dart';
 import 'package:projeto_final/ui/views/edit_profile/edit_profile_page.dart';
 import 'package:projeto_final/ui/views/event_detail/event_detail.dart';
 import 'package:projeto_final/ui/views/home/home_page.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: EventDetailPage(),
+      home: AccreditationPage(),
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
       theme: ThemeData(
