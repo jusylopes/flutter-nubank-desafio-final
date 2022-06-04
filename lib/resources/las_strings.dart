@@ -20,7 +20,6 @@ abstract class Strings {
   static const txtSubtitleRegister =
       'Preencha o formulário para criar sua conta';
   static const txtRegisterAlertWidget = 'CPF ou Senha inválidos';
-  
 
   //strings pagina accreditation
   static const txtTitleAccreditation = 'Credenciamento \n Carnaval 2021';
@@ -28,18 +27,19 @@ abstract class Strings {
   static const txtButtonPdfAccreditation = 'Ver arquivo';
   static const txtcheckAccreditation = 'Li e concordo com os termos';
   static const txtButtonAccreditation = 'CREDENCIAR';
-  static const txtmsgconfirmAccreditation = 'Seu credenciamento foi realizado com sucesso.';
+  static const txtmsgconfirmAccreditation =
+      'Seu credenciamento foi realizado com sucesso.';
   static const buttonRegister = 'REGISTRAR';
   static const buttonChange = 'ALTERAR';
- 
- 
+
   static const txtMyHistoric = 'Meus dados';
   static const nameAppBar = 'Meu nome';
   static const changePhoto = 'Aterar foto';
   static const registerAlertDialog = 'CPF já cadastrado.';
 
   //strings pagina editprofile
-   static const txtDados = 'Dados Pessoais';
-   static const txtContact = 'Contatos';
-   static const txtAddress = 'Endereço';
+  static const txtDados = 'Dados Pessoais';
+  static const txtContact = 'Contatos';
+  static const txtAddress = 'Endereço';
+  static const txtPatchSuccess = 'Dados alterados com sucesso!';
 }

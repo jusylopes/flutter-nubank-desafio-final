@@ -1,4 +1,4 @@
-import 'package:brasil_fields/brasil_fields.dart';
+import 'package:mask/mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -36,16 +36,19 @@ class _BirthdayDateState extends State<BirthdayDate> {
       keyboardType: TextInputType.datetime,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
-        DataInputFormatter(),
+       // Mask.date(),
       ],
+      //autovalidateMode: AutovalidateMode.onUserInteraction,
+     // validator: (value) => Mask.validations.date(value),
       decoration: const InputDecoration(
         suffixIcon: Icon(Icons.calendar_month),
         border: OutlineInputBorder(borderRadius: BorderRadius.zero),
         labelText: 'Data de Nascimento',
-        filled: true,
       ),
+
       readOnly: true,
       onTap: _selectDate,
+
     );
   }
 }
