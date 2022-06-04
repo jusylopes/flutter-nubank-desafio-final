@@ -26,7 +26,7 @@ class EventDetailPage extends StatelessWidget {
               child: Column(
                 children: [
                   Card(
-                    child: GridView.builder(gridDelegate: gridDelegate, itemBuilder: () => '')),
+                   // child: GridView.builder(gridDelegate: gridDelegate, itemBuilder: () => '')),
                   ),
                   Column(children: [
                     const SizedBox(height: 14.58),
