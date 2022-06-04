@@ -1,4 +1,4 @@
-import 'package:projeto_final/data/entity/patch/patch_address_register.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_address_register.dart';
 
 class PatchAddressRegisterMapper {
   static Map<String, dynamic> toReplitMap(
