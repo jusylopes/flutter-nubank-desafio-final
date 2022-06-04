@@ -1,8 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:mask/mask/mask.dart';
-import 'package:mask/models/hashtag_is.dart';
 import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
+import 'package:projeto_final/data/repositories/cep/cep_repository.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/alert_dialog.dart';
@@ -50,9 +49,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _stateController = TextEditingController();
   final _cityController = TextEditingController();
   final _complementController = TextEditingController();
+  final _cepRepository = CepRepository();
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
-  final TextEditingController _controller = TextEditingController();
   String? resultado;
   File? imageProfile;
   String? fullName = 'carregando...';
@@ -74,6 +73,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final user = await userRepository.getUserDetails();
     final address = await userRepository.getAddressDetails();
     final contacts = await userRepository.getUserContacts();
+    // recebendo dados da api
     email = contacts.email;
     fullName = user.fullName;
     cpf = user.cpf;
@@ -90,30 +90,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
     city = address.city;
     state = address.state;
 
-    setState(() {
-      // dados obrigatorios
-      _nameController.text = fullName.toString();
-      _cpfController.text = cpf.toString();
-      _emailController.text = email.toString();
-      _rgController.text =
-          rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
-      //dados opcionais
-      _dateController.text =
-          date.toString().replaceAll('T00:00:00.000Z', '').replaceAll('-', '/');
-      phone != null ? _phoneController.text = phone.toString() : '';
-      mobile != null ? _mobileController.text = mobile.toString() : '';
-      cep != null ? _cepController.text = cep.toString() : '';
-      street != null ? _streetController.text = street.toString() : '';
-      number != null ? _numberController.text = number.toString() : '';
-      complement != null
-          ? _complementController.text = complement.toString()
-          : '';
-      neighborhood != null
-          ? _neighborhoodController.text = neighborhood.toString()
-          : '';
-      state != null ? _stateController.text = state.toString() : '';
-      city != null ? _cityController.text = city.toString() : '';
-    });
+    // controller recebendo dados das variaveis
+    _nameController.text = fullName.toString();
+    _cpfController.text = cpf.toString();
+    _emailController.text = email.toString();
+    _rgController.text =
+        rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
+    _dateController.text =
+        date.toString().replaceAll('T00:00:00.000Z', '');
+    phone != null ? _phoneController.text = phone.toString() : '';
+    mobile != null ? _mobileController.text = mobile.toString() : '';
+    cep != null ? _cepController.text = cep.toString() : '';
+    street != null ? _streetController.text = street.toString() : '';
+    number != null ? _numberController.text = number.toString() : '';
+    complement != null
+        ? _complementController.text = complement.toString()
+        : '';
+    neighborhood != null
+        ? _neighborhoodController.text = neighborhood.toString()
+        : '';
+    state != null ? _stateController.text = state.toString() : '';
+    city != null ? _cityController.text = city.toString() : '';
   }
 
   void validateSuccess() async {
@@ -124,10 +121,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     if (_formKey.currentState!.validate()) {
       FocusScopeNode currentFocus = FocusScope.of(context);
-      bool validateSucess = await userRepository.patchUserRegister(
+
+      bool validateUser = await userRepository.patchUserRegister(
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
+          rg: _rgController.text,
+          email: _emailController.text,
         ),
       );
 
@@ -136,7 +136,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
       }
-      if (validateSucess) {
+      if (validateUser) {
         //para retirar erro de gap
         if (!mounted) return;
         showAlertPatch();
@@ -151,10 +151,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
+  void _searchCep() async {
+    String cep = _cepController.text;
+    final searchCep = await _cepRepository.fetchCep(cep: cep);
+
+    // var recebendo dados da api
+    String street = searchCep.street;
+    String neighborhood = searchCep.neighborhood;
+    String state = searchCep.state;
+    String city = searchCep.city;
+
+    // controller recebendo dados das variaveis
+    _streetController.text = street;
+    _neighborhoodController.text = neighborhood;
+    _stateController.text = state;
+    _cityController.text = city;
   }
 
   @override
@@ -258,7 +269,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       const SizedBox(height: 15.0),
                       MobileField(
                         mobileController: _mobileController,
-                         
                       ),
                       const SizedBox(height: 15.0),
                       EmailField(
@@ -270,16 +280,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           controller: _cepController,
                           keyboardType: TextInputType.number,
                           label: 'CEP',
+                          onChanged: (cepController) {
+                            if (cepController.length >= 7) {
+                              _searchCep();
+                            }
+                          },
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
-                            Mask.generic(
-                              masks: ['#####-###'],
-                              hashtag: Hashtag.numbers, // optional field
-                            ),
+                            //Mask.generic(
+                            //  masks: ['#####-###'],
+                            //  hashtag: Hashtag.numbers,
+                            //),
                           ]),
                       const SizedBox(height: 15.0),
                       CustomTextField(
-                        controller: _controller,
+                        controller: _streetController,
                         label: 'Endereço',
                       ),
                       const SizedBox(height: 15.0),

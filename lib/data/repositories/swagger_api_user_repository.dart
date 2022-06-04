@@ -52,7 +52,7 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Registro OK');
       return true;
     } else {
-      debugPrint('Deu merda no registro ');
+      debugPrint('Erro - Register Entity');
     }
     return false;
   }
@@ -130,7 +130,8 @@ class SwaggerApiUserRepository implements UserRepository {
   }
 
   @override
-  Future<bool> patchUserRegister(PatchUserRegisterEntity patchUserRegister) async {
+  Future<bool> patchUserRegister(
+      PatchUserRegisterEntity patchUserRegister) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
     var url = Uri.parse('https://cubos-las-api.herokuapp.com/user');
@@ -147,13 +148,14 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Patch Registro OK');
       return true;
     } else {
-      debugPrint('Deu merda no Patch');
+      debugPrint('Deu erro no Patch Register');
     }
     return false;
   }
 
   @override
-  Future<bool> patchAddressRegister(PatchAddressRegisterEntity patchAddressRegister) async {
+  Future<bool> patchAddressRegister(
+      PatchAddressRegisterEntity patchAddressRegister) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
     var url = Uri.parse('https://cubos-las-api.herokuapp.com/user');
@@ -170,7 +172,7 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Patch Registro OK');
       return true;
     } else {
-      debugPrint('Deu merda no Patch');
+      debugPrint('Deu erro no Patch Address');
     }
     return false;
   }

@@ -6,13 +6,15 @@ class CustomTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final String label;
+  final void Function(String)? onChanged;
 
   const CustomTextField(
       {super.key,
       required this.controller,
       this.keyboardType,
       required this.label,
-      this.inputFormatters});
+      this.inputFormatters,
+      this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class CustomTextField extends StatelessWidget {
         border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
         labelText: label,
       ),
+      onChanged: onChanged,
     );
   }
 }

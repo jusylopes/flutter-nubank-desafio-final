@@ -5,11 +5,11 @@ class PatchUserRegisterMapper {
       PatchUserRegisterEntity patchUserRegister) {
     return {
       "fullName": patchUserRegister.fullName,
-      // "rg": patchRegister.rg,
+       "rg": patchUserRegister.rg,
       "cpf": patchUserRegister.cpf,
-      // "email": patchRegister.email,
+      "email": patchUserRegister.email,
       // "profilePictureUrl": patchRegister.profilePictureUrl,
-      // "birthDate": patchRegister.birthDate,
+     // "birthDate": patchUserRegister.birthDate,
     };
   }
 }

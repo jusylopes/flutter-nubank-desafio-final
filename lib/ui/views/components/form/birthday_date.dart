@@ -19,10 +19,10 @@ class _BirthdayDateState extends State<BirthdayDate> {
       keyboardType: TextInputType.datetime,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
-        Mask.date(),
+       // Mask.date(),
       ],
-      autovalidateMode: AutovalidateMode.onUserInteraction,
-      validator: (value) => Mask.validations.date(value),
+      //autovalidateMode: AutovalidateMode.onUserInteraction,
+     // validator: (value) => Mask.validations.date(value),
       decoration: const InputDecoration(
         suffixIcon: Icon(Icons.calendar_month),
         border: OutlineInputBorder(borderRadius: BorderRadius.zero),
