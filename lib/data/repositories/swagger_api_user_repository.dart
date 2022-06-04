@@ -204,7 +204,7 @@ class SwaggerApiUserRepository implements UserRepository {
   Future<List<GetAllEvents>> getAllEvents() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
-    var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events');
+    var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events/${2}');
     var respostaGetAllEvents = await http.get(
       urlEvents,
       headers: {
@@ -213,25 +213,23 @@ class SwaggerApiUserRepository implements UserRepository {
       },
     );
 
-    if (respostaGetAllEvents.statusCode == 200) {
-      List<dynamic> body = jsonDecode(respostaGetAllEvents.body);
+    var responseEvents = json.decode(respostaGetAllEvents.body);
 
-      List<GetAllEvents> events =
-          body.map((dynamic item) => GetAllEvents.fromJson(item)).toList();
-      return events;
-    } else {
-      throw "Erro no Get All Events";
+    List<GetAllEvents> events = [];
+    for (var json in responseEvents) {
+      GetAllEvents event = GetAllEvents(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        imageUrl: json['imageUrl'],
+        startDate: json['startDate'],
+        endDate: json['endDate'],
+        status: json['status'],
+      );
+      events.add(event);
     }
-    // if (respostaGetAllEvents.statusCode == 200) {
-    //   print('Events OK');
-    // }
-    // final list = respostaGetAllEvents.body as List;
-
-    // List<GetAllEvents> events = [];
-    // for (var json in list) {
-    //   final event = GetAllEvents.fromJson(json);
-    //   events.add(event);
-    // }
-    // return events;
+    return events;
   }
+
+  
 }
