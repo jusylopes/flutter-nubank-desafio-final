@@ -1,7 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_final/data/entity/patch/patch_contacts_register_entity.dart';
-import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/alert_dialog.dart';
@@ -62,10 +62,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     setState(() {
       _nameController.text = fullName.toString();
-      _rgController.text = rg.toString();
+      // _rgController.text = rg.toString();
       _cpfController.text = cpf.toString();
       _phoneController.text = phone.toString();
-      _dateController.text = birthDate.toString();
+      // _dateController.text = birthDate.toString();
     });
   }
 
@@ -81,8 +81,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
-          rg: _rgController.text,
-          birthDate: _dateController.text.replaceAll("/", ""),
+          // rg: _rgController.text,
+          // birthDate: _dateController.text.replaceAll("/", ""),
         ),
       );
       bool validateContactsSucess = await userRepository
@@ -93,7 +93,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
             .replaceAll("-", ""),
       ));
       await userRepository.getUserDetails();
+      final list = await userRepository.getAllEvents();
+      print(list);
       loadUser();
+
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
       }

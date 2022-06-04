@@ -1,4 +1,4 @@
-import 'package:projeto_final/data/entity/token_entity.dart';
+import 'package:projeto_final/data/entity/user/post/token_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> token() async {
