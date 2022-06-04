@@ -204,7 +204,7 @@ class SwaggerApiUserRepository implements UserRepository {
   Future<List<GetAllEvents>> getAllEvents() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
-    var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events');
+    var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events/${2}');
     var respostaGetAllEvents = await http.get(
       urlEvents,
       headers: {
@@ -226,32 +226,10 @@ class SwaggerApiUserRepository implements UserRepository {
         endDate: json['endDate'],
         status: json['status'],
       );
-
-      //Adding user to the list.
       events.add(event);
     }
     return events;
-
-    // if (respostaGetAllEvents.statusCode == 200) {
-    //   List<dynamic> body = jsonDecode(respostaGetAllEvents.body);
-
-    //   List<GetAllEvents> events =
-    //       body.map((dynamic item) => GetAllEvents.fromJson(item)).toList();
-    //   return events;
-    // } else {
-    //   throw "Erro no Get All Events";
-    // }
-
-    // if (respostaGetAllEvents.statusCode == 200) {
-    //   print('Events OK');
-    // }
-    // final list = respostaGetAllEvents.body as List;
-
-    // List<GetAllEvents> events = [];
-    // for (var json in list) {
-    //   final event = GetAllEvents.fromJson(json);
-    //   events.add(event);
-    // }
-    // return events;
   }
+
+  
 }

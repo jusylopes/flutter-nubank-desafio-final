@@ -1,20 +1,20 @@
 class GetAllEvents {
-  final int? id;
-  final String? name;
-  final String? description;
-  final String? imageUrl;
-  final String? startDate;
-  final String? endDate;
-  final int? status;
+  final int id;
+  final String name;
+  final String description;
+  final String imageUrl;
+  final String startDate;
+  final String endDate;
+  final int status;
 
   GetAllEvents({
-    this.id,
-    this.name,
-    this.description,
-    this.imageUrl,
-    this.startDate,
-    this.endDate,
-    this.status,
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+    required this.startDate,
+    required this.endDate,
+    required this.status,
   });
 
   // GetAllEvents.fromJson(Map<String, dynamic> json) {

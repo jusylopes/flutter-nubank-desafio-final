@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
+import 'package:projeto_final/ui/router/routers.dart';
 
 import 'package:projeto_final/ui/views/components/custom_appbar.dart';
+import 'package:projeto_final/ui/views/components/menu_profile.dart';
 
 class EventDetailPage extends StatefulWidget {
   const EventDetailPage({super.key});
@@ -41,7 +43,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
             ),
           ),
 
-          body: FutureBuilder(
+          body: FutureBuilder<List<GetAllEvents>>(
             future: userRepository.getAllEvents(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               if (snapshot.hasData == false) {
@@ -51,13 +53,19 @@ class _EventDetailPageState extends State<EventDetailPage> {
               } else {
                 return ListView.builder(
                   itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) => ListTile(
-                    title: Text(snapshot.data[index]),
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.editProfile);
+                    },
+                    child: ListTile(
+                      title: Text(snapshot.data[index].name),
+                    ),
                   ),
                 );
               }
             },
           ),
+          backgroundColor: Colors.white,
 
           // body: FutureBuilder(
           //   future: userRepository.getAllEvents(),
