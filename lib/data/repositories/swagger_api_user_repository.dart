@@ -54,7 +54,7 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Registro OK');
       return true;
     } else {
-      debugPrint('Deu merda no registro ');
+      debugPrint('Erro - Register Entity');
     }
     return false;
   }
@@ -150,7 +150,7 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Patch Registro OK');
       return true;
     } else {
-      debugPrint('Deu merda no Patch');
+      debugPrint('Deu erro no Patch Register');
     }
     return false;
   }
@@ -174,7 +174,7 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Patch Registro OK');
       return true;
     } else {
-      debugPrint('Deu merda no Patch');
+      debugPrint('Deu erro no Patch Address');
     }
     return false;
   }

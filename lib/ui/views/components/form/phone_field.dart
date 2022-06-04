@@ -1,6 +1,7 @@
-import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mask/mask/mask.dart';
+import 'package:mask/models/hashtag_is.dart';
 
 class PhoneField extends StatelessWidget {
   final TextEditingController phoneController;
@@ -12,10 +13,15 @@ class PhoneField extends StatelessWidget {
     return TextFormField(
       controller: phoneController,
       keyboardType: TextInputType.number,
-      // inputFormatters: [
-      //   FilteringTextInputFormatter.digitsOnly,
-      //   TelefoneInputFormatter(),
-      // ],
+
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+        Mask.generic(
+          masks: ['(##) ####-####'],
+          hashtag: Hashtag.numbers, // optional field
+        ),
+      ],
+
       decoration: const InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.zero),
         labelText: 'Telefone',
