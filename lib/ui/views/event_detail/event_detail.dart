@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/ui/router/routers.dart';
+
 
 import 'package:projeto_final/ui/views/components/custom_appbar.dart';
 import 'package:projeto_final/ui/views/components/menu_profile.dart';
