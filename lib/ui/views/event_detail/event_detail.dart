@@ -18,7 +18,6 @@ class _EventDetailPageState extends State<EventDetailPage> {
   // final userRepository = SwaggerApiUserRepository();
   // void getListEvents() async {
   //   final list = await userRepository.getAllEvents();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +35,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
               child: Column(
                 children: [
                   Card(
-                   // child: GridView.builder(gridDelegate: gridDelegate, itemBuilder: () => '')),
-                  ),
+                      // child: GridView.builder(gridDelegate: gridDelegate, itemBuilder: () => '')),
+                      ),
                   Column(children: [
                     const SizedBox(height: 14.58),
                     const SizedBox(

@@ -205,7 +205,7 @@ class _AccreditationPageState extends State<AccreditationPage> {
               height: 44.0,
               child: Material(
                 color: Colors.transparent,
-                child: Text(Strings.txtTitleAccreditation1,
+                child: Text(Strings.txtTitleAccreditation1, 
                     style: LasTextStyle.titleAccreditationPage1,
                     textAlign: TextAlign.center),
               ),

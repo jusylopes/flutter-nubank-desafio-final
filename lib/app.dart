@@ -6,7 +6,7 @@ import 'package:projeto_final/ui/views/accreditation/accreditation.dart';
 import 'package:projeto_final/ui/views/contact/contact_page.dart';
 import 'package:projeto_final/ui/views/edit_profile/edit_profile_page.dart';
 import 'package:projeto_final/ui/views/event/event_page.dart';
-import 'package:projeto_final/ui/views/event_detail/event_detail.dart';
+import 'package:projeto_final/ui/views/historic/historic_detalhes.dart';
 import 'package:projeto_final/ui/views/historic/historic_page.dart';
 import 'package:projeto_final/ui/views/home/home_page.dart';
 import 'package:projeto_final/ui/views/inicial/inicial_page.dart';
@@ -27,17 +27,18 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.splash,
+      initialRoute: Routes.historicDetalhes,
       routes: {
-        Routes.splash: (context) => const SplashPage(),
-        Routes.inicial: (context) => const InicialPage(),
-        Routes.login: (context) => const LoginPage(),
-        Routes.register: (context) => const RegisterPage(),
-        Routes.editProfile: (context) => const EditProfilePage(),
-        Routes.home: (context) => const HomePage(),
-        Routes.event: (context) => const EventPage(),
-        Routes.accreditation: (context) => const AccreditationPage(),
+        // Routes.splash: (context) => const SplashPage(),
+        // Routes.inicial: (context) => const InicialPage(),
+        // Routes.login: (context) => const LoginPage(),
+        // Routes.register: (context) => const RegisterPage(),
+        // Routes.editProfile: (context) => const EditProfilePage(),
+        // Routes.home: (context) => const HomePage(),
+        // Routes.event: (context) => const EventPage(),
+        // Routes.accreditation: (context) => const AccreditationPage(),
         // Routes.historic: (context) => const HistoricPage(),
+         Routes.historicDetalhes: (context) => const HistoricDetalhes(),
         Routes.contact: (context) => const ContactPage(),
       },
     );
