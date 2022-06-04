@@ -1,7 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:projeto_final/data/entity/patch/patch_contacts_register_entity.dart';
-import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
+import 'package:projeto_final/data/repositories/cep/cep_repository.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/alert_dialog.dart';
@@ -14,6 +15,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
 import 'package:projeto_final/ui/views/components/form/birthday_date.dart';
 import 'package:projeto_final/ui/views/components/form/cpf_field.dart';
+import 'package:projeto_final/ui/views/components/form/custom_text_field.dart';
+import 'package:projeto_final/ui/views/components/form/email_field.dart';
+import 'package:projeto_final/ui/views/components/form/mobile_fiel.dart';
 import 'package:projeto_final/ui/views/components/form/name_field.dart';
 import 'package:projeto_final/ui/views/components/form/rg_field.dart';
 import 'package:projeto_final/ui/views/components/text_title_form.dart';
@@ -39,33 +43,84 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _mobileController = TextEditingController();
   final _emailController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
+  final _cepController = TextEditingController();
+  final _streetController = TextEditingController();
+  final _numberController = TextEditingController();
+  final _neighborhoodController = TextEditingController();
+  final _stateController = TextEditingController();
+  final _cityController = TextEditingController();
+  final _complementController = TextEditingController();
+  final _cepRepository = CepRepository();
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
+  String? resultado;
   File? imageProfile;
   String? fullName = 'carregando...';
-  String? cpf;
-  String? email;
-  String? phone;
-  String? rg;
-  String? birthDate;
+
+  String? cpf,
+      date,
+      rg,
+      phone,
+      mobile,
+      email,
+      cep,
+      street,
+      neighborhood,
+      state,
+      city,
+      complement;
+  int? number;
 
   void loadUser() async {
     final user = await userRepository.getUserDetails();
     final address = await userRepository.getAddressDetails();
     final contacts = await userRepository.getUserContacts();
-    rg = user.rg;
+
+    // recebendo dados da api
     email = contacts.email;
+
     fullName = user.fullName;
     cpf = user.cpf;
+    rg = user.rg;
+    date = user.birthDate;
     phone = contacts.phone;
-    birthDate = user.birthDate;
+    mobile = contacts.mobilePhone;
+    email = contacts.email;
+    cep = address.cep;
+    street = address.street;
+    number = address.number;
+    complement = address.complement;
+    neighborhood = address.district;
+    city = address.city;
+    state = address.state;
+
+    // controller recebendo dados das variaveis
+    _nameController.text = fullName.toString();
+    _cpfController.text = cpf.toString();
+    _emailController.text = email.toString();
+    _rgController.text =
+        rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
+    _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
+    phone != null ? _phoneController.text = phone.toString() : '';
+    mobile != null ? _mobileController.text = mobile.toString() : '';
+    cep != null ? _cepController.text = cep.toString() : '';
+    street != null ? _streetController.text = street.toString() : '';
+    number != null ? _numberController.text = number.toString() : '';
+    complement != null
+        ? _complementController.text = complement.toString()
+        : '';
+    neighborhood != null
+        ? _neighborhoodController.text = neighborhood.toString()
+        : '';
+    state != null ? _stateController.text = state.toString() : '';
+    city != null ? _cityController.text = city.toString() : '';
 
     setState(() {
       _nameController.text = fullName.toString();
-      _rgController.text = rg.toString();
+      // _rgController.text = rg.toString();
       _cpfController.text = cpf.toString();
       _phoneController.text = phone.toString();
-      _dateController.text = birthDate.toString();
+      // _dateController.text = birthDate.toString();
     });
   }
 
@@ -77,12 +132,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     if (_formKey.currentState!.validate()) {
       FocusScopeNode currentFocus = FocusScope.of(context);
+
       bool validateUserSucess = await userRepository.patchUserRegister(
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
-          rg: _rgController.text,
-          birthDate: _dateController.text.replaceAll("/", ""),
+          // rg: _rgController.text,
+          // birthDate: _dateController.text.replaceAll("/", ""),
         ),
       );
       bool validateContactsSucess = await userRepository
@@ -93,10 +149,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
             .replaceAll("-", ""),
       ));
       await userRepository.getUserDetails();
+      final list = await userRepository.getAllEvents();
+      print(list);
       loadUser();
+
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
       }
+
       if (validateUserSucess && validateContactsSucess) {
         //para retirar erro de gap
         if (!mounted) return;
@@ -112,10 +172,26 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
+  void _searchCep() async {
+    String cep = _cepController.text;
+    final searchCep = await _cepRepository.fetchCep(cep: cep);
+
+    // var recebendo dados da api
+    String street = searchCep.street;
+    String neighborhood = searchCep.neighborhood;
+    String state = searchCep.state;
+    String city = searchCep.city;
+
+    // controller recebendo dados das variaveis
+    _streetController.text = street;
+    _neighborhoodController.text = neighborhood;
+    _stateController.text = state;
+    _cityController.text = city;
+  }
+
   @override
   void initState() {
     super.initState();
-
     loadUser();
   }
 
@@ -131,34 +207,34 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
-  showDialogImage() {
-    showDialog<ImageSource>(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Alterar foto'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.photo_camera,
-              size: 35.0,
-              color: LasColors.buttonColor,
-            ),
-            onPressed: () {
-              //  Navigator.pop(context, 'Camera');
-              pickImage(ImageSource.camera);
-            },
-          ),
-          IconButton(
-              icon: const Icon(Icons.image,
-                  size: 35.0, color: LasColors.buttonColor),
-              onPressed: () {
-                // Navigator.pop(context, 'Galeria');
-                pickImage(ImageSource.gallery);
-              }),
-        ],
-      ),
-    );
-  }
+  // showDialogImage() {
+  //   showDialog<ImageSource>(
+  //     context: context,
+  //     builder: (BuildContext context) => AlertDialog(
+  //       title: const Text('Alterar foto'),
+  //       actions: <Widget>[
+  //         IconButton(
+  //           icon: const Icon(
+  //             Icons.photo_camera,
+  //             size: 35.0,
+  //             color: LasColors.buttonColor,
+  //           ),
+  //           onPressed: () {
+  //             //  Navigator.pop(context, 'Camera');
+  //             pickImage(ImageSource.camera);
+  //           },
+  //         ),
+  //         IconButton(
+  //             icon: const Icon(Icons.image,
+  //                 size: 35.0, color: LasColors.buttonColor),
+  //             onPressed: () {
+  //               // Navigator.pop(context, 'Galeria');
+  //               pickImage(ImageSource.gallery);
+  //             }),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   void showAlertPatch() {
     showDialog(
@@ -189,6 +265,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   child: ListView(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     children: <Widget>[
+                      //dados pessoais
                       const TextTileForm(textTitleForm: Strings.txtDados),
                       NameField(
                         nameController: _nameController,
@@ -205,16 +282,92 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       CpfField(
                         cpfController: _cpfController,
                       ),
+                      //contatos
                       const TextTileForm(textTitleForm: Strings.txtContact),
                       PhoneField(
                         phoneController: _phoneController,
                       ),
                       const SizedBox(height: 15.0),
+                      MobileField(
+                        mobileController: _mobileController,
+                      ),
+                      const SizedBox(height: 15.0),
+                      EmailField(
+                        emailController: _emailController,
+                      ),
+                      //endereco
+                      const TextTileForm(textTitleForm: Strings.txtAddress),
+                      CustomTextField(
+                          controller: _cepController,
+                          keyboardType: TextInputType.number,
+                          label: 'CEP',
+                          onChanged: (cepController) {
+                            if (cepController.length >= 7) {
+                              _searchCep();
+                            }
+                          },
+                          inputFormatters: [
+                            FilteringTextInputFormatter.digitsOnly,
+                            //Mask.generic(
+                            //  masks: ['#####-###'],
+                            //  hashtag: Hashtag.numbers,
+                            //),
+                          ]),
+                      const SizedBox(height: 15.0),
+                      CustomTextField(
+                        controller: _streetController,
+                        label: 'Endereço',
+                      ),
+                      const SizedBox(height: 15.0),
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 100.0,
+                            child: CustomTextField(
+                              controller: _numberController,
+                              label: 'Número',
+                            ),
+                          ),
+                          const SizedBox(width: 15.0),
+                          Expanded(
+                            child: CustomTextField(
+                              controller: _neighborhoodController,
+                              label: 'Bairro',
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 15.0),
+                      CustomTextField(
+                        controller: _complementController,
+                        label: 'Complemento',
+                      ),
+                      const SizedBox(height: 15.0),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomTextField(
+                              controller: _cityController,
+                              label: 'Cidade',
+                            ),
+                          ),
+                          const SizedBox(width: 15.0),
+                          SizedBox(
+                            width: 100.0,
+                            child: CustomTextField(
+                              controller: _stateController,
+                              label: 'Estado',
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20.0),
                       ButtonWidget(
                         colorButton: LasColors.buttonColor,
                         textButton: Strings.buttonChange,
                         onPressed: validateSuccess,
                       ),
+                      const SizedBox(height: 20.0),
                     ],
                   ),
                 ),
@@ -250,10 +403,39 @@ class _EditProfilePageState extends State<EditProfilePage> {
               alignment: Alignment.bottomCenter,
               child: RichText(
                 text: TextSpan(
-                    text: Strings.changePhoto,
-                    style: LasTextStyle.loginCreate,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = showDialogImage),
+                  text: Strings.changePhoto,
+                  style: LasTextStyle.loginCreate,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      showDialog<ImageSource>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Alterar foto'),
+                          actions: <Widget>[
+                            IconButton(
+                              icon: const Icon(
+                                Icons.photo_camera,
+                                size: 35.0,
+                                color: LasColors.buttonColor,
+                              ),
+                              onPressed: () {
+                                //  Navigator.pop(context, 'Camera');
+                                pickImage(ImageSource.camera);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.image,
+                                  size: 35.0, color: LasColors.buttonColor),
+                              onPressed: () {
+                                // Navigator.pop(context, 'Galeria');
+                                pickImage(ImageSource.gallery);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                ),
               ),
             ),
           ],

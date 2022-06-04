@@ -1,4 +1,4 @@
-import 'package:projeto_final/data/entity/login_entity.dart';
+import 'package:projeto_final/data/entity/user/post/login_entity.dart';
 
 class LoginMapper {
   static Map<String, dynamic> toReplitMap(LoginEntity entity) {
