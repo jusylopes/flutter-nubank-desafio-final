@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
         Routes.register: (context) => const RegisterPage(),
         Routes.editProfile: (context) => const EditProfilePage(),
         Routes.home: (context) => const HomePage(),
-        Routes.event: (context) => const EventDetailPage(),
+        Routes.event: (context) => const EventPage(),
         Routes.accreditation: (context) => const AccreditationPage(),
         // Routes.historic: (context) => const HistoricPage(),
         Routes.contact: (context) => const ContactPage(),

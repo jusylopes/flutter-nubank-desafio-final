@@ -204,7 +204,7 @@ class SwaggerApiUserRepository implements UserRepository {
   Future<List<GetAllEvents>> getAllEvents() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
-    var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events/${2}');
+    var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events');
     var respostaGetAllEvents = await http.get(
       urlEvents,
       headers: {
@@ -230,6 +230,4 @@ class SwaggerApiUserRepository implements UserRepository {
     }
     return events;
   }
-
-  
 }
