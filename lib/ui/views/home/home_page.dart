@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
@@ -7,6 +8,8 @@ import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/image_profile.dart';
 import 'package:projeto_final/ui/views/components/menu_profile.dart';
+import 'package:projeto_final/ui/views/home/cubit/home_cubit.dart';
+import 'package:projeto_final/ui/views/home/cubit/home_states.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +21,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final userRepository = SwaggerApiUserRepository();
-  String? fullName;
   bool loading = false;
 
   void logout() async {
@@ -32,20 +34,9 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  void loadUser() async {
-    setState(() => loading = true);
-    final user = await userRepository.getUserDetails();
-
-    setState(() {
-      loading = false;
-      fullName = user.fullName;
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    loadUser();
   }
 
   @override
@@ -53,7 +44,7 @@ class _HomePageState extends State<HomePage> {
     return VisibilityDetector(
       key: const Key('teste'),
       onVisibilityChanged: (_) {
-        loadUser();
+        context.read<HomePageCubit>().loadUser();
       },
       child: Stack(
         children: [
@@ -141,17 +132,31 @@ class _HomePageState extends State<HomePage> {
               Container(
                 padding: const EdgeInsets.only(top: 15),
                 child: Center(
-                  child: (fullName != null && loading == false)
-                      ? Text(
-                          'Olá, ${fullName!.split(' ').first}',
-                          style: LasTextStyle.txtTitleProfile,
-                        )
-                      : const Text(
+                  child: BlocBuilder<HomePageCubit, HomePageState>(
+                    builder: (context, state) {
+                      if (state is LoadingState) {
+                        return const Text(
                           'carregando...',
                           style: LasTextStyle.txtTitleProfile,
-                        ),
+                        );
+                      } else if (state is SuccessState) {
+                        String fullName = state.user.fullName;
+                        return Text(
+                          'Olá, ${fullName.split(' ').first}',
+                          style: LasTextStyle.txtTitleProfile,
+                        );
+                      } else if (state is ErrorState) {
+                        return const Text(
+                          'erro',
+                          style: LasTextStyle.txtTitleProfile,
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  ),
                 ),
-              )
+              ),
             ],
           ),
         ],
