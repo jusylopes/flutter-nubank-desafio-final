@@ -71,7 +71,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       complement;
   int? number;
 
-
   void loadUser() async {
     final user = await userRepository.getUserDetails();
     final address = await userRepository.getAddressDetails();
@@ -101,8 +100,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _emailController.text = email.toString();
     _rgController.text =
         rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
-    _dateController.text =
-        date.toString().replaceAll('T00:00:00.000Z', '');
+    _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
     cep != null ? _cepController.text = cep.toString() : '';
@@ -136,7 +134,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       FocusScopeNode currentFocus = FocusScope.of(context);
 
       bool validateUserSucess = await userRepository.patchUserRegister(
-
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
@@ -161,7 +158,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       }
 
       if (validateUserSucess && validateContactsSucess) {
-
         //para retirar erro de gap
         if (!mounted) return;
         showAlertPatch();
@@ -407,41 +403,40 @@ class _EditProfilePageState extends State<EditProfilePage> {
               alignment: Alignment.bottomCenter,
               child: RichText(
                 text: TextSpan(
-                    text: Strings.changePhoto,
-                    style: LasTextStyle.loginCreate,
-                    recognizer: TapGestureRecognizer()
-                      ..onTap = (){
-                           showDialog<ImageSource>(
-                          context: context,
-                          builder: (BuildContext context) => AlertDialog(
-                            title: const Text('Alterar foto'),
-                            actions: <Widget>[
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.photo_camera,
-                                  size: 35.0,
-                                  color: LasColors.buttonColor,
-                                ),
-                                onPressed: () {
-                                  //  Navigator.pop(context, 'Camera');
-                                  pickImage(ImageSource.camera);
-                                },
+                  text: Strings.changePhoto,
+                  style: LasTextStyle.loginCreate,
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      showDialog<ImageSource>(
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text('Alterar foto'),
+                          actions: <Widget>[
+                            IconButton(
+                              icon: const Icon(
+                                Icons.photo_camera,
+                                size: 35.0,
+                                color: LasColors.buttonColor,
                               ),
-                              IconButton(
-                                  icon: const Icon(Icons.image,
-                                      size: 35.0, color: LasColors.buttonColor),
-                                  onPressed: () {
-                                    // Navigator.pop(context, 'Galeria');
-                                    pickImage(ImageSource.gallery);
-                                  },
-                              ),
-                            ],
-                          ),
-                        );
-                      
-                      },
+                              onPressed: () {
+                                //  Navigator.pop(context, 'Camera');
+                                pickImage(ImageSource.camera);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.image,
+                                  size: 35.0, color: LasColors.buttonColor),
+                              onPressed: () {
+                                // Navigator.pop(context, 'Galeria');
+                                pickImage(ImageSource.gallery);
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                ),
               ),
-            ),
             ),
           ],
         ),
