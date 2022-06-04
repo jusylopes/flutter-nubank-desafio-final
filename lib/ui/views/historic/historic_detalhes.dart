@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../resources/las_colors.dart';
 import '../components/custom_bar_container.dart';
 
 class HistoricDetalhes extends StatelessWidget {
@@ -60,15 +59,34 @@ class HistoricDetalhes extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            Container(
-              color: LasColors.buttonColor,
-              child: ListTile(
-                  title: const Text('Baixar'),
-                  onTap: () {},
-                  leading: const Icon(
-                    Icons.download,
-                  )),
+            Center(
+              child: SizedBox(
+                width: 259,
+                height: 50,
+                child: ElevatedButton(
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(Icons.download),
+                        const Text('BAIXAR',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w500)),
+                        Container(),
+                      ],
+                    )),
+              ),
             )
+            // Container(
+            //   color: LasColors.buttonColor,
+            //   child: ListTile(
+            //       title: const Text('Baixar'),
+            //       onTap: () {},
+            //       leading: const Icon(
+            //         Icons.download,
+            //       )),
+            // )
 
             //...getSections(accreditations)
             // .map((e) => buildListView(e.accreditations, e.title))

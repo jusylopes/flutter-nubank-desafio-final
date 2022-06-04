@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/ui/router/routers.dart';
 
 import '../components/custom_bar_container.dart';
 import 'api_historic_cred.dart';
@@ -93,6 +94,7 @@ buildListView(List<Accreditation> list, String year) {
                 final accreditation = list[index];
                 return GestureDetector(
                   onTap: () {
+                    Navigator.of(context).pushNamed(Routes.historicDetalhes);
                     print(index);
                   },
                   child: Padding(

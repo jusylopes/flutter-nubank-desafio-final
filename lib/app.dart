@@ -2,17 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/router/routers.dart';
-import 'package:projeto_final/ui/views/accreditation/accreditation.dart';
-import 'package:projeto_final/ui/views/contact/contact_page.dart';
-import 'package:projeto_final/ui/views/edit_profile/edit_profile_page.dart';
-import 'package:projeto_final/ui/views/event/event_page.dart';
 import 'package:projeto_final/ui/views/historic/historic_detalhes.dart';
 import 'package:projeto_final/ui/views/historic/historic_page.dart';
-import 'package:projeto_final/ui/views/home/home_page.dart';
-import 'package:projeto_final/ui/views/inicial/inicial_page.dart';
-import 'package:projeto_final/ui/views/login/login_page.dart';
-import 'package:projeto_final/ui/views/register/register_page.dart';
-import 'package:projeto_final/ui/views/splash/splash_page.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -36,9 +27,9 @@ class MyApp extends StatelessWidget {
         // Routes.home: (context) => const HomePage(),
         // Routes.event: (context) => const EventPage(),
         // Routes.accreditation: (context) => const AccreditationPage(),
-        // Routes.historic: (context) => const HistoricPage(),
-         Routes.historicDetalhes: (context) => const HistoricDetalhes(),
-        Routes.contact: (context) => const ContactPage(),
+        Routes.historic: (context) => const HistoricPage(),
+        Routes.historicDetalhes: (context) => const HistoricDetalhes(),
+        //Routes.contact: (context) => const ContactPage(),
       },
     );
   }
