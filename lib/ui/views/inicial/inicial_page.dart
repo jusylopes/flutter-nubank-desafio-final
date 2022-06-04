@@ -1,8 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:flutter/gestures.dart';
 import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
@@ -39,7 +39,7 @@ class InicialPage extends StatelessWidget {
                           colorButton: LasColors.buttonColor,
                           textButton: Strings.buttonInitial,
                           onPressed: () {
-                            Navigator.pushNamed(context, Routes.login);
+                            Navigator.pushNamed(context, Routes.historic);
                           })),
                   const SizedBox(height: 15),
                   Container(
@@ -55,7 +55,7 @@ class InicialPage extends StatelessWidget {
                               style: LasTextStyle.loginCreate,
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.pushNamed(context, Routes.register);
+                                  Navigator.pushNamed(context, Routes.historic);
                                 })
                         ],
                       ),

@@ -1,11 +1,12 @@
-import 'package:projeto_final/data/entity/get/get_address_details.dart';
-import 'package:projeto_final/data/entity/get/get_user_contacts.dart';
-import 'package:projeto_final/data/entity/get/get_user_details.dart';
-import 'package:projeto_final/data/entity/patch/patch_address_register.dart';
-import 'package:projeto_final/data/entity/patch/patch_contacts_register_entity.dart';
-import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
-import 'package:projeto_final/data/entity/register_entity.dart';
-import 'package:projeto_final/data/entity/login_entity.dart';
+import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
+import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
+import 'package:projeto_final/data/entity/user/get/get_user_contacts.dart';
+import 'package:projeto_final/data/entity/user/get/get_user_details.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_address_register.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
+import 'package:projeto_final/data/entity/user/post/register_entity.dart';
+import 'package:projeto_final/data/entity/user/post/login_entity.dart';
 
 abstract class UserRepository {
   Future<void> login(LoginEntity login);
@@ -27,4 +28,6 @@ abstract class UserRepository {
   Future<GetAddressDetails> getAddressDetails();
 
   Future<GetUserContacts> getUserContacts();
+
+  Future<List<GetAllEvents>> getAllEvents();
 }

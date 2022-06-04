@@ -1,13 +1,14 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:projeto_final/data/entity/get/get_address_details.dart';
-import 'package:projeto_final/data/entity/get/get_user_contacts.dart';
-import 'package:projeto_final/data/entity/get/get_user_details.dart';
-import 'package:projeto_final/data/entity/patch/patch_address_register.dart';
-import 'package:projeto_final/data/entity/patch/patch_contacts_register_entity.dart';
-import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
-import 'package:projeto_final/data/entity/register_entity.dart';
-import 'package:projeto_final/data/entity/login_entity.dart';
+import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
+import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
+import 'package:projeto_final/data/entity/user/get/get_user_contacts.dart';
+import 'package:projeto_final/data/entity/user/get/get_user_details.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_address_register.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
+import 'package:projeto_final/data/entity/user/post/register_entity.dart';
+import 'package:projeto_final/data/entity/user/post/login_entity.dart';
 import 'package:projeto_final/data/repositories/user_repository.dart';
 import 'package:projeto_final/external/login_mapper.dart';
 import 'package:projeto_final/external/patch_address_register_mapper.dart';
@@ -54,7 +55,7 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Registro OK');
       return true;
     } else {
-      debugPrint('Deu merda no registro ');
+      debugPrint('Erro - Register Entity');
     }
     return false;
   }
@@ -140,17 +141,15 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaPatchUserRegister = await http.patch(
       url,
       headers: {
-        // 'Content-Type': 'application/json; charset=UTF-8',
-
         'Authorization': 'Bearer $token',
       },
       body: PatchUserRegisterMapper.toReplitMap(patchUserRegister),
     );
     if (respostaPatchUserRegister.statusCode == 200) {
-      debugPrint('Patch Registro OK');
+      debugPrint('Patch Register OK');
       return true;
     } else {
-      debugPrint('Deu merda no Patch');
+      debugPrint('Deu erro no Patch Register');
     }
     return false;
   }
@@ -164,17 +163,15 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaPatchAddressRegister = await http.patch(
       url,
       headers: {
-        // 'Content-Type': 'application/json; charset=UTF-8',
-
         'Authorization': 'Bearer $token',
       },
       body: PatchAddressRegisterMapper.toReplitMap(patchAddressRegister),
     );
     if (respostaPatchAddressRegister.statusCode == 200) {
-      debugPrint('Patch Registro OK');
+      debugPrint('Patch Address OK');
       return true;
     } else {
-      debugPrint('Deu merda no Patch');
+      debugPrint('Deu erro no Patch Address');
     }
     return false;
   }
@@ -195,11 +192,46 @@ class SwaggerApiUserRepository implements UserRepository {
       body: PatchContactsRegisterMapper.toReplitMap(patchContactsRegister),
     );
     if (respostaPatchContactsRegister.statusCode == 200) {
-      debugPrint('Patch Registro OK');
+      debugPrint('Patch Registro Contacts OK');
       return true;
     } else {
       debugPrint('Deu merda no Patch Contacts');
     }
     return false;
+  }
+
+  @override
+  Future<List<GetAllEvents>> getAllEvents() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events');
+    var respostaGetAllEvents = await http.get(
+      urlEvents,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (respostaGetAllEvents.statusCode == 200) {
+      List<dynamic> body = jsonDecode(respostaGetAllEvents.body);
+
+      List<GetAllEvents> events =
+          body.map((dynamic item) => GetAllEvents.fromJson(item)).toList();
+      return events;
+    } else {
+      throw "Erro no Get All Events";
+    }
+    // if (respostaGetAllEvents.statusCode == 200) {
+    //   print('Events OK');
+    // }
+    // final list = respostaGetAllEvents.body as List;
+
+    // List<GetAllEvents> events = [];
+    // for (var json in list) {
+    //   final event = GetAllEvents.fromJson(json);
+    //   events.add(event);
+    // }
+    // return events;
   }
 }

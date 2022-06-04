@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final/data/entity/login_entity.dart';
+import 'package:projeto_final/data/entity/user/post/login_entity.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   final _cpfController = TextEditingController();
   final _passwordController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
+ 
 
   void submit() async {
     setState(() {
@@ -140,7 +141,6 @@ class _LoginPageState extends State<LoginPage> {
       ],
     );
   }
-
 
   //Usar o showAlert
   final snackBar = const SnackBar(
