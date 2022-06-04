@@ -13,9 +13,6 @@ class EventDetailPage extends StatefulWidget {
 
 class _EventDetailPageState extends State<EventDetailPage> {
   final userRepository = SwaggerApiUserRepository();
-  void getListEvents() async {
-    final list = await userRepository.getAllEvents();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +39,24 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 ),
               ),
             ),
+          ),
+
+          body: FutureBuilder(
+            future: userRepository.getAllEvents(),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData == false) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return ListView.builder(
+                  itemCount: snapshot.data.length,
+                  itemBuilder: (context, index) => ListTile(
+                    title: Text(snapshot.data[index]),
+                  ),
+                );
+              }
+            },
           ),
 
           // body: FutureBuilder(

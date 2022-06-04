@@ -213,15 +213,35 @@ class SwaggerApiUserRepository implements UserRepository {
       },
     );
 
-    if (respostaGetAllEvents.statusCode == 200) {
-      List<dynamic> body = jsonDecode(respostaGetAllEvents.body);
+    var responseEvents = json.decode(respostaGetAllEvents.body);
 
-      List<GetAllEvents> events =
-          body.map((dynamic item) => GetAllEvents.fromJson(item)).toList();
-      return events;
-    } else {
-      throw "Erro no Get All Events";
+    List<GetAllEvents> events = [];
+    for (var json in responseEvents) {
+      GetAllEvents event = GetAllEvents(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        imageUrl: json['imageUrl'],
+        startDate: json['startDate'],
+        endDate: json['endDate'],
+        status: json['status'],
+      );
+
+      //Adding user to the list.
+      events.add(event);
     }
+    return events;
+
+    // if (respostaGetAllEvents.statusCode == 200) {
+    //   List<dynamic> body = jsonDecode(respostaGetAllEvents.body);
+
+    //   List<GetAllEvents> events =
+    //       body.map((dynamic item) => GetAllEvents.fromJson(item)).toList();
+    //   return events;
+    // } else {
+    //   throw "Erro no Get All Events";
+    // }
+
     // if (respostaGetAllEvents.statusCode == 200) {
     //   print('Events OK');
     // }
