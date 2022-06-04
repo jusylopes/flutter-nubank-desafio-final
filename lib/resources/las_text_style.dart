@@ -58,9 +58,17 @@ abstract class LasTextStyle {
     color: LasColors.txtLoginRegisterPageSubtitle,
   );
 
-  static const titleAccreditationPage = TextStyle(
+  static const titleAccreditationPage1 = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 20.0,
+    fontSize: 20.00,
+    letterSpacing: 0.15,
+    color: LasColors.textButtonColor,
+    fontFamily: 'Roboto',
+  );
+
+  static const titleAccreditationPage2 = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.00,
     color: LasColors.textButtonColor,
     fontFamily: 'Roboto-Medium',
   );
@@ -116,7 +124,13 @@ abstract class LasTextStyle {
 
   static const nameAppbar = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 20.0,
+    fontSize: 21.0,
+    color: LasColors.textLoginPage,
+  );
+
+  static const txtEditDados = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 19.0,
     color: LasColors.textLoginPage,
   );
 }

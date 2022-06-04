@@ -5,7 +5,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../resources/las_strings.dart';
 import '../../../resources/las_text_style.dart';
 import '../components/background.dart';
-import '../components/custom_appBar.dart';
 
 var url = 'http://www.africau.edu/images/default/sample.pdf';
 
@@ -25,7 +24,7 @@ class _AccreditationPageState extends State<AccreditationPage> {
       Scaffold(
           appBar: const PreferredSize(
             preferredSize: Size.fromHeight(180.0),
-            child: AppBarWidget(),
+            child: AppBarWidget(back: true),
           ),
           body: SafeArea(
             child: Center(
@@ -197,12 +196,23 @@ class _AccreditationPageState extends State<AccreditationPage> {
               ]),
             ),
           )),
-      SizedBox(
-          width: 272.0,
-          height: 44.0,
-          child: Text(Strings.txtTitleEventDetail,
-              style: LasTextStyle.titleAccreditationPage,
-              textAlign: TextAlign.center)),
+      SafeArea(
+        child: Center(
+          child: Column(children: const [
+            SizedBox(height: 14.0),
+            SizedBox(
+              width: 272.0,
+              height: 44.0,
+              child: Material(
+                color: Colors.transparent,
+                child: Text(Strings.txtTitleAccreditation1,
+                    style: LasTextStyle.titleAccreditationPage1,
+                    textAlign: TextAlign.center),
+              ),
+            )
+          ]),
+        ),
+      ),
     ]);
   }
 }
