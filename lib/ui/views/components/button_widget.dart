@@ -4,7 +4,7 @@ import 'package:projeto_final/resources/las_text_style.dart';
 class ButtonWidget extends StatelessWidget {
   final Color colorButton;
   final String textButton;
-  final VoidCallback onPressed;
+  final Function() onPressed;
 
   const ButtonWidget(
       {Key? key,

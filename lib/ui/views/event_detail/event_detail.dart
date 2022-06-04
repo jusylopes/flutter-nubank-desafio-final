@@ -7,8 +7,18 @@ import '../../../resources/las_text_style.dart';
 import '../components/background.dart';
 import '../components/custom_appBar.dart';
 
-class EventDetailPage extends StatelessWidget {
+class EventDetailPage extends StatefulWidget {
   const EventDetailPage({super.key});
+
+  @override
+  State<EventDetailPage> createState() => _EventDetailPageState();
+}
+
+class _EventDetailPageState extends State<EventDetailPage> {
+  // final userRepository = SwaggerApiUserRepository();
+  // void getListEvents() async {
+  //   final list = await userRepository.getAllEvents();
+  
 
   @override
   Widget build(BuildContext context) {

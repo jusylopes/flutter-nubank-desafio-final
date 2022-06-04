@@ -45,4 +45,5 @@ abstract class Strings {
   static const txtDados = 'Dados Pessoais';
   static const txtContact = 'Contatos';
   static const txtAddress = 'Endereço';
+  static const txtPatchSuccess = 'Dados alterados com sucesso!';
 }

@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: EventDetailPage(),
+     
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
       theme: ThemeData(
@@ -29,16 +29,16 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Roboto'),
       initialRoute: Routes.splash,
       routes: {
-        //   Routes.splash: (context) => const SplashPage(),
-        //   Routes.inicial: (context) => const InicialPage(),
-        //   Routes.login: (context) => const LoginPage(),
-        //   Routes.register: (context) => const RegisterPage(),
-        //   Routes.editProfile: (context) => const EditProfilePage(),
-        //   Routes.home: (context) => const HomePage(),
-        //   Routes.event: (context) => const EventPage(),
-        //   Routes.accreditation: (context) => const AccreditationPage(),
-        //  // Routes.historic: (context) => const HistoricPage(),
-        //   Routes.contact: (context) => const ContactPage(),
+        Routes.splash: (context) => const SplashPage(),
+        Routes.inicial: (context) => const InicialPage(),
+        Routes.login: (context) => const LoginPage(),
+        Routes.register: (context) => const RegisterPage(),
+        Routes.editProfile: (context) => const EditProfilePage(),
+        Routes.home: (context) => const HomePage(),
+        Routes.event: (context) => const EventPage(),
+        Routes.accreditation: (context) => const AccreditationPage(),
+        // Routes.historic: (context) => const HistoricPage(),
+        Routes.contact: (context) => const ContactPage(),
       },
     );
   }
