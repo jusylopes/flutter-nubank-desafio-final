@@ -29,17 +29,16 @@ class MyApp extends StatelessWidget {
       initialRoute: Routes.historicDetalhes,
       routes: {
 
-        // Routes.splash: (context) => const SplashPage(),
-        // Routes.inicial: (context) => const InicialPage(),
-        // Routes.login: (context) => const LoginPage(),
-        // Routes.register: (context) => const RegisterPage(),
-        // Routes.editProfile: (context) => const EditProfilePage(),
-        // Routes.home: (context) => const HomePage(),
-        // Routes.event: (context) => const EventPage(),
-        // Routes.accreditation: (context) => const AccreditationPage(),
-
+        Routes.splash: (context) => const SplashPage(),
+        Routes.inicial: (context) => const InicialPage(),
+        Routes.login: (context) => const LoginPage(),
+        Routes.register: (context) => const RegisterPage(),
+        Routes.editProfile: (context) => const EditProfilePage(),
+        Routes.home: (context) => const HomePage(),
+        Routes.event: (context) => const EventPage(),
+        Routes.accreditation: (context) => const AccreditationPage(),
         // Routes.historic: (context) => const HistoricPage(),
-         Routes.historicDetalhes: (context) => const HistoricDetalhes(),
+        Routes.historicDetalhes: (context) => const HistoricDetalhes(),
         Routes.contact: (context) => const ContactPage(),
       },
     );
