@@ -13,6 +13,7 @@ class PhoneField extends StatelessWidget {
     return TextFormField(
       controller: phoneController,
       keyboardType: TextInputType.number,
+
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
         Mask.generic(
@@ -20,6 +21,7 @@ class PhoneField extends StatelessWidget {
           hashtag: Hashtag.numbers, // optional field
         ),
       ],
+
       decoration: const InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.zero),
         labelText: 'Telefone',

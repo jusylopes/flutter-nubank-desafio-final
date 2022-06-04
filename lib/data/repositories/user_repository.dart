@@ -2,6 +2,7 @@ import 'package:projeto_final/data/entity/get/get_address_details.dart';
 import 'package:projeto_final/data/entity/get/get_user_contacts.dart';
 import 'package:projeto_final/data/entity/get/get_user_details.dart';
 import 'package:projeto_final/data/entity/patch/patch_address_register.dart';
+import 'package:projeto_final/data/entity/patch/patch_contacts_register_entity.dart';
 import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
 import 'package:projeto_final/data/entity/register_entity.dart';
 import 'package:projeto_final/data/entity/login_entity.dart';
@@ -15,6 +16,9 @@ abstract class UserRepository {
 
   Future<void> patchAddressRegister(
       PatchAddressRegisterEntity patchAddressRegister);
+
+  Future<void> patchContactsRegister(
+      PatchContactsRegisterEntity patchContactsRegister);
 
   Future<bool> logout();
 

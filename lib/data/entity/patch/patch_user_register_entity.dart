@@ -4,7 +4,10 @@ class PatchUserRegisterEntity {
   final String? cpf;
   final String? email;
   // final String? profilePictureUrl;
+
  // final String? birthDate;
+
+
 
   PatchUserRegisterEntity({
     required this.fullName,
@@ -12,6 +15,8 @@ class PatchUserRegisterEntity {
     required this.cpf,
     required this.email,
     // required this.profilePictureUrl,
+
     //required this.birthDate,
+
   });
 }

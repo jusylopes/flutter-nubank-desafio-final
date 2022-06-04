@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/patch/patch_contacts_register_entity.dart';
 import 'package:projeto_final/data/entity/patch/patch_user_register_entity.dart';
 import 'package:projeto_final/data/repositories/cep/cep_repository.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
@@ -55,6 +56,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String? resultado;
   File? imageProfile;
   String? fullName = 'carregando...';
+
   String? cpf,
       date,
       rg,
@@ -69,10 +71,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
       complement;
   int? number;
 
+
   void loadUser() async {
     final user = await userRepository.getUserDetails();
     final address = await userRepository.getAddressDetails();
     final contacts = await userRepository.getUserContacts();
+
     // recebendo dados da api
     email = contacts.email;
     fullName = user.fullName;
@@ -111,6 +115,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         : '';
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
+
   }
 
   void validateSuccess() async {
@@ -122,21 +127,32 @@ class _EditProfilePageState extends State<EditProfilePage> {
     if (_formKey.currentState!.validate()) {
       FocusScopeNode currentFocus = FocusScope.of(context);
 
-      bool validateUser = await userRepository.patchUserRegister(
+      bool validateUserSucess = await userRepository.patchUserRegister(
+
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
           rg: _rgController.text,
+
           email: _emailController.text,
+
         ),
       );
-
+      bool validateContactsSucess = await userRepository
+          .patchContactsRegister(PatchContactsRegisterEntity(
+        phone: _phoneController.text
+            .replaceAll("(", "")
+            .replaceAll(")", "")
+            .replaceAll("-", ""),
+      ));
       await userRepository.getUserDetails();
       loadUser();
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
       }
-      if (validateUser) {
+
+      if (validateUserSucess && validateContactsSucess) {
+
         //para retirar erro de gap
         if (!mounted) return;
         showAlertPatch();
