@@ -185,8 +185,6 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaPatchContactsRegister = await http.patch(
       url,
       headers: {
-        // 'Content-Type': 'application/json; charset=UTF-8',
-
         'Authorization': 'Bearer $token',
       },
       body: PatchContactsRegisterMapper.toReplitMap(patchContactsRegister),
