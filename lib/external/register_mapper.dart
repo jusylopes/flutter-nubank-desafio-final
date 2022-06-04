@@ -1,4 +1,4 @@
-import 'package:projeto_final/data/entity/register_entity.dart';
+import 'package:projeto_final/data/entity/user/post/register_entity.dart';
 
 class RegisterMapper {
   static Map<String, dynamic> toReplitMap(RegisterEntity register) {

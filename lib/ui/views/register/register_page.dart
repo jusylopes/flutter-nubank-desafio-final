@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final/data/entity/login_entity.dart';
-import 'package:projeto_final/data/entity/register_entity.dart';
+import 'package:projeto_final/data/entity/user/post/login_entity.dart';
+import 'package:projeto_final/data/entity/user/post/register_entity.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
@@ -90,6 +90,7 @@ class _RegisterPageState extends State<RegisterPage> {
         const BackgroundPage(),
         const BackgroundCurve(),
         Scaffold(
+         
           body: Center(
             child: SingleChildScrollView(
               child: Column(
@@ -132,6 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             textButton: _textButton,
                             onPressed: validateSuccess,
                           ),
+                          const SizedBox(height: 25.0),
                         ],
                       ),
                     ),
