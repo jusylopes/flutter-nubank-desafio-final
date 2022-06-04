@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../../../resources/las_colors.dart';
 import '../components/custom_bar_container.dart';
 
 class HistoricDetalhes extends StatelessWidget {
   const HistoricDetalhes({Key? key}) : super(key: key);
+
+  //Nao finalizada, imagem de teste
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class HistoricDetalhes extends StatelessWidget {
               height: 50,
             ),
             Container(
-              color: const Color.fromARGB(255, 26, 3, 156),
+              color: LasColors.buttonColor,
               child: ListTile(
                   title: const Text('Baixar'),
                   onTap: () {},
