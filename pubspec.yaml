@@ -39,6 +39,7 @@ flutter:
     - assets/images/profileMask.png
     - assets/images/teste.jpg
     - assets/images/Vector1.png
+    - assets/images/festa.jpg
 
   fonts:
     - family: Roboto

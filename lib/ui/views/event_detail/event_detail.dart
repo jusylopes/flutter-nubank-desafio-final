@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:projeto_final/ui/views/components/custom_appbar.dart';
 
 class EventDetailPage extends StatelessWidget {
