@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    Expanded(child: CardHomePage()),
+                    CardHomePage(),
                     TextButton.icon(
                       onPressed: logout,
                       icon: const Icon(

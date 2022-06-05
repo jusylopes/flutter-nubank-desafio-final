@@ -24,4 +24,5 @@ abstract class LasColors {
   static const Color txtButtonAlert = Color(0XFF555770);
   static const Color txtBodyAlert = Color(0XFFFFFFFF);
   static const Color txtButtonCard = Color(0XFFED6A20);
+  static const Color txtCardHomePage = Color(0XFF0175b4);
 }
