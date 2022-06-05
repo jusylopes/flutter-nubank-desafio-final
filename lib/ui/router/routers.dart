@@ -10,4 +10,5 @@ abstract class Routes {
   static const historic = '/historic';
   static const historicDetails = '/historicDetails';
   static const contact = '/contact';
+  static const eventDetails = '/eventDetails';
 }

@@ -6,6 +6,7 @@ import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
+import 'package:projeto_final/ui/views/components/card_home_page.dart';
 import 'package:projeto_final/ui/views/components/image_profile.dart';
 import 'package:projeto_final/ui/views/components/menu_profile.dart';
 import 'package:projeto_final/ui/views/home/cubit/home_cubit.dart';
@@ -64,10 +65,10 @@ class _HomePageState extends State<HomePage> {
                         primary: false,
                         padding: const EdgeInsets.symmetric(
                             vertical: 10, horizontal: 10),
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 12,
+                        crossAxisSpacing: 4,
+                        mainAxisSpacing: 8,
                         crossAxisCount: 2,
-                        childAspectRatio: (1 / .6),
+                        childAspectRatio: (1 / .5),
                         children: <Widget>[
                           MenuProfile(
                             textAppBar: 'Eventos',
@@ -96,9 +97,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    Expanded(child: CardHomePage()),
                     TextButton.icon(
                       onPressed: logout,
                       icon: const Icon(

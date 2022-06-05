@@ -94,9 +94,6 @@ abstract class LasTextStyle {
     color: LasColors.texmsgconfirmAccreditation,
   );
 
-  
-     
-
   static const appBarProfile = TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 17.0,
@@ -126,5 +123,16 @@ abstract class LasTextStyle {
     fontWeight: FontWeight.w400,
     fontSize: 19.0,
     color: LasColors.textLoginPage,
+  );
+  static const txtCardHomePageTtile = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 22.0,
+    color: LasColors.textButtonColor,
+  );
+
+  static const txtCardHomePageSubTtile = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16.0,
+    color: LasColors.textButtonColor,
   );
 }
