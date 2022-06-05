@@ -185,8 +185,6 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaPatchContactsRegister = await http.patch(
       url,
       headers: {
-        // 'Content-Type': 'application/json; charset=UTF-8',
-
         'Authorization': 'Bearer $token',
       },
       body: PatchContactsRegisterMapper.toReplitMap(patchContactsRegister),
@@ -213,25 +211,21 @@ class SwaggerApiUserRepository implements UserRepository {
       },
     );
 
-    if (respostaGetAllEvents.statusCode == 200) {
-      List<dynamic> body = jsonDecode(respostaGetAllEvents.body);
+    var responseEvents = json.decode(respostaGetAllEvents.body);
 
-      List<GetAllEvents> events =
-          body.map((dynamic item) => GetAllEvents.fromJson(item)).toList();
-      return events;
-    } else {
-      throw "Erro no Get All Events";
+    List<GetAllEvents> events = [];
+    for (var json in responseEvents) {
+      GetAllEvents event = GetAllEvents(
+        id: json['id'],
+        name: json['name'],
+        description: json['description'],
+        imageUrl: json['imageUrl'],
+        startDate: json['startDate'],
+        endDate: json['endDate'],
+        status: json['status'],
+      );
+      events.add(event);
     }
-    // if (respostaGetAllEvents.statusCode == 200) {
-    //   print('Events OK');
-    // }
-    // final list = respostaGetAllEvents.body as List;
-
-    // List<GetAllEvents> events = [];
-    // for (var json in list) {
-    //   final event = GetAllEvents.fromJson(json);
-    //   events.add(event);
-    // }
-    // return events;
+    return events;
   }
 }

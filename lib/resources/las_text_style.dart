@@ -58,10 +58,19 @@ abstract class LasTextStyle {
     color: LasColors.txtLoginRegisterPageSubtitle,
   );
 
-  static const titleAccreditationPage = TextStyle(
+  static const titleAccreditationPage1 = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 20.0,
+    fontSize: 20.00,
+    letterSpacing: 0.15,
     color: LasColors.textButtonColor,
+    fontFamily: 'Roboto',
+  );
+
+  static const titleAccreditationPage2 = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.00,
+    color: LasColors.textButtonColor,
+    fontFamily: 'Roboto-Medium',
   );
 
   static const termAccreditationPage = TextStyle(
@@ -94,9 +103,6 @@ abstract class LasTextStyle {
     color: LasColors.texmsgconfirmAccreditation,
   );
 
-  
-     
-
   static const appBarProfile = TextStyle(
       fontWeight: FontWeight.w500,
       fontSize: 17.0,
@@ -126,5 +132,42 @@ abstract class LasTextStyle {
     fontWeight: FontWeight.w400,
     fontSize: 19.0,
     color: LasColors.textLoginPage,
+  );
+  static const txtCardHomePageTtile = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 22.0,
+    color: LasColors.textButtonColor,
+  );
+
+  static const txtCardHomePageSubTtile = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16.0,
+    color: LasColors.textButtonColor,
+  );
+  static const txtTitlePages = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.0,
+    color: LasColors.textButtonColor,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
+  );
+  static const txteventCardTitle = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 18.0,
+    color: LasColors.txtEventPage,
+  );
+  static const txteventCardButton = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 14.0,
+    color: LasColors.txtEventPage,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
+  );
+  static const txteventCardBody = TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: 14.0,
+    color: LasColors.txtEventPage,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
   );
 }

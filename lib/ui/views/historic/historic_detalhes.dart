@@ -4,8 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../resources/las_colors.dart';
 import '../components/custom_bar_container.dart';
 
-class HistoricDetalhes extends StatelessWidget {
-  const HistoricDetalhes({Key? key}) : super(key: key);
+class HistoricDetailsPage extends StatelessWidget {
+  const HistoricDetailsPage({Key? key}) : super(key: key);
 
   //Falta pouco pra terminar
 
@@ -35,7 +35,7 @@ class HistoricDetalhes extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
-                    'assets/images/festa.jpg',
+                    'assets/images/cardEvent1.jpg',
                     fit: BoxFit.cover,
                     height: 209,
                     width: 315,

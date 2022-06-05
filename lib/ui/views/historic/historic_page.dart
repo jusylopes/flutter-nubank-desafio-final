@@ -94,7 +94,7 @@ buildListView(List<Accreditation> list, String year) {
                 final accreditation = list[index];
                 return GestureDetector(
                   onTap: () {
-                    Navigator.of(context).pushNamed(Routes.historicDetalhes);
+                    Navigator.of(context).pushNamed(Routes.historicDetails);
                   },
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 1, 10, 1),
