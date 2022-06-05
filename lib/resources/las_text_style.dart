@@ -146,17 +146,16 @@ abstract class LasTextStyle {
     fontWeight: FontWeight.w500,
     fontSize: 18.0,
     color: LasColors.txtEventPage,
-   
   );
   static const txteventCardButton = TextStyle(
-    fontWeight: FontWeight.w300,
+    fontWeight: FontWeight.w500,
     fontSize: 14.0,
     color: LasColors.txtEventPage,
     decoration: TextDecoration.none,
     fontFamily: 'Roboto',
   );
-  static const txteventCardBody= TextStyle(
-    fontWeight: FontWeight.w500,
+  static const txteventCardBody = TextStyle(
+    fontWeight: FontWeight.w300,
     fontSize: 14.0,
     color: LasColors.txtEventPage,
     decoration: TextDecoration.none,

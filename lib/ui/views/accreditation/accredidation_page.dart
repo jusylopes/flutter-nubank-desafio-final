@@ -3,8 +3,8 @@ import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 
-class AccredidationPage extends StatelessWidget {
-  const AccredidationPage({Key? key}) : super(key: key);
+class AccredidationPageTeste extends StatelessWidget {
+  const AccredidationPageTeste({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class AccredidationPage extends StatelessWidget {
           height: 110.0,
           child: Center(
             child: Text(
-              'Eventos',
+              'Credenciamento',
               style: LasTextStyle.txtTitlePages,
             ),
           ),
