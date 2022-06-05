@@ -24,13 +24,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+     
       debugShowCheckedModeBanner: false,
       title: Strings.appName,
       theme: ThemeData(
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.accreditation,
+      initialRoute: Routes.event,
       routes: {
         Routes.splash: (context) => const SplashPage(),
         Routes.inicial: (context) => const InicialPage(),
