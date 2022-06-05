@@ -97,7 +97,7 @@ buildListView(List<Accreditation> list, String year) {
                     Navigator.of(context).pushNamed(Routes.historicDetalhes);
                   },
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),
+                    padding: const EdgeInsets.fromLTRB(10, 1, 10, 1),
                     child: Card(
                       margin: EdgeInsets.zero,
                       elevation: 0,

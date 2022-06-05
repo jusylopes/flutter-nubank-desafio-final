@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/router/routers.dart';
-import 'package:projeto_final/ui/views/historic/historic_detalhes.dart';
 import 'package:projeto_final/ui/views/historic/historic_page.dart';
 
 class MyApp extends StatelessWidget {
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.historicDetalhes,
+      initialRoute: Routes.historic,
       routes: {
         // Routes.splash: (context) => const SplashPage(),
         // Routes.inicial: (context) => const InicialPage(),
@@ -28,7 +27,7 @@ class MyApp extends StatelessWidget {
         // Routes.event: (context) => const EventPage(),
         // Routes.accreditation: (context) => const AccreditationPage(),
         Routes.historic: (context) => const HistoricPage(),
-        Routes.historicDetalhes: (context) => const HistoricDetalhes(),
+        // Routes.historicDetalhes: (context) => const HistoricDetalhes(),
         //Routes.contact: (context) => const ContactPage(),
       },
     );
