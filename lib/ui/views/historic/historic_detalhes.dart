@@ -7,7 +7,7 @@ import '../components/custom_bar_container.dart';
 class HistoricDetalhes extends StatelessWidget {
   const HistoricDetalhes({Key? key}) : super(key: key);
 
-  //Nao finalizada, imagem de teste
+  //Falta pouco pra terminar
 
   @override
   Widget build(BuildContext context) {
