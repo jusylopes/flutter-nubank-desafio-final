@@ -58,10 +58,19 @@ abstract class LasTextStyle {
     color: LasColors.txtLoginRegisterPageSubtitle,
   );
 
-  static const titleAccreditationPage = TextStyle(
+  static const titleAccreditationPage1 = TextStyle(
     fontWeight: FontWeight.w500,
-    fontSize: 20.0,
+    fontSize: 20.00,
+    letterSpacing: 0.15,
     color: LasColors.textButtonColor,
+    fontFamily: 'Roboto',
+  );
+
+  static const titleAccreditationPage2 = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.00,
+    color: LasColors.textButtonColor,
+    fontFamily: 'Roboto-Medium',
   );
 
   static const termAccreditationPage = TextStyle(

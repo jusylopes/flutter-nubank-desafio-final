@@ -3,6 +3,10 @@ import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/ui/views/components/custom_appbar.dart';
 
+import '../../../resources/las_strings.dart';
+import '../../../resources/las_text_style.dart';
+import '../components/app_bar.dart';
+
 class EventPage extends StatefulWidget {
   const EventPage({Key? key}) : super(key: key);
 
@@ -18,25 +22,10 @@ class _EventPageState extends State<EventPage> {
     return Stack(
       children: [
         Scaffold(
-          appBar: AppBar(
-            toolbarHeight: 200.0,
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            flexibleSpace: ClipPath(
-              clipper: CustomAppbar(),
-              child: Container(
-                height: 150.0,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.blue,
-                child: Column(
-                  children: const [
-                    SizedBox(
-                      height: 44.0,
-                      width: double.infinity,
-                    )
-                  ],
-                ),
-              ),
+          appBar: const PreferredSize(
+            preferredSize: Size.fromHeight(180.0),
+            child: AppBarWidget(
+              back: true,
             ),
           ),
           body: FutureBuilder<List<GetAllEvents>>(
@@ -81,7 +70,24 @@ class _EventPageState extends State<EventPage> {
           //   },
           // ),
           backgroundColor: Colors.white,
-        )
+        ),
+        SafeArea(
+          child: Center(
+            child: Column(children: const [
+              SizedBox(height: 27.0),
+              SizedBox(
+                width: 272.0,
+                height: 44.0,
+                child: Material(
+                  color: Colors.transparent,
+                  child: Text('Eventos',
+                      style: LasTextStyle.titleAccreditationPage1,
+                      textAlign: TextAlign.center),
+                ),
+              )
+            ]),
+          ),
+        ),
       ],
     );
   }
