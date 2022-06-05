@@ -14,7 +14,7 @@ class ImageProfile extends StatelessWidget {
           'assets/images/profileMask.png',
         ),
         child: Image.asset(
-          'assets/images/teste.jpg',
+          'assets/images/imageProfile.jpg',
         ),
       ),
     );

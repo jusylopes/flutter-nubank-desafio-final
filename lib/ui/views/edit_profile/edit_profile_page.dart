@@ -378,8 +378,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         Column(
           children: [
             Container(
-              margin: const EdgeInsets.only(top: 40),
-              height: 180,
+              margin: const EdgeInsets.only(top: 80),
+              height: 160,
               child: Stack(alignment: Alignment.center, children: <Widget>[
                 Image.asset(
                   'assets/images/Vector1.png',
@@ -440,6 +440,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
           ],
         ),
+        const SizedBox(
+          height: 100.0,
+          child: Center(
+            child: Text(
+              'Meus Dados',
+              style: LasTextStyle.txtTitlePages
+            ),
+          ),
+        )
       ],
     );
   }

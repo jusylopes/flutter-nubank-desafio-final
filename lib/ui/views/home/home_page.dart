@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
-      key: const Key('teste'),
+      key: const Key(''),
       onVisibilityChanged: (_) {
         context.read<HomePageCubit>().loadUser();
       },
@@ -97,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                     ),
-                    Expanded(child: CardHomePage()),
+                    CardHomePage(),
                     TextButton.icon(
                       onPressed: logout,
                       icon: const Icon(

@@ -7,8 +7,9 @@ import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/accreditation/accreditation.dart';
 import 'package:projeto_final/ui/views/contact/contact_page.dart';
 import 'package:projeto_final/ui/views/edit_profile/edit_profile_page.dart';
+import 'package:projeto_final/ui/views/event/event_details_page.dart';
 import 'package:projeto_final/ui/views/event/event_page.dart';
-import 'package:projeto_final/ui/views/event_detail/event_detail.dart';
+import 'package:projeto_final/ui/views/historic/historic_page.dart';
 import 'package:projeto_final/ui/views/home/cubit/home_cubit.dart';
 import 'package:projeto_final/ui/views/historic/historic_detalhes.dart';
 import 'package:projeto_final/ui/views/home/home_page.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.home,
+      initialRoute: Routes.event,
       routes: {
         Routes.splash: (context) => const SplashPage(),
         Routes.inicial: (context) => const InicialPage(),
@@ -41,10 +42,10 @@ class MyApp extends StatelessWidget {
               create: (_) => HomePageCubit(SwaggerApiUserRepository()),
               child: const HomePage(),
             ),
-        Routes.event: (context) => const EventPage(),
-        Routes.eventDetails: (context) => const EventDetailPage(),
+        Routes.event: (context) => EventPage(),
+        Routes.eventDetails: (context) => const EventDetailsPage(),
         Routes.accreditation: (context) => const AccreditationPage(),
-        // Routes.historic: (context) => const HistoricPage(),
+        Routes.historic: (context) => const HistoricPage(),
         Routes.historicDetails: (context) => const HistoricDetailsPage(),
         Routes.contact: (context) => const ContactPage(),
       },
