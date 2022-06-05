@@ -31,7 +31,7 @@ class CardHomePage extends StatelessWidget {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                             image: const DecorationImage(
-                              image: AssetImage('assets/images/teste.jpg'),
+                              image: AssetImage('assets/images/cardEvent1.jpg'),
                               fit: BoxFit.cover,
                               alignment: Alignment.topCenter,
                             ),
