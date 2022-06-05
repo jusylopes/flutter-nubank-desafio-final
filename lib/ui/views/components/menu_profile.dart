@@ -17,27 +17,25 @@ class MenuProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: InkWell(
-        onTap: () {
-          Navigator.pushNamed(context, route);
-        },
-        child: Card(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.zero,
-          ),
-          color: LasColors.menuProfile,
-          child: Center(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                      padding: const EdgeInsets.symmetric(vertical: 12),
-                      child: Icon(iconMenu,
-                          size: 52.0, color: LasColors.txtAppBarProfile)),
-                  Text(textAppBar, style: LasTextStyle.appBarProfile),
-                ]),
-          ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, route);
+      },
+      child: Card(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.zero,
+        ),
+        color: LasColors.menuProfile,
+        child: Center(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                    padding: const EdgeInsets.only(top: 6),
+                    child: Icon(iconMenu,
+                        size: 52.0, color: LasColors.txtAppBarProfile)),
+                Text(textAppBar, style: LasTextStyle.appBarProfile),
+              ]),
         ),
       ),
     );

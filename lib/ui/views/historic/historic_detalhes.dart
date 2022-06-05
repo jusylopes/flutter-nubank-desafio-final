@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../resources/las_colors.dart';
 import '../components/custom_bar_container.dart';
 
-class HistoricDetalhes extends StatelessWidget {
-  const HistoricDetalhes({Key? key}) : super(key: key);
+class HistoricDetailsPage extends StatelessWidget {
+  const HistoricDetailsPage({Key? key}) : super(key: key);
 
   //Nao finalizada, imagem de teste
 

@@ -8,6 +8,7 @@ abstract class Routes {
   static const event = '/event';
   static const accreditation = '/accreditation';
   static const historic = '/historic';
-  static const historicDetalhes = '/';
+  static const historicDetails = '/historicDetails';
   static const contact = '/contact';
+  static const eventDetails = '/eventDetails';
 }
