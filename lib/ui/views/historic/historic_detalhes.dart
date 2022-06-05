@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+import '../../../resources/las_colors.dart';
 import '../components/custom_bar_container.dart';
 
 class HistoricDetalhes extends StatelessWidget {
@@ -64,15 +66,28 @@ class HistoricDetalhes extends StatelessWidget {
                 width: 259,
                 height: 50,
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      const url =
+                          'http://www.africau.edu/images/default/sample.pdf';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: LasColors.buttonColor,
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         const Icon(Icons.download),
-                        const Text('BAIXAR',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500)),
+                        const Center(
+                          child: Text('BAIXAR',
+                              style: TextStyle(
+                                  color: LasColors.txtAppBarProfile,
+                                  fontWeight: FontWeight.w500)),
+                        ),
                         Container(),
                       ],
                     )),

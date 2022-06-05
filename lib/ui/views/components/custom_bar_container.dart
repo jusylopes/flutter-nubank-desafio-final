@@ -4,6 +4,7 @@ import '../../../resources/las_colors.dart';
 import 'custom_appbar.dart';
 
 // Para ampliar a imagem de fundo do background cobrindo ate o appbar na tela de historico
+// appbar das telas de historic e historic detalhes
 class CustomBarContainer extends StatelessWidget {
   final String titleappbarhistoric;
 
@@ -24,6 +25,7 @@ class CustomBarContainer extends StatelessWidget {
             IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();
+                  // Navigator.of(context).pushNamed(Routes.historic);
                 },
                 icon: const Icon(
                   Icons.arrow_back_ios_new,
