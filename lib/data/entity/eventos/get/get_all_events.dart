@@ -7,6 +7,8 @@ class GetAllEvents {
   final String endDate;
   final int status;
 
+  static var events;
+
   GetAllEvents({
     required this.id,
     required this.name,

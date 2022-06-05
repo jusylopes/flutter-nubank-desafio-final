@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -15,9 +16,7 @@ class EventDetailPage extends StatefulWidget {
 }
 
 class _EventDetailPageState extends State<EventDetailPage> {
-  // final userRepository = SwaggerApiUserRepository();
-  // void getListEvents() async {
-  //   final list = await userRepository.getAllEvents();
+  final events = GetAllEvents.events;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +33,12 @@ class _EventDetailPageState extends State<EventDetailPage> {
             body: Center(
               child: Column(
                 children: [
-                  Card(
-                      // child: GridView.builder(gridDelegate: gridDelegate, itemBuilder: () => '')),
-                      ),
+                  ListView.builder(itemBuilder: (BuildContext context, int i) {
+                    return ListTile(
+                      // leading: Image.asset(events[i].imageUrl),
+                      title: Text(events[i].name),
+                    );
+                  }),
                   Column(children: [
                     const SizedBox(height: 14.58),
                     const SizedBox(
