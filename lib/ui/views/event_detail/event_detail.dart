@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
+import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -16,8 +16,6 @@ class EventDetailPage extends StatefulWidget {
 }
 
 class _EventDetailPageState extends State<EventDetailPage> {
-  final events = GetAllEvents.events;
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -35,9 +33,9 @@ class _EventDetailPageState extends State<EventDetailPage> {
                 children: [
                   ListView.builder(itemBuilder: (BuildContext context, int i) {
                     return ListTile(
-                      // leading: Image.asset(events[i].imageUrl),
-                      title: Text(events[i].name),
-                    );
+                        // leading: Image.asset(events[i].imageUrl),
+                        // title: Text(events[i].name),
+                        );
                   }),
                   Column(children: [
                     const SizedBox(height: 14.58),
