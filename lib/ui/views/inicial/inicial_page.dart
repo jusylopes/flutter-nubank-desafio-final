@@ -39,7 +39,7 @@ class InicialPage extends StatelessWidget {
                           colorButton: LasColors.buttonColor,
                           textButton: Strings.buttonInitial,
                           onPressed: () {
-                            Navigator.pushNamed(context, Routes.historic);
+                            Navigator.pushNamed(context, Routes.login);
                           })),
                   const SizedBox(height: 15),
                   Container(

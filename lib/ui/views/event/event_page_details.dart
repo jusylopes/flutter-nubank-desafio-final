@@ -22,7 +22,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   void completedPerfil() async {
     if (profileCompleted) {
-      Navigator.pushNamed(context, Routes.accreditation);
+      Navigator.popAndPushNamed(context, Routes.accreditation);
     }
     if (!profileCompleted) {
       showAlertError();
