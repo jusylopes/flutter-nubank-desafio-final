@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/user/patch/patch_address_register.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
 import 'package:projeto_final/data/repositories/cep/cep_repository.dart';
@@ -98,9 +99,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _nameController.text = fullName.toString();
     _cpfController.text = cpf.toString();
     _emailController.text = email.toString();
-    _rgController.text =
-        rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
+
+    // rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
     _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
+    _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
     cep != null ? _cepController.text = cep.toString() : '';
@@ -115,13 +117,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
 
-    setState(() {
-      _nameController.text = fullName.toString();
-      // _rgController.text = rg.toString();
-      _cpfController.text = cpf.toString();
-      _phoneController.text = phone.toString();
-      // _dateController.text = birthDate.toString();
-    });
+    setState(
+      () {
+        _nameController.text;
+        _rgController.text;
+        _cpfController.text;
+        _phoneController.text;
+        _dateController.text;
+        _cepController.text;
+      },
+    );
   }
 
   void validateSuccess() async {
@@ -137,27 +142,33 @@ class _EditProfilePageState extends State<EditProfilePage> {
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
-          // rg: _rgController.text,
-          // birthDate: _dateController.text.replaceAll("/", ""),
+          rg: _rgController.text,
+          birthDate: _dateController.text,
         ),
       );
-      bool validateContactsSucess = await userRepository
-          .patchContactsRegister(PatchContactsRegisterEntity(
-        phone: _phoneController.text
-            .replaceAll("(", "")
-            .replaceAll(")", "")
-            .replaceAll("-", ""),
-      ));
-      await userRepository.getUserDetails();
-      final list = await userRepository.getAllEvents();
-      print(list);
+      print(_dateController.text);
+      bool validateContactsSucess = await userRepository.patchContactsRegister(
+        PatchContactsRegisterEntity(
+          phone: _phoneController.text
+              .replaceAll("(", "")
+              .replaceAll(")", "")
+              .replaceAll("-", "")
+              .replaceAll("#", "")
+              .replaceAll(" ", ""),
+        ),
+      );
+      bool validateAddressSucess = await userRepository.patchAddressRegister(
+        PatchAddressRegisterEntity(number: _numberController.text),
+      );
       loadUser();
 
       if (!currentFocus.hasPrimaryFocus) {
         currentFocus.unfocus();
       }
 
-      if (validateUserSucess && validateContactsSucess) {
+      if (validateUserSucess &&
+          validateContactsSucess &&
+          validateAddressSucess) {
         //para retirar erro de gap
         if (!mounted) return;
         showAlertPatch();
@@ -206,35 +217,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       debugPrint('Falha ao pegar a imagem : $e');
     }
   }
-
-  // showDialogImage() {
-  //   showDialog<ImageSource>(
-  //     context: context,
-  //     builder: (BuildContext context) => AlertDialog(
-  //       title: const Text('Alterar foto'),
-  //       actions: <Widget>[
-  //         IconButton(
-  //           icon: const Icon(
-  //             Icons.photo_camera,
-  //             size: 35.0,
-  //             color: LasColors.buttonColor,
-  //           ),
-  //           onPressed: () {
-  //             //  Navigator.pop(context, 'Camera');
-  //             pickImage(ImageSource.camera);
-  //           },
-  //         ),
-  //         IconButton(
-  //             icon: const Icon(Icons.image,
-  //                 size: 35.0, color: LasColors.buttonColor),
-  //             onPressed: () {
-  //               // Navigator.pop(context, 'Galeria');
-  //               pickImage(ImageSource.gallery);
-  //             }),
-  //       ],
-  //     ),
-  //   );
-  // }
 
   void showAlertPatch() {
     showDialog(

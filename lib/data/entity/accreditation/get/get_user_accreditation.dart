@@ -1,10 +1,10 @@
 class GetUserAccreditation {
-  final int? id;
-  final String? location;
-  final String? salesType;
-  final String? status;
-  final String? accreditedAt;
-  // Event? event;
+  late final int? id;
+  late final String? location;
+  late final String? salesType;
+  late final String? status;
+  late final String? accreditedAt;
+  Event? event;
 
   GetUserAccreditation({
     required this.id,
@@ -12,8 +12,17 @@ class GetUserAccreditation {
     required this.salesType,
     required this.status,
     required this.accreditedAt,
-    // required this.event,
+    required this.event,
   });
+
+  GetUserAccreditation.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    location = json['location'];
+    salesType = json['salesType'];
+    status = json['status'];
+    accreditedAt = json['accreditedAt'];
+    event = json['event'] != null ? Event.fromJson(json['event']) : null;
+  }
 }
 
 class Event {
@@ -26,11 +35,21 @@ class Event {
   int? status;
 
   Event(
-      {this.id,
-      this.name,
-      this.description,
-      this.imageUrl,
-      this.startDate,
-      this.endDate,
-      this.status});
+      {required this.id,
+      required this.name,
+      required this.description,
+      required this.imageUrl,
+      required this.startDate,
+      required this.endDate,
+      required this.status});
+
+  Event.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    description = json['description'];
+    imageUrl = json['imageUrl'];
+    startDate = json['startDate'];
+    endDate = json['endDate'];
+    status = json['status'];
+  }
 }

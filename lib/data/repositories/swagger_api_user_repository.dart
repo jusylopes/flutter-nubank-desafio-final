@@ -337,7 +337,7 @@ class SwaggerApiUserRepository implements UserRepository {
         salesType: json['salesType'],
         status: json['status'],
         accreditedAt: json['accreditedAt'],
-        // event: json['event'],
+        event: json['event'],
       );
       accreditadeds.add(accreditaded);
     }
