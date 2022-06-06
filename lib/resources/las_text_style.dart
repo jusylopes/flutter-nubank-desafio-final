@@ -126,6 +126,8 @@ abstract class LasTextStyle {
     fontWeight: FontWeight.w500,
     fontSize: 21.0,
     color: LasColors.textLoginPage,
+     decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
   );
 
   static const txtEditDados = TextStyle(
@@ -143,5 +145,39 @@ abstract class LasTextStyle {
     fontWeight: FontWeight.w500,
     fontSize: 16.0,
     color: LasColors.textButtonColor,
+  );
+  static const txtTitlePages = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 20.0,
+    color: LasColors.textButtonColor,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
+  );
+  static const txteventCardTitle = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 18.0,
+    color: LasColors.txtEventPage,
+  );
+  static const txteventCardButton = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 14.0,
+    color: LasColors.txtEventPage,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
+  );
+  static const txteventCardBody = TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: 14.0,
+    color: LasColors.txtEventPage,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
+  );
+
+  static const txtSubTilePage = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 14.0,
+    color: LasColors.textButtonColor,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
   );
 }

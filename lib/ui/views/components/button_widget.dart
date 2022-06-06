@@ -21,7 +21,7 @@ class ButtonWidget extends StatelessWidget {
           textStyle: LasTextStyle.txtButton,
           padding: const EdgeInsets.symmetric(horizontal: 110, vertical: 20),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(0.2),
+            borderRadius: BorderRadius.circular(2),
           )),
       onPressed: onPressed,
       child: Text(textButton),
