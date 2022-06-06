@@ -170,4 +170,12 @@ abstract class LasTextStyle {
     decoration: TextDecoration.none,
     fontFamily: 'Roboto',
   );
+
+  static const txtSubTilePage = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 14.0,
+    color: LasColors.textButtonColor,
+    decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
+  );
 }

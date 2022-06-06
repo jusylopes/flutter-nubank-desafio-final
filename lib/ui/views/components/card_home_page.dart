@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/router/routers.dart';
 
 class CardHomePage extends StatelessWidget {
   CardHomePage({super.key});
@@ -85,7 +86,10 @@ class CardHomePage extends StatelessWidget {
                                           horizontal: 40),
                                       textStyle: const TextStyle(fontSize: 20),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                          context, Routes.eventDetails);
+                                    },
                                     child: const Text(
                                       'Saiba mais',
                                       style:
