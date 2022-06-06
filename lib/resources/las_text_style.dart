@@ -126,6 +126,8 @@ abstract class LasTextStyle {
     fontWeight: FontWeight.w500,
     fontSize: 21.0,
     color: LasColors.textLoginPage,
+     decoration: TextDecoration.none,
+    fontFamily: 'Roboto',
   );
 
   static const txtEditDados = TextStyle(
