@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                             textAppBar: 'Meu histórico',
                             iconMenu: Icons.chrome_reader_mode,
                             context: context,
-                            route: Routes.contact,
+                            route: Routes.historic,
                           ),
                           MenuProfile(
                             textAppBar: 'Contato',
