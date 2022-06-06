@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
@@ -11,7 +10,6 @@ import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter/services.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
 import 'package:projeto_final/ui/views/components/form/birthday_date.dart';
 import 'package:projeto_final/ui/views/components/form/cpf_field.dart';
@@ -19,12 +17,12 @@ import 'package:projeto_final/ui/views/components/form/custom_text_field.dart';
 import 'package:projeto_final/ui/views/components/form/email_field.dart';
 import 'package:projeto_final/ui/views/components/form/mobile_fiel.dart';
 import 'package:projeto_final/ui/views/components/form/name_field.dart';
+import 'package:projeto_final/ui/views/components/form/phone_field.dart';
 import 'package:projeto_final/ui/views/components/form/rg_field.dart';
 import 'package:projeto_final/ui/views/components/text_title_form.dart';
-import 'dart:async';
 import 'dart:io';
 import 'package:projeto_final/ui/views/components/image_profile.dart';
-import '../components/form/phone_field.dart';
+
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -195,47 +193,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     loadUser();
   }
 
-  //upload de imagem - alice
-  Future pickImage(ImageSource source) async {
-    try {
-      final imageProfile = await ImagePicker().pickImage(source: source);
-      if (imageProfile == null) return;
-      final imageTemporary = File(imageProfile.path);
-      setState(() => this.imageProfile = imageTemporary);
-    } on PlatformException catch (e) {
-      debugPrint('Falha ao pegar a imagem : $e');
-    }
-  }
-
-  // showDialogImage() {
-  //   showDialog<ImageSource>(
-  //     context: context,
-  //     builder: (BuildContext context) => AlertDialog(
-  //       title: const Text('Alterar foto'),
-  //       actions: <Widget>[
-  //         IconButton(
-  //           icon: const Icon(
-  //             Icons.photo_camera,
-  //             size: 35.0,
-  //             color: LasColors.buttonColor,
-  //           ),
-  //           onPressed: () {
-  //             //  Navigator.pop(context, 'Camera');
-  //             pickImage(ImageSource.camera);
-  //           },
-  //         ),
-  //         IconButton(
-  //             icon: const Icon(Icons.image,
-  //                 size: 35.0, color: LasColors.buttonColor),
-  //             onPressed: () {
-  //               // Navigator.pop(context, 'Galeria');
-  //               pickImage(ImageSource.gallery);
-  //             }),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   void showAlertPatch() {
     showDialog(
         context: context,
@@ -387,6 +344,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
                 const ImageProfile(),
               ]),
+              //RETIRADO IMPLEMENTACAO DE ALTERAR FOTO
             ),
             Container(
               height: 30,
@@ -398,55 +356,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 ),
               ),
             ),
-            Container(
-              height: 20,
-              alignment: Alignment.bottomCenter,
-              child: RichText(
-                text: TextSpan(
-                  text: Strings.changePhoto,
-                  style: LasTextStyle.loginCreate,
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      showDialog<ImageSource>(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                          title: const Text('Alterar foto'),
-                          actions: <Widget>[
-                            IconButton(
-                              icon: const Icon(
-                                Icons.photo_camera,
-                                size: 35.0,
-                                color: LasColors.buttonColor,
-                              ),
-                              onPressed: () {
-                                //  Navigator.pop(context, 'Camera');
-                                pickImage(ImageSource.camera);
-                              },
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.image,
-                                  size: 35.0, color: LasColors.buttonColor),
-                              onPressed: () {
-                                // Navigator.pop(context, 'Galeria');
-                                pickImage(ImageSource.gallery);
-                              },
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                ),
-              ),
-            ),
           ],
         ),
         const SizedBox(
           height: 100.0,
           child: Center(
-            child: Text(
-              'Meus Dados',
-              style: LasTextStyle.txtTitlePages
-            ),
+            child: Text('Meus Dados', style: LasTextStyle.txtTitlePages),
           ),
         )
       ],

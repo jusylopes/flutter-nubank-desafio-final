@@ -4,24 +4,29 @@ import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
+import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
+import 'package:projeto_final/ui/views/components/button_widget.dart';
 
-import '../components/alert_dialog.dart';
-
-class EventPage extends StatefulWidget {
-  const EventPage({Key? key}) : super(key: key);
+class EventDetailsPage extends StatefulWidget {
+  const EventDetailsPage({Key? key}) : super(key: key);
 
   @override
-  State<EventPage> createState() => _EventPageState();
+  State<EventDetailsPage> createState() => _EventDetailsPageState();
 }
 
-class _EventPageState extends State<EventPage> {
+class _EventDetailsPageState extends State<EventDetailsPage> {
   final userRepository = SwaggerApiUserRepository();
-  bool loading = true;
+  bool profileCompleted = true;
 
   void completedPerfil() async {
-    //implementar logica de perfil completo
+    if (profileCompleted) {
+      Navigator.popAndPushNamed(context, Routes.accreditation);
+    }
+    if (!profileCompleted) {
+      showAlertError();
+    }
   }
 
   void showAlertError() {
@@ -50,6 +55,7 @@ class _EventPageState extends State<EventPage> {
               children: [
                 Expanded(
                   child: FutureBuilder<List>(
+                      //RETORNAR APENAS UM EVENTO ESPECIFICO
                       future: userRepository.getAllEvents(),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (!snapshot.hasData) {
@@ -61,7 +67,6 @@ class _EventPageState extends State<EventPage> {
                               itemCount: snapshot.data.length,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (BuildContext context, int index) {
-                                // retorna os eventos
                                 return Column(
                                   children: [
                                     const SizedBox(height: 20.0),
@@ -98,20 +103,12 @@ class _EventPageState extends State<EventPage> {
                                           overflow: TextOverflow.ellipsis,
                                         )),
                                     Container(
-                                      padding: const EdgeInsets.only(right: 30),
-                                      alignment: Alignment.bottomRight,
-                                      child: TextButton(
-                                        style: TextButton.styleFrom(
-                                          primary: LasColors.txtEventPage,
-                                          textStyle:
-                                              LasTextStyle.txteventCardButton,
-                                        ),
-                                        //IR PARA DETALHES DO EVENTO
-                                        onPressed: () {
-                                          Navigator.pushNamed(
-                                              context, Routes.eventDetails);
-                                        },
-                                        child: const Text('DETALHAR'),
+                                      padding: const EdgeInsets.only(top: 30),
+                                      alignment: Alignment.bottomCenter,
+                                      child: ButtonWidget(
+                                        colorButton: LasColors.buttonColor,
+                                        textButton: 'CREDENCIAR',
+                                        onPressed: completedPerfil,
                                       ),
                                     ),
                                   ],
@@ -125,10 +122,10 @@ class _EventPageState extends State<EventPage> {
           ),
         ),
         const SizedBox(
-          height: 130.0,
+          height: 110.0,
           child: Center(
             child: Text(
-              'Eventos',
+              'Detalhes do Evento',
               style: LasTextStyle.txtTitlePages,
             ),
           ),
