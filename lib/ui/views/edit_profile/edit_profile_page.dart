@@ -139,8 +139,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
           birthDate: _dateController.text.replaceAll("/", "-"),
         ),
       );
-    
-      debugPrint(_dateController.text.replaceAll("/", "-"));
 
       bool validateContactsSucess = await userRepository
           .patchContactsRegister(PatchContactsRegisterEntity(
