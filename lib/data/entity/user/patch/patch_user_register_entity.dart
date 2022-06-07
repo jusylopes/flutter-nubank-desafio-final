@@ -2,7 +2,7 @@ class PatchUserRegisterEntity {
   final String? fullName;
   final String? rg;
   final String? cpf;
-  // final String? email;
+  //final String? email;
   // final String? profilePictureUrl;
   final String? birthDate;
 

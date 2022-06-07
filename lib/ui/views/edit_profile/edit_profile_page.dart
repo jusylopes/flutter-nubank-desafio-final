@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mask/mask/mask.dart';
+import 'package:mask/models/hashtag_is.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_address_register.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
@@ -9,6 +11,7 @@ import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
@@ -21,9 +24,7 @@ import 'package:projeto_final/ui/views/components/form/name_field.dart';
 import 'package:projeto_final/ui/views/components/form/phone_field.dart';
 import 'package:projeto_final/ui/views/components/form/rg_field.dart';
 import 'package:projeto_final/ui/views/components/text_title_form.dart';
-import 'dart:io';
 import 'package:projeto_final/ui/views/components/image_profile.dart';
-
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
@@ -50,11 +51,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _cityController = TextEditingController();
   final _complementController = TextEditingController();
   final _cepRepository = CepRepository();
+  String? resultado;
+  // File? imageProfile;
+  String? fullName = 'carregando...';
+  var inputFormat = DateFormat('dd/MM/yyyy');
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
-  String? resultado;
-  File? imageProfile;
-  String? fullName = 'carregando...';
 
   String? cpf,
       date,
@@ -77,7 +79,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     // recebendo dados da api
     email = contacts.email;
-
     fullName = user.fullName;
     cpf = user.cpf;
     rg = user.rg;
@@ -94,12 +95,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
     state = address.state;
 
     // controller recebendo dados das variaveis
+    // setState(() {
     _nameController.text = fullName.toString();
     _cpfController.text = cpf.toString();
     _emailController.text = email.toString();
-
     // rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
     _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
+    print(_dateController);
     _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
@@ -115,6 +117,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
 
+
     setState(
       () {
         _nameController.text;
@@ -125,6 +128,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         _cepController.text;
       },
     );
+
   }
 
   void validateSuccess() async {
@@ -134,19 +138,22 @@ class _EditProfilePageState extends State<EditProfilePage> {
     });
 
     if (_formKey.currentState!.validate()) {
-      FocusScopeNode currentFocus = FocusScope.of(context);
-
+      //comentado - parar de subir teclado
+      // FocusScopeNode currentFocus = FocusScope.of(context);
       bool validateUserSucess = await userRepository.patchUserRegister(
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
           rg: _rgController.text,
-          birthDate: _dateController.text,
+
+          birthDate: _dateController.text.replaceAll("/", "-")t,
         ),
       );
       print(_dateController.text);
       bool validateContactsSucess = await userRepository.patchContactsRegister(
         PatchContactsRegisterEntity(
+          email: _emailController.text,
+          mobilePhone: _mobileController.text.replaceAll("-", ""),
           phone: _phoneController.text
               .replaceAll("(", "")
               .replaceAll(")", "")
@@ -158,19 +165,37 @@ class _EditProfilePageState extends State<EditProfilePage> {
       bool validateAddressSucess = await userRepository.patchAddressRegister(
         PatchAddressRegisterEntity(number: _numberController.text),
       );
-      loadUser();
+      //loadUser();
+      bool validateAddressSucess =
+          await userRepository.patchAddressRegister(PatchAddressRegisterEntity(
+        cep: _cepController.text.replaceAll("#", "").replaceAll("-", ""),
+        street: _streetController.text,
+        number: _numberController.text,
+        complement: _complementController.text,
+        district: _neighborhoodController.text,
+        city: _cityController.text,
+        state: _stateController.text,
+      ));
 
-      if (!currentFocus.hasPrimaryFocus) {
-        currentFocus.unfocus();
-      }
+      //await userRepository.getUserDetails();
+      // final list = await userRepository.getAllEvents();
+      // print(list);
+      // loadUser();
 
+      // if (!currentFocus.hasPrimaryFocus) {
+      //   currentFocus.unfocus();
+      // }
+
+     
       if (validateUserSucess &&
           validateContactsSucess &&
           validateAddressSucess) {
         //para retirar erro de gap
         if (!mounted) return;
+
         showAlertPatch();
       } else {
+        showAlertPatchError();
         setState(() {
           _colorButton = LasColors.buttonColor;
           _textButton = Strings.buttonRegister;
@@ -190,7 +215,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     String neighborhood = searchCep.neighborhood;
     String state = searchCep.state;
     String city = searchCep.city;
-
     // controller recebendo dados das variaveis
     _streetController.text = street;
     _neighborhoodController.text = neighborhood;
@@ -210,6 +234,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
         barrierDismissible: false,
         builder: (BuildContext context) => const Alert(
             bodyAlert: Strings.txtPatchSuccess, txtButton: Strings.buttonOk));
+  }
+
+  void showAlertPatchError() {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) => const Alert(
+            bodyAlert: 'Erro ao alterar dados.', txtButton: Strings.buttonOk));
   }
 
   @override
@@ -270,16 +302,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
                           keyboardType: TextInputType.number,
                           label: 'CEP',
                           onChanged: (cepController) {
-                            if (cepController.length >= 7) {
+                            if (cepController.length >= 8) {
                               _searchCep();
                             }
                           },
                           inputFormatters: [
                             FilteringTextInputFormatter.digitsOnly,
-                            //Mask.generic(
-                            //  masks: ['#####-###'],
-                            //  hashtag: Hashtag.numbers,
-                            //),
+                            Mask.generic(
+                              masks: ['#####-###'],
+                              hashtag: Hashtag.numbers,
+                            ),
                           ]),
                       const SizedBox(height: 15.0),
                       CustomTextField(

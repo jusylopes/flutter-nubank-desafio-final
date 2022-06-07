@@ -4,31 +4,24 @@ import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
-import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
-import 'package:projeto_final/ui/views/components/button_widget.dart';
 
-class EventDetailsPage extends StatefulWidget {
-  final int index;
+import '../components/alert_dialog.dart';
 
-  const EventDetailsPage({super.key, required this.index}) ;
+class HistoricPage2 extends StatefulWidget {
+  const HistoricPage2({Key? key}) : super(key: key);
 
   @override
-  State<EventDetailsPage> createState() => _EventDetailsPageState();
+  State<HistoricPage2> createState() => _HistoricPage2State();
 }
 
-class _EventDetailsPageState extends State<EventDetailsPage> {
+class _HistoricPage2State extends State<HistoricPage2> {
   final userRepository = SwaggerApiUserRepository();
-  bool profileCompleted = true;
+  bool loading = true;
 
   void completedPerfil() async {
-    if (profileCompleted) {
-      Navigator.popAndPushNamed(context, Routes.accreditation);
-    }
-    if (!profileCompleted) {
-      showAlertError();
-    }
+    //implementar logica de perfil completo
   }
 
   void showAlertError() {
@@ -57,7 +50,6 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
               children: [
                 Expanded(
                   child: FutureBuilder<List>(
-                      //RETORNAR APENAS UM EVENTO ESPECIFICO
                       future: userRepository.getAllEvents(),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (!snapshot.hasData) {
@@ -69,6 +61,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                               itemCount: snapshot.data.length,
                               scrollDirection: Axis.vertical,
                               itemBuilder: (BuildContext context, int index) {
+                                // retorna os eventos
                                 return Column(
                                   children: [
                                     const SizedBox(height: 20.0),
@@ -105,12 +98,20 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                                           overflow: TextOverflow.ellipsis,
                                         )),
                                     Container(
-                                      padding: const EdgeInsets.only(top: 30),
-                                      alignment: Alignment.bottomCenter,
-                                      child: ButtonWidget(
-                                        colorButton: LasColors.buttonColor,
-                                        textButton: 'CREDENCIAR',
-                                        onPressed: completedPerfil,
+                                      padding: const EdgeInsets.only(right: 30),
+                                      alignment: Alignment.bottomRight,
+                                      child: TextButton(
+                                        style: TextButton.styleFrom(
+                                          primary: LasColors.txtEventPage,
+                                          textStyle:
+                                              LasTextStyle.txteventCardButton,
+                                        ),
+                                        //IR PARA DETALHES DO EVENTO
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, Routes.eventDetails);
+                                        },
+                                        child: const Text('DETALHAR'),
                                       ),
                                     ),
                                   ],
@@ -124,10 +125,10 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
           ),
         ),
         const SizedBox(
-          height: 110.0,
+          height: 100.0,
           child: Center(
             child: Text(
-              'Detalhes do Evento',
+              'Meu histórico',
               style: LasTextStyle.txtTitlePages,
             ),
           ),
