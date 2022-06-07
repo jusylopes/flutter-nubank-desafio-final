@@ -117,7 +117,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
 
-
     setState(
       () {
         _nameController.text;
@@ -128,7 +127,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         _cepController.text;
       },
     );
-
   }
 
   void validateSuccess() async {
@@ -145,8 +143,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
           rg: _rgController.text,
-
-          birthDate: _dateController.text.replaceAll("/", "-")t,
+          birthDate: _dateController.text.replaceAll("/", "-"),
         ),
       );
       print(_dateController.text);
@@ -162,9 +159,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               .replaceAll(" ", ""),
         ),
       );
-      bool validateAddressSucess = await userRepository.patchAddressRegister(
-        PatchAddressRegisterEntity(number: _numberController.text),
-      );
+
       //loadUser();
       bool validateAddressSucess =
           await userRepository.patchAddressRegister(PatchAddressRegisterEntity(
@@ -186,7 +181,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       //   currentFocus.unfocus();
       // }
 
-     
       if (validateUserSucess &&
           validateContactsSucess &&
           validateAddressSucess) {

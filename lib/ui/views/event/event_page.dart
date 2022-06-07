@@ -112,15 +112,18 @@ class _EventPageState extends State<EventPage> {
                                               LasTextStyle.txteventCardButton,
                                         ),
                                         //IR PARA DETALHES DO EVENTO
-                                        onPressed: () {
+                                        onPressed: () async {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const EventDetailsPage(
-                                                        // index vai ser id do evento, retirar o 2
-                                                        index: 2)),
+                                              builder: (context) =>
+                                                  EventDetailsPage(
+                                                // index vai ser id do evento, retirar o 2
+                                                index: snapshot.data[index].id,
+                                              ),
+                                            ),
                                           );
+                                          print(snapshot.data[index].id);
                                         },
                                         child: const Text('DETALHAR'),
                                       ),

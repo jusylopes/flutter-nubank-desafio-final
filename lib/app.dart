@@ -45,7 +45,9 @@ class MyApp extends StatelessWidget {
               child: const HomePage(),
             ),
         Routes.event: (context) => const EventPage(),
-      //  Routes.eventDetails: (context) =>  EventDetailsPage(),
+        Routes.eventDetails: (context) => EventDetailsPage(
+              index: 2,
+            ),
         Routes.accreditation: (context) => const AccreditationPage(),
         Routes.historic: (context) => const HistoricPage2(),
         Routes.historicDetails: (context) => const HistoricDetailsPage(),

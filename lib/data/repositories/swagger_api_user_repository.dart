@@ -244,7 +244,6 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
-    print(id);
 
     var json = jsonDecode(respostaSpecificEvent.body);
 
