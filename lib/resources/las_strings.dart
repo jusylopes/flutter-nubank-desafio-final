@@ -23,7 +23,7 @@ abstract class Strings {
 
   //strings pagina accreditation
   static const txtTitleAccreditation1 = 'Credenciamento';
-   static const txtTitleAccreditationAPI = 'Carnaval 2021';
+  static const txtTitleAccreditationAPI = 'Carnaval 2021';
   static const txtTermAccreditation = 'Termo de\n participação';
   static const txtButtonPdfAccreditation = 'Ver arquivo';
   static const txtcheckAccreditation = 'Li e concordo com os termos';
@@ -40,10 +40,19 @@ abstract class Strings {
 
   static const txtTitleEventDetail = 'Detalhes do Evento';
   static const buttonAccreditation = 'CREDENCIAR';
+  static const buttonAccreditationOk = 'CREDENCIADO';
 
   //strings pagina editprofile
   static const txtDados = 'Dados Pessoais';
   static const txtContact = 'Contatos';
   static const txtAddress = 'Endereço';
   static const txtPatchSuccess = 'Dados alterados com sucesso!';
+  static const teste =
+      'A Prefeitura de Salvador começa a partir de hoje (05) o cadastramento dos ambulantes que pretendem trabalhar nas festas pré-carnaval Fuzuê e Furdunço. As credenciais serão para comercialização de bebidas ou alimentos. Lembrando que, o credencimanento dará direito a participação em todos os dias das festas pré-carnavalescas. O ambulante tem até 31 do mês de janeiro para realizar o credenciamento.';
+
+  //strings eventpage
+  static const eventAlertDialog =
+      'Não foi possível realizar o credenciamento. Complete seu perfil.';
+  static const eventAlertDialogSuccess =
+      'Seu credenciamento foi realizado com sucesso.';
 }

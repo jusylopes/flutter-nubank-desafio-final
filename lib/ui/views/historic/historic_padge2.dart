@@ -1,27 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
-import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
-import 'package:projeto_final/ui/router/routers.dart';
-import 'package:projeto_final/ui/views/components/custom_appbar.dart';
-import 'package:projeto_final/ui/views/historic/historic_page.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
-import 'package:projeto_final/ui/views/event/event_page_details.dart';
 
 import '../components/alert_dialog.dart';
 
-class EventPage extends StatefulWidget {
-  const EventPage({Key? key}) : super(key: key);
+class HistoricPage2 extends StatefulWidget {
+  const HistoricPage2({Key? key}) : super(key: key);
 
   @override
-  State<EventPage> createState() => _EventPageState();
+  State<HistoricPage2> createState() => _HistoricPage2State();
 }
 
-class _EventPageState extends State<EventPage> {
+class _HistoricPage2State extends State<HistoricPage2> {
   final userRepository = SwaggerApiUserRepository();
   bool loading = true;
 
@@ -112,18 +107,9 @@ class _EventPageState extends State<EventPage> {
                                               LasTextStyle.txteventCardButton,
                                         ),
                                         //IR PARA DETALHES DO EVENTO
-                                        onPressed: () async {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EventDetailsPage(
-                                                // index vai ser id do evento, retirar o 2
-                                                index: snapshot.data[index].id,
-                                              ),
-                                            ),
-                                          );
-                                          print(snapshot.data[index].id);
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, Routes.eventDetails);
                                         },
                                         child: const Text('DETALHAR'),
                                       ),
@@ -139,10 +125,10 @@ class _EventPageState extends State<EventPage> {
           ),
         ),
         const SizedBox(
-          height: 130.0,
+          height: 100.0,
           child: Center(
             child: Text(
-              'Eventos',
+              'Meu histórico',
               style: LasTextStyle.txtTitlePages,
             ),
           ),

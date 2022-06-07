@@ -4,9 +4,9 @@ class PatchContactsRegisterMapper {
   static Map<String, dynamic> toReplitMap(
       PatchContactsRegisterEntity patchContactsRegister) {
     return {
-      // "email": patchContactsRegister.email,
+      "email": patchContactsRegister.email,
       "phone": patchContactsRegister.phone,
-      // "mobilePhone": patchContactsRegister.mobilePhone,
+      "mobilePhone": patchContactsRegister.mobilePhone,
     };
   }
 }

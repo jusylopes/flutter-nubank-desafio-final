@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/router/routers.dart';
+import 'package:projeto_final/ui/views/event/event_page_details.dart';
 
 class CardHomePage extends StatelessWidget {
   CardHomePage({super.key});
@@ -85,7 +87,19 @@ class CardHomePage extends StatelessWidget {
                                           horizontal: 40),
                                       textStyle: const TextStyle(fontSize: 20),
                                     ),
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              EventDetailsPage(
+                                            // index vai ser id do evento, retirar o 2
+                                            index: snapshot.data[index].id,
+                                          ),
+                                        ),
+                                      );
+                                      print(snapshot.data[index].id);
+                                    },
                                     child: const Text(
                                       'Saiba mais',
                                       style:

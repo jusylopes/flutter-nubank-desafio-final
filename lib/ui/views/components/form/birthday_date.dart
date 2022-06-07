@@ -1,6 +1,7 @@
 import 'package:mask/mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class BirthdayDate extends StatefulWidget {
   final TextEditingController dateController;
@@ -17,15 +18,15 @@ class _BirthdayDateState extends State<BirthdayDate> {
   _selectDate() async {
     final DateTime? dateNew = await showDatePicker(
         context: context,
-        initialDate: dateTime,
-        initialDatePickerMode: DatePickerMode.day,
-        firstDate: DateTime(1900),
-        lastDate: DateTime(2101));
+        initialDate: DateTime(2004),
+        initialDatePickerMode: DatePickerMode.year,
+        firstDate: DateTime(1922),
+        lastDate: DateTime(2004));
     if (dateNew != null) {
       dateTime = dateNew;
-      print(dateNew.format);
-      widget.dateController.text = dateTime.format.toString();
-      //assign the chosen date to the controller
+
+      widget.dateController.text =
+          DateFormat(DateFormat.YEAR_NUM_MONTH_DAY, 'pt-BR').format(dateTime);
     }
   }
 
@@ -36,36 +37,15 @@ class _BirthdayDateState extends State<BirthdayDate> {
       keyboardType: TextInputType.datetime,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
-       // Mask.date(),
+        Mask.date(),
       ],
-      //autovalidateMode: AutovalidateMode.onUserInteraction,
-     // validator: (value) => Mask.validations.date(value),
       decoration: const InputDecoration(
         suffixIcon: Icon(Icons.calendar_month),
         border: OutlineInputBorder(borderRadius: BorderRadius.zero),
         labelText: 'Data de Nascimento',
       ),
-
       readOnly: true,
       onTap: _selectDate,
-
     );
   }
 }
-
-extension DateTimeExtension on DateTime {
-  String get format {
-    return '${day.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/$year';
-  }
-}
- 
-        // showDatePicker(
-        //   context: context,
-        //   initialDate: DateTime.now(),
-        //   firstDate: DateTime(1900),
-        //   lastDate: DateTime(2060),
-        // ).then((date) {
-        //   setState(() {
-        //     _dateTime = date;
-        //   });
-        // });
