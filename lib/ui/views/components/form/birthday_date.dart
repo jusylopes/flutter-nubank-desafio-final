@@ -25,7 +25,7 @@ class _BirthdayDateState extends State<BirthdayDate> {
       dateTime = dateNew;
       print(dateNew.format);
       widget.dateController.text = dateTime.format.toString();
-      //assign the chosen date to the controller
+      
     }
   }
 
@@ -58,14 +58,3 @@ extension DateTimeExtension on DateTime {
     return '${day.toString().padLeft(2, '0')}/${month.toString().padLeft(2, '0')}/$year';
   }
 }
- 
-        // showDatePicker(
-        //   context: context,
-        //   initialDate: DateTime.now(),
-        //   firstDate: DateTime(1900),
-        //   lastDate: DateTime(2060),
-        // ).then((date) {
-        //   setState(() {
-        //     _dateTime = date;
-        //   });
-        // });
