@@ -35,7 +35,6 @@ class SwaggerApiUserRepository implements UserRepository {
     }
     if (respostaLogin.statusCode == 404) {
       throw UsuarioNaoAutorizado(BaseErrorMessenger.Http_404('pagina'));
-
     }
     if (respostaLogin.statusCode == 201) {
       await sharedPreferences.setString(
@@ -60,9 +59,14 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaRegister = await http.post(
       url,
       body: RegisterMapper.toReplitMap(register),
-
     );
-    
+    if (respostaRegister.statusCode == 400) {
+      throw (BaseErrorMessenger.Http_400('Má requisição'));
+    }
+    if (respostaRegister.statusCode == 409) {
+      throw (BaseErrorMessenger.Http_409('Email ou CPF já cadastrado'));
+    }
+
     if (respostaRegister.statusCode == 201) {
       debugPrint('Registro OK');
       return true;
@@ -94,32 +98,41 @@ class SwaggerApiUserRepository implements UserRepository {
       birthDate: json['birthDate'],
       createdAt: json['createdAt'],
     );
+
+    debugPrint('Usuario encontrado');
+
     return user;
   }
 
   @override
   Future<GetAddressDetails> getAddressDetails() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString('token');
-    var urlUser = Uri.parse('https://cubos-las-api.herokuapp.com/user/address');
-    var respostaGetDetails = await http.get(
-      urlUser,
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-    );
-    final json = jsonDecode(respostaGetDetails.body);
-    final address = GetAddressDetails(
-      cep: json['cep'],
-      street: json['street'],
-      number: json['number'],
-      complement: json['complement'],
-      district: json['district'],
-      city: json['city'],
-      state: json['state'],
-    );
-    return address;
+    try {
+      var token = sharedPreferences.getString('token');
+      var urlUser =
+          Uri.parse('https://cubos-las-api.herokuapp.com/user/address');
+      var respostaGetDetails = await http.get(
+        urlUser,
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final json = jsonDecode(respostaGetDetails.body);
+      final address = GetAddressDetails(
+        cep: json['cep'],
+        street: json['street'],
+        number: json['number'],
+        complement: json['complement'],
+        district: json['district'],
+        city: json['city'],
+        state: json['state'],
+      );
+      print(json);
+      return address;
+    } catch (e) {
+      throw UsuarioNaoAutorizado('Não Autorizado');
+    }
   }
 
   @override

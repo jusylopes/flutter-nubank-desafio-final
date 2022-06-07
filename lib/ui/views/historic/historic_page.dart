@@ -66,7 +66,7 @@ class _HistoricPageState extends State<HistoricPage> {
                 top: 7,
               ),
             ),
-            
+
             // ...getSections(accreditations)
             //     .map((e) => buildListView(e.accreditations, e.title))
             ScrowViewBlocoHistoric(),
