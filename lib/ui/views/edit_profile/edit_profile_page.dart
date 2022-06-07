@@ -137,8 +137,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         PatchUserRegisterEntity(
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
-          // rg: _rgController.text,
-          // birthDate: _dateController.text.replaceAll("/", ""),
+           rg: _rgController.text,
+           birthDate: _dateController.text.replaceAll("/", ""),
         ),
       );
       bool validateContactsSucess = await userRepository

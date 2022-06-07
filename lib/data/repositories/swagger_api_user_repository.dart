@@ -88,6 +88,13 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    switch (respostaGetUser.statusCode) {
+      case 401:
+        throw UsuarioNaoAutorizado('Não autorizado');
+
+      default:
+        break;
+    }
     final json = jsonDecode(respostaGetUser.body);
     final user = GetUserDetails(
       id: json['id'],
@@ -128,7 +135,7 @@ class SwaggerApiUserRepository implements UserRepository {
         city: json['city'],
         state: json['state'],
       );
-      print(json);
+      // print(json);
       return address;
     } catch (e) {
       throw UsuarioNaoAutorizado('Não Autorizado');
@@ -148,6 +155,14 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    switch (respostaGetContacts.statusCode) {
+      case 401:
+        throw UsuarioNaoAutorizado('Não autorizado');
+
+      default:
+        break;
+    }
+
     final json = jsonDecode(respostaGetContacts.body);
     final contacts = GetUserContacts(
       email: json['email'],
@@ -170,8 +185,19 @@ class SwaggerApiUserRepository implements UserRepository {
       },
       body: PatchUserRegisterMapper.toReplitMap(patchUserRegister),
     );
+    if (respostaPatchUserRegister.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não Autorizado'));
+    }
+
+    if (respostaPatchUserRegister.statusCode == 400) {
+      throw (BaseErrorMessenger.Http_400('Má requisição'));
+    }
+    if (respostaPatchUserRegister.statusCode == 409) {
+      throw (BaseErrorMessenger.Http_409('Email ou CPF já cadastrado'));
+    }
+
     if (respostaPatchUserRegister.statusCode == 200) {
-      debugPrint('Patch Register OK');
+      debugPrint('Atualizado com sucesso');
       return true;
     } else {
       debugPrint('Deu erro no Patch Register');
@@ -192,6 +218,14 @@ class SwaggerApiUserRepository implements UserRepository {
       },
       body: PatchAddressRegisterMapper.toReplitMap(patchAddressRegister),
     );
+    if (respostaPatchAddressRegister.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não Autorizado'));
+    }
+
+    if (respostaPatchAddressRegister.statusCode == 400) {
+      throw (BaseErrorMessenger.Http_400('Má requisição'));
+    }
+
     if (respostaPatchAddressRegister.statusCode == 200) {
       debugPrint('Patch Address OK');
       return true;
@@ -214,8 +248,20 @@ class SwaggerApiUserRepository implements UserRepository {
       },
       body: PatchContactsRegisterMapper.toReplitMap(patchContactsRegister),
     );
+    if (respostaPatchContactsRegister.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não Autorizado'));
+    }
+
+    if (respostaPatchContactsRegister.statusCode == 400) {
+      throw (BaseErrorMessenger.Http_400('Má requisição'));
+    }
+
+    if (respostaPatchContactsRegister.statusCode == 409) {
+      throw (AdressErrorMessenger.Http_409('Email já cadastrado'));
+    }
+
     if (respostaPatchContactsRegister.statusCode == 200) {
-      debugPrint('Patch Registro Contacts OK');
+      debugPrint('Contatos atualizados com sucesso');
       return true;
     } else {
       debugPrint('Deu merda no Patch Contacts');
@@ -235,6 +281,13 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    switch (respostaGetAllEvents.statusCode) {
+      case 401:
+        throw UsuarioNaoAutorizado('Não autorizado');
+
+      default:
+        break;
+    }
 
     var responseEvents = json.decode(respostaGetAllEvents.body);
 
@@ -268,6 +321,13 @@ class ReturnHistory {
         'Authorization': 'Bearer $token',
       },
     );
+    // if (respostaAcredHistory.statusCode == 401) {
+    //   throw (BaseErrorMessenger.Http_401('Não Autorizado'));
+    // }
+    // if (respostaAcredHistory.statusCode == 404) {
+    //   throw (AcreditationIdErrorMessenger.Http_404(
+    //       'O usuário não tem eventos credenciados com o ID fornecido'));
+    // }
 
     var responseaccreditation = json.decode(respostaAcredHistory.body);
 
