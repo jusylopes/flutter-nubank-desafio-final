@@ -1,4 +1,6 @@
-import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
+import 'package:projeto_final/data/entity/accreditation/get/get_user_accreditation.dart';
+import 'package:projeto_final/data/entity/accreditation/post/accreditation_entity.dart';
+import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_contacts.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_details.dart';
@@ -29,5 +31,13 @@ abstract class UserRepository {
 
   Future<GetUserContacts> getUserContacts();
 
-  Future<List<GetAllEvents>> getAllEvents();
+  Future<List<GetEvent>> getAllEvents();
+
+  Future<GetEvent> getSpecificEvent(int id);
+
+  Future<GetEvent> getStatusEvent(int eventStatus);
+
+  Future<bool> accreditation(String eventId);
+
+  Future<List<GetUserAccreditation>> getUserAccreditation();
 }

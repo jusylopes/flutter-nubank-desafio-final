@@ -25,8 +25,10 @@ class _BirthdayDateState extends State<BirthdayDate> {
     if (dateNew != null) {
       dateTime = dateNew;
 
+
       widget.dateController.text =
           DateFormat(DateFormat.YEAR_NUM_MONTH_DAY, 'pt-BR').format(dateTime);
+
     }
   }
 
@@ -37,8 +39,10 @@ class _BirthdayDateState extends State<BirthdayDate> {
       keyboardType: TextInputType.datetime,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
+
         Mask.date(),
       ],
+
       decoration: const InputDecoration(
         suffixIcon: Icon(Icons.calendar_month),
         border: OutlineInputBorder(borderRadius: BorderRadius.zero),

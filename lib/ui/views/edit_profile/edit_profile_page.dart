@@ -99,12 +99,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _nameController.text = fullName.toString();
     _cpfController.text = cpf.toString();
     _emailController.text = email.toString();
-    _rgController.text =
-        rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
+    // rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
     _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
-
     print(_dateController);
-
+    _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
     cep != null ? _cepController.text = cep.toString() : '';
@@ -118,7 +116,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
         : '';
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
-    // });
+
+
+    setState(
+      () {
+        _nameController.text;
+        _rgController.text;
+        _cpfController.text;
+        _phoneController.text;
+        _dateController.text;
+        _cepController.text;
+      },
+    );
+
   }
 
   void validateSuccess() async {
@@ -135,20 +145,27 @@ class _EditProfilePageState extends State<EditProfilePage> {
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
           rg: _rgController.text,
-          //API SÓ ACC DATA ANO/MES/DIA
-          birthDate: _dateController.text.replaceAll("/", "-"),
+
+          birthDate: _dateController.text.replaceAll("/", "-")t,
         ),
       );
-    
-      debugPrint(_dateController.text.replaceAll("/", "-"));
-
-      bool validateContactsSucess = await userRepository
-          .patchContactsRegister(PatchContactsRegisterEntity(
-        email: _emailController.text,
-        mobilePhone: _mobileController.text.replaceAll("-", ""),
-        phone: _phoneController.text.replaceAll("-", ""),
-      ));
-
+      print(_dateController.text);
+      bool validateContactsSucess = await userRepository.patchContactsRegister(
+        PatchContactsRegisterEntity(
+          email: _emailController.text,
+          mobilePhone: _mobileController.text.replaceAll("-", ""),
+          phone: _phoneController.text
+              .replaceAll("(", "")
+              .replaceAll(")", "")
+              .replaceAll("-", "")
+              .replaceAll("#", "")
+              .replaceAll(" ", ""),
+        ),
+      );
+      bool validateAddressSucess = await userRepository.patchAddressRegister(
+        PatchAddressRegisterEntity(number: _numberController.text),
+      );
+      //loadUser();
       bool validateAddressSucess =
           await userRepository.patchAddressRegister(PatchAddressRegisterEntity(
         cep: _cepController.text.replaceAll("#", "").replaceAll("-", ""),
@@ -169,9 +186,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       //   currentFocus.unfocus();
       // }
 
+     
       if (validateUserSucess &&
           validateContactsSucess &&
           validateAddressSucess) {
+        //para retirar erro de gap
+        if (!mounted) return;
+
         showAlertPatch();
       } else {
         showAlertPatchError();

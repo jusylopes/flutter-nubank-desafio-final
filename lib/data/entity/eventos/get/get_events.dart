@@ -1,4 +1,4 @@
-class GetAllEvents {
+class GetEvent {
   final int id;
   final String name;
   final String description;
@@ -7,9 +7,9 @@ class GetAllEvents {
   final String endDate;
   final int status;
 
-  static var events;
+  
 
-  GetAllEvents({
+  GetEvent({
     required this.id,
     required this.name,
     required this.description,
