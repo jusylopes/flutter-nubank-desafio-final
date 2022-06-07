@@ -24,7 +24,7 @@ class _BirthdayDateState extends State<BirthdayDate> {
     if (dateNew != null) {
       dateTime = dateNew;
       print(dateNew.format);
-      widget.dateController.text = dateTime.format.toString();
+      widget.dateController.text = dateNew.format.toString();
       //assign the chosen date to the controller
     }
   }
@@ -36,10 +36,10 @@ class _BirthdayDateState extends State<BirthdayDate> {
       keyboardType: TextInputType.datetime,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
-       // Mask.date(),
+        // Mask.date(),
       ],
       //autovalidateMode: AutovalidateMode.onUserInteraction,
-     // validator: (value) => Mask.validations.date(value),
+      // validator: (value) => Mask.validations.date(value),
       decoration: const InputDecoration(
         suffixIcon: Icon(Icons.calendar_month),
         border: OutlineInputBorder(borderRadius: BorderRadius.zero),
@@ -48,7 +48,6 @@ class _BirthdayDateState extends State<BirthdayDate> {
 
       readOnly: true,
       onTap: _selectDate,
-
     );
   }
 }

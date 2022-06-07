@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
+import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
+import 'package:projeto_final/ui/router/routers.dart';
+import 'package:projeto_final/ui/views/components/custom_appbar.dart';
+import 'package:projeto_final/ui/views/historic/historic_page.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';

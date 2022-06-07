@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
-import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
+import 'package:projeto_final/data/entity/accreditation/get/get_user_accreditation.dart';
+import 'package:projeto_final/data/entity/accreditation/post/accreditation_entity.dart';
+import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_contacts.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_details.dart';
@@ -27,6 +29,7 @@ class SwaggerApiUserRepository implements UserRepository {
       url,
       body: LoginMapper.toReplitMap(login),
     );
+
     if (respostaLogin.statusCode == 201) {
       await sharedPreferences.setString(
           'token', '${jsonDecode(respostaLogin.body)["token"]}');
@@ -199,7 +202,7 @@ class SwaggerApiUserRepository implements UserRepository {
   }
 
   @override
-  Future<List<GetAllEvents>> getAllEvents() async {
+  Future<List<GetEvent>> getAllEvents() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
     var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events');
@@ -213,9 +216,9 @@ class SwaggerApiUserRepository implements UserRepository {
 
     var responseEvents = json.decode(respostaGetAllEvents.body);
 
-    List<GetAllEvents> events = [];
+    List<GetEvent> events = [];
     for (var json in responseEvents) {
-      GetAllEvents event = GetAllEvents(
+      GetEvent event = GetEvent(
         id: json['id'],
         name: json['name'],
         description: json['description'],
@@ -227,5 +230,117 @@ class SwaggerApiUserRepository implements UserRepository {
       events.add(event);
     }
     return events;
+  }
+
+  @override
+  Future<GetEvent> getSpecificEvent(int id) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var urlEvents = Uri.parse('https://cubos-las-api.herokuapp.com/events/$id');
+    var respostaSpecificEvent = await http.get(
+      urlEvents,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    print(id);
+
+    var json = jsonDecode(respostaSpecificEvent.body);
+
+    final event = GetEvent(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      imageUrl: json['imageUrl'],
+      startDate: json['startDate'],
+      endDate: json['endDate'],
+      status: json['status'],
+    );
+    print(event.description);
+
+    return event;
+  }
+
+  @override
+  Future<GetEvent> getStatusEvent(int eventStatus) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var urlEventStatus = Uri.parse(
+        'https://cubos-las-api.herokuapp.com/events/status/$eventStatus');
+    var respostaEventStatus = await http.get(
+      urlEventStatus,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    print(eventStatus);
+
+    var json = jsonDecode(respostaEventStatus.body);
+
+    final status = GetEvent(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      imageUrl: json['imageUrl'],
+      startDate: json['startDate'],
+      endDate: json['endDate'],
+      status: json['status'],
+    );
+    print(status.description);
+
+    return status;
+  }
+
+  @override
+  Future<bool> accreditation(String eventId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var url =
+        Uri.parse('https://cubos-las-api.herokuapp.com/accreditation/$eventId');
+    var respostaAccreditation = await http.post(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+      body: {'id': eventId},
+    );
+    var json = jsonDecode(respostaAccreditation.body);
+    print(json);
+    if (respostaAccreditation.statusCode == 201) {
+      print('Acredditation Ok');
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  @override
+  Future<List<GetUserAccreditation>> getUserAccreditation() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var urlUserAccreditation =
+        Uri.parse('https://cubos-las-api.herokuapp.com/accreditation');
+    var respostaGetUserAccreditation = await http.get(
+      urlUserAccreditation,
+      headers: {
+        'Authorization': 'Bearer $token',
+      },
+    );
+    final responseEvents = jsonDecode(respostaGetUserAccreditation.body);
+    List<GetUserAccreditation> accreditadeds = [];
+    for (var json in responseEvents) {
+      GetUserAccreditation accreditaded = GetUserAccreditation(
+        id: json['id'],
+        location: json['location'],
+        salesType: json['salesType'],
+        status: json['status'],
+        accreditedAt: json['accreditedAt'],
+        event: json['event'],
+      );
+      accreditadeds.add(accreditaded);
+    }
+    return accreditadeds;
   }
 }
