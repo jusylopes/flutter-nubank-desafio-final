@@ -26,7 +26,6 @@ class _LoginPageState extends State<LoginPage> {
   final _cpfController = TextEditingController();
   final _passwordController = TextEditingController();
   final userRepository = SwaggerApiUserRepository();
- 
 
   void submit() async {
     setState(() {
@@ -49,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
       if (validateSucess) {
         //para retirar erro de gap
         if (!mounted) return;
-        Navigator.of(context).popAndPushNamed(Routes.home);
+        Navigator.of(context).popAndPushNamed(Routes.historic);
       } else {
         _cpfController.clear();
         _passwordController.clear();

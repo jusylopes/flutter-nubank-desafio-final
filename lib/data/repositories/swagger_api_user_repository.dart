@@ -1,5 +1,7 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 import 'package:projeto_final/data/entity/eventos/get/get_all_events.dart';
 import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_contacts.dart';
@@ -7,16 +9,17 @@ import 'package:projeto_final/data/entity/user/get/get_user_details.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_address_register.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
-import 'package:projeto_final/data/entity/user/post/register_entity.dart';
 import 'package:projeto_final/data/entity/user/post/login_entity.dart';
+import 'package:projeto_final/data/entity/user/post/register_entity.dart';
+import 'package:projeto_final/data/erros/usuario_nao_autorizado_erro.dart';
 import 'package:projeto_final/data/repositories/user_repository.dart';
 import 'package:projeto_final/external/login_mapper.dart';
 import 'package:projeto_final/external/patch_address_register_mapper.dart';
 import 'package:projeto_final/external/patch_contacts_register_mapper.dart';
 import 'package:projeto_final/external/patch_user_register_mapper.dart';
 import 'package:projeto_final/external/register_mapper.dart';
+import 'package:projeto_final/pasta_teste_historic/model_teste.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
 
 class SwaggerApiUserRepository implements UserRepository {
   @override
@@ -27,6 +30,13 @@ class SwaggerApiUserRepository implements UserRepository {
       url,
       body: LoginMapper.toReplitMap(login),
     );
+    if (respostaLogin.statusCode == 401) {
+      throw UsuarioNaoAutorizado('Email ou senha incorreta');
+    }
+    if (respostaLogin.statusCode == 404) {
+      throw UsuarioNaoAutorizado(BaseErrorMessenger.Http_404('pagina'));
+
+    }
     if (respostaLogin.statusCode == 201) {
       await sharedPreferences.setString(
           'token', '${jsonDecode(respostaLogin.body)["token"]}');
@@ -50,7 +60,9 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaRegister = await http.post(
       url,
       body: RegisterMapper.toReplitMap(register),
+
     );
+    
     if (respostaRegister.statusCode == 201) {
       debugPrint('Registro OK');
       return true;
@@ -227,5 +239,32 @@ class SwaggerApiUserRepository implements UserRepository {
       events.add(event);
     }
     return events;
+  }
+}
+
+class ReturnHistory {
+  Future<List<AcredHistory>> getAcredHistory() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var urlaccreditation =
+        Uri.parse('https://cubos-las-api.herokuapp.com/accreditation');
+    var respostaAcredHistory = await http.get(
+      urlaccreditation,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    var responseaccreditation = json.decode(respostaAcredHistory.body);
+
+    List<AcredHistory> accreditation = [];
+
+    for (Map<String, dynamic> map in responseaccreditation) {
+      AcredHistory r = AcredHistory.fromJson(map);
+      accreditation.add(r);
+    }
+
+    return accreditation;
   }
 }
