@@ -3,6 +3,8 @@ import 'package:projeto_final/data/entity/user/patch/patch_address_register.dart
 class PatchAddressRegisterMapper {
   static Map<String, dynamic> toReplitMap(
       PatchAddressRegisterEntity patchAddressRegister) {
+        print(patchAddressRegister.cep);
+   
     return {
       "cep": patchAddressRegister.cep,
       "street": patchAddressRegister.street,

@@ -1,11 +1,11 @@
 class PatchContactsRegisterEntity {
-  // final String? email;
+  final String? email;
   final String? phone;
-  // final String? mobilePhone;
+  final String? mobilePhone;
 
   PatchContactsRegisterEntity({
-    // required this.email,
+    required this.email,
     required this.phone,
-    // required this.mobilePhone,
+    required this.mobilePhone,
   });
 }

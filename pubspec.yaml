@@ -12,9 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
+  flutter_localizations:
+    sdk: flutter
   flutter_svg: ^1.1.0
-  http: ^0.13.4
-  image_picker: ^0.8.5+3
+  http: ^0.13.4 
+  intl: ^0.17.0
   mask: ^1.0.3
   provider: ^6.0.3
   shared_preferences: ^2.0.15

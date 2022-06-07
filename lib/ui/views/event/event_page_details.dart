@@ -10,7 +10,9 @@ import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
 
 class EventDetailsPage extends StatefulWidget {
-  const EventDetailsPage({Key? key}) : super(key: key);
+  final int index;
+
+  const EventDetailsPage({super.key, required this.index}) ;
 
   @override
   State<EventDetailsPage> createState() => _EventDetailsPageState();
