@@ -3,8 +3,6 @@ import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.
 class PatchUserRegisterMapper {
   static Map<String, dynamic> toReplitMap(
       PatchUserRegisterEntity patchUserRegister) {
-    print(patchUserRegister.birthDate);
-
     return {
       "fullName": patchUserRegister.fullName,
       "rg": patchUserRegister.rg,
