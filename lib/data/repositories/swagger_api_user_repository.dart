@@ -2,9 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:projeto_final/data/entity/accreditation/get/get_user_accreditation.dart';
-import 'package:projeto_final/data/entity/accreditation/post/accreditation_entity.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_contacts.dart';
@@ -21,11 +19,9 @@ import 'package:projeto_final/external/patch_address_register_mapper.dart';
 import 'package:projeto_final/external/patch_contacts_register_mapper.dart';
 import 'package:projeto_final/external/patch_user_register_mapper.dart';
 import 'package:projeto_final/external/register_mapper.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-// 
+//
 
 class SwaggerApiUserRepository implements UserRepository {
   @override
@@ -325,6 +321,12 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    if (respostaSpecificEvent.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não autorizado'));
+    }
+    if (respostaSpecificEvent.statusCode == 404) {
+      throw (EventsErrorMessenger.Http_404('Itém não encontrado'));
+    }
 
     var json = jsonDecode(respostaSpecificEvent.body);
 
@@ -355,6 +357,12 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    if (respostaEventStatus.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não autorizado'));
+    }
+    // if (respostaEventStatus.statusCode == 200) {
+    //   debugPrint('Sucesso');
+
     print(eventStatus);
 
     var json = jsonDecode(respostaEventStatus.body);
@@ -387,6 +395,14 @@ class SwaggerApiUserRepository implements UserRepository {
       body: {'id': eventId},
     );
     var json = jsonDecode(respostaAccreditation.body);
+    if (respostaAccreditation.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não autorizado'));
+    }
+    if (respostaAccreditation.statusCode == 404) {
+      throw (AcreditationErrorMessenger.Http_404(
+          'Não encontrado o ID do evento'));
+    }
+
     print(json);
     if (respostaAccreditation.statusCode == 201) {
       print('Acredditation Ok');
@@ -408,6 +424,10 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    if (respostaGetUserAccreditation.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não autorizado'));
+    }
+
     final responseEvents = jsonDecode(respostaGetUserAccreditation.body);
     List<GetUserAccreditation> accreditadeds = [];
     for (var json in responseEvents) {
@@ -424,37 +444,3 @@ class SwaggerApiUserRepository implements UserRepository {
     return accreditadeds;
   }
 }
-   //foi retirado da pasta de teste, pode excluir
-// class ReturnHistory {
-//   Future<List<AcredHistory>> getAcredHistory() async {
-//     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-//     var token = sharedPreferences.getString('token');
-//     var urlaccreditation =
-//         Uri.parse('https://cubos-las-api.herokuapp.com/accreditation');
-//     var respostaAcredHistory = await http.get(
-//       urlaccreditation,
-//       headers: {
-//         'Content-Type': 'application/json; charset=UTF-8',
-//         'Authorization': 'Bearer $token',
-//       },
-//     );
-//     if (respostaAcredHistory.statusCode == 401) {
-//       throw (BaseErrorMessenger.Http_401('Não Autorizado'));
-//     }
-//     if (respostaAcredHistory.statusCode == 404) {
-//       throw (AcreditationIdErrorMessenger.Http_404(
-//           'O usuário não tem eventos credenciados com o ID fornecido'));
-//     }
-
-//     var responseaccreditation = json.decode(respostaAcredHistory.body);
-
-//     List<AcredHistory> accreditation = [];
-
-//     for (Map<String, dynamic> map in responseaccreditation) {
-//       AcredHistory r = AcredHistory.fromJson(map);
-//       accreditation.add(r);
-//     }
-
-//     return accreditation;
-//   }
-// }

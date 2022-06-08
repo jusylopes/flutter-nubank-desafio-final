@@ -93,15 +93,7 @@ class HistoricDetailsPage extends StatelessWidget {
                     )),
               ),
             )
-            // Container(
-            //   color: LasColors.buttonColor,
-            //   child: ListTile(
-            //       title: const Text('Baixar'),
-            //       onTap: () {},
-            //       leading: const Icon(
-            //         Icons.download,
-            //       )),
-            // )
+            
 
             //...getSections(accreditations)
             // .map((e) => buildListView(e.accreditations, e.title))
