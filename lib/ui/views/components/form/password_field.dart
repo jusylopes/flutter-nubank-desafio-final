@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 class PasswordField extends StatefulWidget {
-  const PasswordField({super.key});
+  final TextEditingController passwordController;
+
+  const PasswordField({super.key, required this.passwordController});
 
   @override
   State<PasswordField> createState() => _PasswordFieldState();
 }
 
 class _PasswordFieldState extends State<PasswordField> {
-  final TextEditingController _passwordController = TextEditingController();
   bool _isHidden = true;
 
   _passwordView() {
@@ -18,10 +19,17 @@ class _PasswordFieldState extends State<PasswordField> {
   }
 
   @override
+  void dispose() {
+    widget.passwordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: _passwordController,
+        controller: widget.passwordController,
         obscureText: _isHidden,
+        obscuringCharacter: "*",
         decoration: InputDecoration(
           border: const OutlineInputBorder(borderRadius: BorderRadius.zero),
           labelText: 'Senha',
@@ -34,6 +42,7 @@ class _PasswordFieldState extends State<PasswordField> {
         ),
         validator: (String? value) {
           return value == null || value.isEmpty ? 'Campo obrigatório' : null;
+          
         });
   }
 }
