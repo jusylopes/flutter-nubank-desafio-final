@@ -101,7 +101,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     _emailController.text = email.toString();
     // rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
     _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
-    print(_dateController);
+    // print(_dateController);
     _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
@@ -117,16 +117,16 @@ class _EditProfilePageState extends State<EditProfilePage> {
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
 
-    setState(
-      () {
-        _nameController.text;
-        _rgController.text;
-        _cpfController.text;
-        _phoneController.text;
-        _dateController.text;
-        _cepController.text;
-      },
-    );
+    // setState(
+    //   () {
+    //     _nameController.text;
+    //     _rgController.text;
+    //     _cpfController.text;
+    //     _phoneController.text;
+    //     _dateController.text;
+    //     _cepController.text;
+    //   },
+    // );
   }
 
   void validateSuccess() async {

@@ -158,7 +158,7 @@ class SwaggerApiUserRepository implements UserRepository {
       debugPrint('Patch Register OK');
       return true;
     } else {
-      debugPrint('Deu erro no Patch Register');
+      debugPrint('Deu erro no Patch User Register');
     }
     return false;
   }
