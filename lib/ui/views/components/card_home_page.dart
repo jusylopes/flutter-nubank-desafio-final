@@ -3,6 +3,7 @@ import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
+import 'package:projeto_final/ui/views/event/event_page_details.dart';
 
 class CardHomePage extends StatelessWidget {
   CardHomePage({super.key});
@@ -90,7 +91,7 @@ class CardHomePage extends StatelessWidget {
                                       Navigator.of(context).pushNamed(
                                           Routes.eventDetails,
                                           arguments: {
-                                            'id': 2,
+                                            'id': snapshot.data[index].id,
                                           });
                                     },
                                     child: const Text(

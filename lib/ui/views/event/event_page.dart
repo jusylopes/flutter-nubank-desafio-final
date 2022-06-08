@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/app.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/ui/router/routers.dart';
@@ -116,7 +117,7 @@ class _EventPageState extends State<EventPage> {
                                           Navigator.of(context).pushNamed(
                                               Routes.eventDetails,
                                               arguments: {
-                                                'id': 2,
+                                                'id': snapshot.data[index].id,
                                               });
                                         },
                                         child: const Text('DETALHAR'),

@@ -159,7 +159,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       //   currentFocus.unfocus();
       // }
 
-     
       if (validateUserSucess &&
           validateContactsSucess &&
           validateAddressSucess) {
