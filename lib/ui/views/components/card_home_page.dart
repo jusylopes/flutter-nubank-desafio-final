@@ -87,8 +87,11 @@ class CardHomePage extends StatelessWidget {
                                       textStyle: const TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      Navigator.pushNamed(
-                                          context, Routes.eventDetails);
+                                      Navigator.of(context).pushNamed(
+                                          Routes.eventDetails,
+                                          arguments: {
+                                            'id': 2,
+                                          });
                                     },
                                     child: const Text(
                                       'Saiba mais',
