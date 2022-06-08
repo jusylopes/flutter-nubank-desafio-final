@@ -36,7 +36,7 @@ class _AccreditationPageState extends State<AccreditationPage> {
     void showAlertSuccess() async {
       final accreditation = await userRepository.accreditation(id);
       Navigator.of(context).pushNamed(
-        Routes.home,
+        Routes.eventDetails,
         arguments: id,
       );
       showDialog(
@@ -182,10 +182,10 @@ class _AccreditationPageState extends State<AccreditationPage> {
               'Credenciamento',
               style: LasTextStyle.txtTitlePages,
             ),
-            Text(
-              'Nome do evento',
-              style: LasTextStyle.txtSubTilePage,
-            ),
+            // Text(
+            //   'Nome do evento',
+            //   style: LasTextStyle.txtSubTilePage,
+            // ),
           ],
         ),
       )),

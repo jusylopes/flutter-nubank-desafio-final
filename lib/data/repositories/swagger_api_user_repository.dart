@@ -1,11 +1,6 @@
 import 'dart:convert';
-
-import 'package:flutter/cupertino.dart';
-
 import 'package:http/http.dart' as http;
-
 import 'package:projeto_final/data/entity/accreditation/get/get_details.dart';
-
 import 'package:projeto_final/data/entity/accreditation/get/get_user_accreditation.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
@@ -82,12 +77,10 @@ class SwaggerApiUserRepository implements UserRepository {
     }
 
     if (respostaRegister.statusCode == 201) {
-      debugPrint('Registro OK');
       return true;
     } else {
-      debugPrint('Erro - Register Entity');
+      return false;
     }
-    return false;
   }
 
   @override
@@ -119,9 +112,6 @@ class SwaggerApiUserRepository implements UserRepository {
       birthDate: json['birthDate'],
       createdAt: json['createdAt'],
     );
-
-    debugPrint('Usuario encontrado');
-
     return user;
   }
 
@@ -149,7 +139,6 @@ class SwaggerApiUserRepository implements UserRepository {
         city: json['city'],
         state: json['state'],
       );
-      // print(json);
       return address;
     } catch (e) {
       throw UsuarioNaoAutorizado('Não Autorizado');
@@ -202,21 +191,15 @@ class SwaggerApiUserRepository implements UserRepository {
     if (respostaPatchUserRegister.statusCode == 401) {
       throw (BaseErrorMessenger.Http_401('Não Autorizado'));
     }
-
-    // if (respostaPatchUserRegister.statusCode == 400) {
-    //   throw (BaseErrorMessenger.Http_400('Má requisição'));
-    // }
     if (respostaPatchUserRegister.statusCode == 409) {
       throw (BaseErrorMessenger.Http_409('Email ou CPF já cadastrado'));
     }
 
     if (respostaPatchUserRegister.statusCode == 200) {
-      debugPrint('Atualizado com sucesso');
       return true;
     } else {
-      debugPrint('Deu erro no Patch User Register');
+      return false;
     }
-    return false;
   }
 
   @override
@@ -241,12 +224,10 @@ class SwaggerApiUserRepository implements UserRepository {
     }
 
     if (respostaPatchAddressRegister.statusCode == 200) {
-      debugPrint('Patch Address OK');
       return true;
     } else {
-      debugPrint('Deu erro no Patch Address');
+      return false;
     }
-    return false;
   }
 
   @override
@@ -275,11 +256,8 @@ class SwaggerApiUserRepository implements UserRepository {
     }
 
     if (respostaPatchContactsRegister.statusCode == 200) {
-      debugPrint('Contatos atualizados com sucesso');
       return true;
-    } else {
-      debugPrint('Deu merda no Patch Contacts');
-    }
+    } else {}
     return false;
   }
 
@@ -371,11 +349,6 @@ class SwaggerApiUserRepository implements UserRepository {
     if (respostaEventStatus.statusCode == 401) {
       throw (BaseErrorMessenger.Http_401('Não autorizado'));
     }
-    // if (respostaEventStatus.statusCode == 200) {
-    //   debugPrint('Sucesso');
-
-    print(eventStatus);
-
     var json = jsonDecode(respostaEventStatus.body);
 
     final status = GetEvent(
@@ -415,10 +388,7 @@ class SwaggerApiUserRepository implements UserRepository {
           'Não encontrado o ID do evento'));
     }
 
-    print(json);
-
     if (respostaAccreditation.statusCode == 201) {
-      debugPrint('Acredditation Ok');
       return true;
     } else {
       return false;
@@ -448,7 +418,6 @@ class SwaggerApiUserRepository implements UserRepository {
       GetUserAccreditation accreditaded = GetUserAccreditation.fromJson(json);
       accreditadeds.add(accreditaded);
     }
-    debugPrint(accreditadeds[12].event?.name);
     return accreditadeds;
   }
 

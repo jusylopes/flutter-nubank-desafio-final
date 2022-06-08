@@ -51,8 +51,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _cityController = TextEditingController();
   final _complementController = TextEditingController();
   final _cepRepository = CepRepository();
-  String? resultado;
-  // File? imageProfile;
   String? fullName = 'carregando...';
   var inputFormat = DateFormat('dd/MM/yyyy');
   Color _colorButton = LasColors.buttonColor;
@@ -77,7 +75,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final address = await userRepository.getAddressDetails();
     final contacts = await userRepository.getUserContacts();
 
-    // recebendo dados da api
     email = contacts.email;
     fullName = user.fullName;
     cpf = user.cpf;
@@ -94,15 +91,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
     city = address.city;
     state = address.state;
 
-    // controller recebendo dados das variaveis
-    // setState(() {
     _nameController.text = fullName.toString();
     _cpfController.text = cpf.toString();
     _emailController.text = email.toString();
-    // rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
     _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
     adjustDateInitial();
-    // print(_dateController);
     _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
@@ -127,8 +120,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
     if (_formKey.currentState!.validate()) {
       adjustDateFinal();
-      //comentado - parar de subir teclado
-      // FocusScopeNode currentFocus = FocusScope.of(context);
       bool validateUserSucess = await userRepository.patchUserRegister(
         PatchUserRegisterEntity(
           fullName: _nameController.text,
@@ -142,13 +133,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
         PatchContactsRegisterEntity(
             email: _emailController.text,
             mobilePhone: _mobileController.text.replaceAll("-", ""),
-            phone: _phoneController.text
-                // .replaceAll("(", "")
-                // .replaceAll(")", "")
-                .replaceAll("-", "")
-                .replaceAll("#", "")
-            // .replaceAll(" ", ""),
-            ),
+            phone:
+                _phoneController.text.replaceAll("-", "").replaceAll("#", "")),
       );
 
       bool validateAddressSucess =
@@ -161,15 +147,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
         city: _cityController.text,
         state: _stateController.text,
       ));
-      // if (!currentFocus.hasPrimaryFocus) {
-      //   currentFocus.unfocus();
-      // }
       loadUser();
 
       if (validateUserSucess &&
           validateContactsSucess &&
           validateAddressSucess) {
-        //para retirar erro de gap
         if (!mounted) return;
 
         showAlertPatch();
@@ -189,12 +171,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
     String cep = _cepController.text;
     final searchCep = await _cepRepository.fetchCep(cep: cep);
 
-    // var recebendo dados da api
     String street = searchCep.street;
     String neighborhood = searchCep.neighborhood;
     String state = searchCep.state;
     String city = searchCep.city;
-    // controller recebendo dados das variaveis
     _streetController.text = street;
     _neighborhoodController.text = neighborhood;
     _stateController.text = state;
@@ -244,7 +224,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   child: ListView(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     children: <Widget>[
-                      //dados pessoais
                       const TextTileForm(textTitleForm: Strings.txtDados),
                       NameField(
                         nameController: _nameController,
@@ -261,7 +240,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       CpfField(
                         cpfController: _cpfController,
                       ),
-                      //contatos
                       const TextTileForm(textTitleForm: Strings.txtContact),
                       PhoneField(
                         phoneController: _phoneController,
@@ -274,7 +252,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       EmailField(
                         emailController: _emailController,
                       ),
-                      //endereco
                       const TextTileForm(textTitleForm: Strings.txtAddress),
                       CustomTextField(
                           controller: _cepController,

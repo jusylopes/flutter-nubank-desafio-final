@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_details.dart';
 
 abstract class HomePageState extends Equatable {}
-//equatable compara instancias de objetos
 
 class InicialState extends HomePageState {
   @override

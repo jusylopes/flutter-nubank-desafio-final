@@ -11,11 +11,8 @@ import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
 
 class EventDetailsPage extends StatefulWidget {
-  // final int id;
-
   const EventDetailsPage({
     super.key,
-    // required this.id,
   });
 
   @override
@@ -106,10 +103,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                                     final userDetails =
                                         await userRepository.getUserDetails();
                                     if (userDetails.rg != null) {
-                                      // profileCompleted = true;
-
                                     } else {
-                                      // profileCompleted = false;
                                       showAlertError();
                                     }
                                     Navigator.of(context).pushNamed(

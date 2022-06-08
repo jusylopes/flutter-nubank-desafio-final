@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../../../resources/las_colors.dart';
 import 'custom_appbar.dart';
 
-// Para ampliar a imagem de fundo do background cobrindo ate o appbar na tela de historico
-// appbar das telas de historic e historic detalhes
 class CustomBarContainer extends StatelessWidget {
   final String titleappbarhistoric;
 

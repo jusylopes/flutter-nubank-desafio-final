@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
-import 'package:projeto_final/resources/las_strings.dart';
 
 class HistoricPage extends StatefulWidget {
   const HistoricPage({Key? key}) : super(key: key);
@@ -37,25 +35,8 @@ class _HistoricPageState extends State<HistoricPage> {
                   return const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: CircularProgressIndicator(),
-                    // child: Center(
-                    //   child: Column(
-                    //     children: [
-                    //       const SizedBox(height: 50),
-                    //       SizedBox(
-                    //         height: 120,
-                    //         child: Lottie.network(
-                    //             'https://assets4.lottiefiles.com/packages/lf20_ddxv3rxw.json'),
-                    //       ),
-                    //       const SizedBox(height: 50),
-                    //       const Text(Strings.alertHistoryc,
-                    //           style: LasTextStyle.txtHistorycDetails,
-                    //           textAlign: TextAlign.center),
-                    //     ],
-                    //   ),
-                    // ),
-                  );
-                }                
-                else {
+                    );
+                } else {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -97,8 +78,11 @@ class _HistoricPageState extends State<HistoricPage> {
                                         maxLines: 1,
                                         overflow: TextOverflow.clip),
                                     onTap: () {
-                                      Navigator.of(context).popAndPushNamed(
-                                          Routes.historicDetails);
+                                      Navigator.of(context).pushNamed(
+                                        Routes.historicDetails,
+                                        arguments:
+                                            snapshot.data[index].event.id,
+                                      );
                                     },
                                   ),
                                 );
@@ -107,7 +91,7 @@ class _HistoricPageState extends State<HistoricPage> {
                       ),
                     ],
                   );
-                } 
+                }
               },
             ),
           ),

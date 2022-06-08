@@ -19,9 +19,7 @@ class _EventPageState extends State<EventPage> {
   final userRepository = SwaggerApiUserRepository();
   bool loading = true;
 
-  void completedPerfil() async {
-    //implementar logica de perfil completo
-  }
+  void completedPerfil() async {}
 
   void showAlertError() {
     showDialog(
