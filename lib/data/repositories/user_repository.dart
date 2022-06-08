@@ -42,5 +42,5 @@ abstract class UserRepository {
 
   Future<List<GetUserAccreditation>> getUserAccreditation();
 
-  Future<List<GetAccreditadedDetails>> accreditadedDetails();
+  Future<List<GetAccreditadedDetails>> accreditadedDetails(int eventId);
 }

@@ -30,11 +30,15 @@ class SwaggerApiUserRepository implements UserRepository {
       url,
       body: LoginMapper.toReplitMap(login),
     );
-
-
     if (respostaLogin.statusCode == 201) {
-      await sharedPreferences.setString(
-          'token', '${jsonDecode(respostaLogin.body)["token"]}');
+      var urlRefresh =
+          Uri.parse('https://cubos-las-api.herokuapp.com/token/refresh');
+      var respostaRefreshToken = await http.put(
+        urlRefresh,
+        body: {'hash': '${jsonDecode(respostaLogin.body)["token"]}'},
+      );
+      await sharedPreferences.setString('token',
+          '${jsonDecode(respostaRefreshToken.body)["generatedToken"]}');
       return true;
     } else {
       return false;
@@ -336,11 +340,11 @@ class SwaggerApiUserRepository implements UserRepository {
   }
 
   @override
-  Future<List<GetAccreditadedDetails>> accreditadedDetails() async {
+  Future<List<GetAccreditadedDetails>> accreditadedDetails(int eventId) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
-    var urlAccreditadedDetails =
-        Uri.parse('https://cubos-las-api.herokuapp.com/accreditation/2/check');
+    var urlAccreditadedDetails = Uri.parse(
+        'https://cubos-las-api.herokuapp.com/accreditation/$eventId/check');
     var respostaAccreditadedDetails = await http.get(
       urlAccreditadedDetails,
       headers: {
