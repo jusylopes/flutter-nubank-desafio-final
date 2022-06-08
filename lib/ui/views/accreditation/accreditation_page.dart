@@ -36,7 +36,7 @@ class _AccreditationPageState extends State<AccreditationPage> {
     void showAlertSuccess() async {
       final accreditation = await userRepository.accreditation(id);
       Navigator.of(context).pushNamed(
-        Routes.event,
+        Routes.home,
         arguments: id,
       );
       showDialog(
