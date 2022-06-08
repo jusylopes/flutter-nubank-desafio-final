@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
       await userRepository.logout();
       //para retirar erro de gap
       if (!mounted) return;
-      Navigator.of(context).popAndPushNamed(Routes.login);
+      Navigator.of(context).popAndPushNamed(Routes.inicial);
     } catch (error) {
       debugPrint('$error');
     }

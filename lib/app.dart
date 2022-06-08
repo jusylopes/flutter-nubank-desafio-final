@@ -12,17 +12,13 @@ import 'package:projeto_final/ui/views/event/event_page.dart';
 import 'package:projeto_final/ui/views/event/event_page_details.dart';
 import 'package:projeto_final/ui/views/historic/historic_details.dart';
 import 'package:projeto_final/ui/views/historic/historic_page.dart';
-import 'package:projeto_final/ui/views/historic/historic_page.dart';
-import 'package:projeto_final/ui/views/historic/historic_padge2.dart';
 import 'package:projeto_final/ui/views/home/cubit/home_cubit.dart';
-import 'package:projeto_final/ui/views/historic/historic_detalhes.dart';
 import 'package:projeto_final/ui/views/home/home_page.dart';
 import 'package:projeto_final/ui/views/inicial/inicial_page.dart';
 import 'package:projeto_final/ui/views/login/login_page.dart';
 import 'package:projeto_final/ui/views/register/register_page.dart';
 import 'package:projeto_final/ui/views/splash/splash_page.dart';
 import 'ui/views/historic/historic_page.dart';
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -48,9 +44,7 @@ class MyApp extends StatelessWidget {
               child: const HomePage(),
             ),
         Routes.event: (context) => const EventPage(),
-
         Routes.eventDetails: (context) => const EventDetailsPage(),
-
         Routes.accreditation: (context) => const AccreditationPage(),
         Routes.historic: (context) => const HistoricPage(),
         Routes.historicDetails: (context) => const HistoricDetailsPage(),

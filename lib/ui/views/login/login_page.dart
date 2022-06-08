@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
       if (validateSucess) {
         //para retirar erro de gap
         if (!mounted) return;
-        Navigator.of(context).popAndPushNamed(Routes.historic);
+        Navigator.of(context).popAndPushNamed(Routes.home);
       } else {
         _cpfController.clear();
         _passwordController.clear();
@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         const BackgroundPage(),

@@ -4,13 +4,13 @@ class PatchAddressRegisterMapper {
   static Map<String, dynamic> toReplitMap(
       PatchAddressRegisterEntity patchAddressRegister) {
     return {
-      // "cep": patchAddressRegister.cep,
-      // "street": patchAddressRegister.street,
+      "cep": patchAddressRegister.cep,
+      "street": patchAddressRegister.street,
       "number": patchAddressRegister.number,
-      // "complement": patchAddressRegister.complement,
-      // "district": patchAddressRegister.district,
-      // "city": patchAddressRegister.city,
-      // "state": patchAddressRegister.state,
+      "complement": patchAddressRegister.complement,
+      "district": patchAddressRegister.district,
+      "city": patchAddressRegister.city,
+      "state": patchAddressRegister.state,
     };
   }
 }

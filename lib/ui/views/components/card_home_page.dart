@@ -4,7 +4,6 @@ import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
 
-
 class CardHomePage extends StatelessWidget {
   CardHomePage({super.key});
   final userRepository = SwaggerApiUserRepository();
@@ -32,8 +31,9 @@ class CardHomePage extends StatelessWidget {
                           width: 250.0,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/cardEvent1.jpg'),
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                  '${snapshot.data[index].imageUrl}'),
                               fit: BoxFit.cover,
                               alignment: Alignment.topCenter,
                             ),
@@ -89,10 +89,9 @@ class CardHomePage extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       Navigator.of(context).pushNamed(
-                                          Routes.eventDetails,
-                                          arguments: {
-                                            'id': snapshot.data[index].id,
-                                          });
+                                        Routes.eventDetails,
+                                        arguments: snapshot.data[index].id,
+                                      );
                                     },
                                     child: const Text(
                                       'Saiba mais',

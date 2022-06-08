@@ -69,9 +69,9 @@ class _EventPageState extends State<EventPage> {
                                       width: 350.0,
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(15),
-                                        image: const DecorationImage(
-                                          image: AssetImage(
-                                              'assets/images/cardEvent1.jpg'),
+                                        image: DecorationImage(
+                                          image: NetworkImage(
+                                              '${snapshot.data[index].imageUrl}'),
                                           fit: BoxFit.cover,
                                           alignment: Alignment.topCenter,
                                         ),
@@ -108,10 +108,9 @@ class _EventPageState extends State<EventPage> {
                                         //IR PARA DETALHES DO EVENTO
                                         onPressed: () {
                                           Navigator.of(context).pushNamed(
-                                              Routes.eventDetails,
-                                              arguments: {
-                                                'id': snapshot.data[index].id,
-                                              });
+                                            Routes.eventDetails,
+                                            arguments: snapshot.data[index].id,
+                                          );
                                         },
                                         child: const Text('DETALHAR'),
                                       ),

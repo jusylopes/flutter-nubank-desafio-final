@@ -15,7 +15,6 @@ class HistoricPage extends StatefulWidget {
 
 class _HistoricPageState extends State<HistoricPage> {
   final userRepository = SwaggerApiUserRepository();
-  bool credenciado = true;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class _HistoricPageState extends State<HistoricPage> {
                 ),
                 Expanded(
                   child: FutureBuilder<List>(
-                    future: userRepository.getAllEvents(),
+                    future: userRepository.getUserAccreditation(),
                     builder: (context, AsyncSnapshot snapshot) {
                       if (!snapshot.hasData) {
                         return const Center(
@@ -59,16 +58,16 @@ class _HistoricPageState extends State<HistoricPage> {
                                       const EdgeInsets.symmetric(vertical: 1.0),
                                   color: Colors.white,
                                   child: ListTile(
-                                    leading: const CircleAvatar(
+                                    leading: CircleAvatar(
                                       backgroundImage: NetworkImage(
-                                          'https://classic.exame.com/wp-content/uploads/2020/07/carnaval-20202-rio-divulgacao-riotur.jpg?quality=70&strip'),
+                                          '${snapshot.data[index].event.imageUrl}'),
                                     ),
                                     title: Text(
-                                      '${snapshot.data[index].name}',
+                                      '${snapshot.data[index].event.name}',
                                       style: LasTextStyle.txtTitlePageHistoryc,
                                     ),
                                     subtitle: Text(
-                                        '${snapshot.data[index].description}',
+                                        '${snapshot.data[index].event.description}',
                                         style:
                                             LasTextStyle.txtHistorycDetailsDesc,
                                         maxLines: 1,
