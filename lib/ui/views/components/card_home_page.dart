@@ -88,15 +88,10 @@ class CardHomePage extends StatelessWidget {
                                       textStyle: const TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () async {
-                                      Navigator.push(
+                                      Navigator.pushNamed(
                                         context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              EventDetailsPage(
-                                            // index vai ser id do evento, retirar o 2
-                                            index: snapshot.data[index].id,
-                                          ),
-                                        ),
+                                        Routes.eventDetails,
+                                        arguments: snapshot.data[index].id,
                                       );
                                       print(snapshot.data[index].id);
                                     },

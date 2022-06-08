@@ -11,9 +11,12 @@ import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
 
 class EventDetailsPage extends StatefulWidget {
-  final int index;
+  // final int index;
 
-  const EventDetailsPage({super.key, required this.index});
+  const EventDetailsPage({
+    super.key,
+    // required this.index,
+  });
 
   @override
   State<EventDetailsPage> createState() => _EventDetailsPageState();
@@ -22,7 +25,6 @@ class EventDetailsPage extends StatefulWidget {
 class _EventDetailsPageState extends State<EventDetailsPage> {
   final userRepository = SwaggerApiUserRepository();
   bool profileCompleted = true;
-  
 
   void completedPerfil() async {
     if (profileCompleted) {
@@ -43,6 +45,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final id = ModalRoute.of(context)!.settings.arguments as int;
     return Stack(
       children: [
         const BackgroundPage(),
@@ -60,7 +63,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                 Expanded(
                   child: FutureBuilder<GetEvent>(
                       //RETORNAR APENAS UM EVENTO ESPECIFICO
-                      future: userRepository.getSpecificEvent(widget.index),
+                      future: userRepository.getSpecificEvent(id),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (!snapshot.hasData) {
                           return const Center(
