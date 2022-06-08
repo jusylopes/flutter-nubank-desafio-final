@@ -126,7 +126,7 @@ abstract class LasTextStyle {
     fontWeight: FontWeight.w500,
     fontSize: 21.0,
     color: LasColors.textLoginPage,
-     decoration: TextDecoration.none,
+    decoration: TextDecoration.none,
     fontFamily: 'Roboto',
   );
 
@@ -180,4 +180,49 @@ abstract class LasTextStyle {
     decoration: TextDecoration.none,
     fontFamily: 'Roboto',
   );
+
+  static const txtSubTilePageHistoryc = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 12.0,
+    color: LasColors.textLoginPage,
+  );
+
+  static const txtTitlePageHistoryc = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 15.0,
+    color: LasColors.textRegisterPage,
+  );
+
+  static const txtTitleYear = TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: 14.0,
+    color: LasColors.txtEventPage,
+  );
+
+static const txtHistorycError = TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: 14.0,
+    color: LasColors.txtAlertWidget,
+  );
+
+static const txtHistorycDetails = TextStyle(
+    fontWeight: FontWeight.w700,
+    fontSize: 24.0,
+    color: LasColors.txtAlertWidget,
+  );
+  static const txtHistorycDetailsBody = TextStyle(
+    fontWeight: FontWeight.w400,
+    fontSize: 15.0,
+    color: LasColors.txtAlertWidget,
+  );
+  static const txtHistorycDetailsDesc = TextStyle(
+    fontWeight: FontWeight.w300,
+    fontSize: 15.0,
+    color: LasColors.txtHistorycPage,
+  );
+
+
+
+ 
+
 }

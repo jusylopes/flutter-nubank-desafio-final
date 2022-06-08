@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:mask/mask/mask.dart';
 import 'package:mask/models/hashtag_is.dart';
@@ -11,7 +13,6 @@ import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
@@ -50,11 +51,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _stateController = TextEditingController();
   final _cityController = TextEditingController();
   final _complementController = TextEditingController();
-  final _cepRepository = CepRepository();
-  String? resultado;
-  // File? imageProfile;
-  String? fullName = 'carregando...';
-  var inputFormat = DateFormat('dd/MM/yyyy');
+  final _cepRepository = CepRepository();   
+  String? fullName = 'carregando...'; 
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
 
@@ -103,14 +101,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
     city = address.city;
     state = address.state;
 
-    // controller recebendo dados das variaveis
-    // setState(() {
+    // controller recebendo dados das variaveis   
     _nameController.text = fullName.toString();
     _cpfController.text = cpf.toString();
-    _emailController.text = email.toString();
-    // rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
-    _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
-    // print(_dateController);
+    _emailController.text = email.toString();   
+    _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');   
     _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
@@ -136,6 +131,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         _cepController.text.toString();
       },
     );
+
   }
 
   void validateSuccess() async {
@@ -158,25 +154,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
           rg: _rgController.text,
+
           birthDate: _dateController.text.replaceAll("/", "-"),
         ),
       );
-
-      print(_dateController.text.replaceAll("/", "-"));
-
-      bool validateContactsSucess = await userRepository.patchContactsRegister(
-        PatchContactsRegisterEntity(
-          email: _emailController.text,
-          mobilePhone: _mobileController.text.replaceAll("-", ""),
-          phone: _phoneController.text
-              .replaceAll("(", "")
-              .replaceAll(")", "")
-              .replaceAll("-", "")
-              .replaceAll("#", "")
-              .replaceAll(" ", ""),
-        ),
-      );
-
+      bool validateContactsSucess = await userRepository
+          .patchContactsRegister(PatchContactsRegisterEntity(
+        email: _emailController.text,
+        mobilePhone: _mobileController.text.replaceAll("-", ""),
+        phone: _phoneController.text.replaceAll("-", "")
+              //.replaceAll("(", "")
+              //.replaceAll(")", "")
+              //.replaceAll("-", "")
+              //.replaceAll("#", "")
+              //.replaceAll(" ", ""),
+      ));
       bool validateAddressSucess =
           await userRepository.patchAddressRegister(PatchAddressRegisterEntity(
         cep: _cepController.text.replaceAll("#", "").replaceAll("-", ""),
@@ -187,12 +179,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         city: _cityController.text,
         state: _stateController.text,
       ));
-
-      //await userRepository.getUserDetails();
-      // final list = await userRepository.getAllEvents();
-      // print(list);
-      // loadUser();
-
       // if (!currentFocus.hasPrimaryFocus) {
       //   currentFocus.unfocus();
       // }

@@ -3,7 +3,7 @@ import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
-import 'package:projeto_final/ui/views/event/event_page_details.dart';
+
 
 class CardHomePage extends StatelessWidget {
   CardHomePage({super.key});
@@ -87,13 +87,12 @@ class CardHomePage extends StatelessWidget {
                                           horizontal: 40),
                                       textStyle: const TextStyle(fontSize: 20),
                                     ),
-                                    onPressed: () async {
-                                      Navigator.pushNamed(
-                                        context,
-                                        Routes.eventDetails,
-                                        arguments: snapshot.data[index].id,
-                                      );
-                                      print(snapshot.data[index].id);
+                                    onPressed: () {
+                                      Navigator.of(context).pushNamed(
+                                          Routes.eventDetails,
+                                          arguments: {
+                                            'id': snapshot.data[index].id,
+                                          });
                                     },
                                     child: const Text(
                                       'Saiba mais',

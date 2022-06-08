@@ -2,50 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
-import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
-import 'package:projeto_final/ui/router/routers.dart';
-import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class EventDetailsPage extends StatefulWidget {
+class HistoricDetailsPage extends StatefulWidget {
   // final int index;
 
-  const EventDetailsPage({
+  const HistoricDetailsPage({
     super.key,
     // required this.index,
   });
 
   @override
-  State<EventDetailsPage> createState() => _EventDetailsPageState();
+  State<HistoricDetailsPage> createState() => _HistoricDetailsPageState();
 }
 
-class _EventDetailsPageState extends State<EventDetailsPage> {
+class _HistoricDetailsPageState extends State<HistoricDetailsPage> {
   final userRepository = SwaggerApiUserRepository();
-  bool profileCompleted = true;
-
-  void completedPerfil() async {
-    if (profileCompleted) {
-      Navigator.popAndPushNamed(context, Routes.accreditation);
-    }
-    if (!profileCompleted) {
-      showAlertError();
-    }
-  }
-
-  void showAlertError() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => const Alert(
-            bodyAlert: Strings.eventAlertDialog, txtButton: Strings.buttonOk));
-  }
 
   @override
   Widget build(BuildContext context) {
-    final id = ModalRoute.of(context)!.settings.arguments as int;
+    // final id = ModalRoute.of(context)!.settings.arguments as int;
+
     return Stack(
       children: [
         const BackgroundPage(),
@@ -58,12 +39,10 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
           ),
           body: SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
                   child: FutureBuilder<GetEvent>(
-                      //RETORNAR APENAS UM EVENTO ESPECIFICO
-                      future: userRepository.getSpecificEvent(id),
+                      future: userRepository.getSpecificEvent(2),
                       builder: (context, AsyncSnapshot snapshot) {
                         if (!snapshot.hasData) {
                           return const Center(
@@ -109,10 +88,17 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                                 padding: const EdgeInsets.only(top: 30),
                                 alignment: Alignment.bottomCenter,
                                 child: ButtonWidget(
-                                  colorButton: LasColors.buttonColor,
-                                  textButton: 'CREDENCIAR',
-                                  onPressed: completedPerfil,
-                                ),
+                                    colorButton: LasColors.buttonColor,
+                                    textButton: 'BAIXAR',
+                                    onPressed: () async {
+                                      const url =
+                                          'http://www.africau.edu/images/default/sample.pdf';
+                                      if (await canLaunch(url)) {
+                                        await launch(url);
+                                      } else {
+                                        throw 'Could not launch $url';
+                                      }
+                                    }),
                               ),
                             ],
                           );
@@ -127,7 +113,7 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
           height: 110.0,
           child: Center(
             child: Text(
-              'Detalhes do Evento',
+              'Histórico Detalhado',
               style: LasTextStyle.txtTitlePages,
             ),
           ),

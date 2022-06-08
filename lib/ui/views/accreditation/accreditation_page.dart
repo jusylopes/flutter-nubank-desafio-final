@@ -152,79 +152,10 @@ class _AccreditationPageState extends State<AccreditationPage> {
                 const SizedBox(
                   height: 20.0,
                 ),
-//jusy add:
                 ButtonWidget(
                     colorButton: _colorButton,
                     textButton: _textButton,
                     onPressed: isChecked ? showAlertSuccess : showAlertErro),
-
-                // Jusy retirou, já existe botao e dialog na pasta components
-                // child: ElevatedButton(
-                //   onPressed: (isChecked == false)
-                //       ? null
-                //       : () => showDialog(
-                //             context: context,
-                //             builder: (BuildContext context) => Dialog(
-                //               shape: const RoundedRectangleBorder(
-                //                   borderRadius: BorderRadius.all(
-                //                       Radius.circular(15.0))),
-                //               child: Container(
-                //                   alignment: Alignment.center,
-                //                   width: 328.0,
-                //                   height: 257.0,
-                //                   decoration: BoxDecoration(
-                //                       borderRadius: const BorderRadius.all(
-                //                           Radius.circular(15)),
-                //                       color: const Color(0xFFFFFFFF),
-                //                       border: Border.all(
-                //                         width: 2.0,
-                //                         color: const Color.fromRGBO(
-                //                             0, 0, 0, 0.25),
-                //                         style: BorderStyle.solid,
-                //                       )),
-                //                   child: Column(
-                //                     children: [
-                //                       const SizedBox(height: 61.0),
-                //                       const SizedBox(
-                //                         width: 280.0,
-                //                         height: 56.0,
-                //                         child: Text(
-                //                           Strings.txtmsgconfirmAccreditation,
-                //                           style: LasTextStyle
-                //                               .msgConfirmAccreditation,
-                //                           textAlign: TextAlign.center,
-                //                         ),
-                //                       ),
-                //                       const SizedBox(height: 57.0),
-                //                       SizedBox(
-                //                         width: 85.0,
-                //                         height: 37.0,
-                //                         child: ElevatedButton(
-                //                           style: ButtonStyle(
-                //                               backgroundColor:
-                //                                   MaterialStateProperty.all(
-                //                                       const Color(
-                //                                           0xff004BA0))),
-                //                           onPressed: () =>
-                //                               Navigator.pop(context),
-                //                           child: const Text(
-                //                             'OK',
-                //                           ),
-                //                         ),
-                //                       ),
-                //                     ],
-                //                   )),
-                //             ),
-                //           ),
-                //   style: ButtonStyle(
-                //     backgroundColor: MaterialStateProperty.all(
-                //         (isChecked == false)
-                //             ? const Color(0xFF828282)
-                //             : const Color(0xff004BA0)),
-                //   ),
-                //   child: const Text(Strings.txtButtonAccreditation,
-                //       style: LasTextStyle.buttonAccreditationPage),
-                // ),
               ]),
             ),
           )),

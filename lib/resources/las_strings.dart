@@ -47,12 +47,12 @@ abstract class Strings {
   static const txtContact = 'Contatos';
   static const txtAddress = 'Endereço';
   static const txtPatchSuccess = 'Dados alterados com sucesso!';
-  static const teste =
-      'A Prefeitura de Salvador começa a partir de hoje (05) o cadastramento dos ambulantes que pretendem trabalhar nas festas pré-carnaval Fuzuê e Furdunço. As credenciais serão para comercialização de bebidas ou alimentos. Lembrando que, o credencimanento dará direito a participação em todos os dias das festas pré-carnavalescas. O ambulante tem até 31 do mês de janeiro para realizar o credenciamento.';
 
   //strings eventpage
   static const eventAlertDialog =
       'Não foi possível realizar o credenciamento. Complete seu perfil.';
   static const eventAlertDialogSuccess =
       'Seu credenciamento foi realizado com sucesso.';
+  static const alertHistoryc =
+      'Você ainda não fez credenciamento em nenhum evento.';
 }

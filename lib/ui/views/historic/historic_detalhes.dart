@@ -4,8 +4,10 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../resources/las_colors.dart';
 import '../components/custom_bar_container.dart';
 
-class HistoricDetailsPage extends StatelessWidget {
-  const HistoricDetailsPage({Key? key}) : super(key: key);
+class HistorycDetailsPage extends StatelessWidget {
+  final int eventId;
+
+  const HistorycDetailsPage({super.key, required this.eventId});
 
   //Falta pouco pra terminar
 
@@ -93,7 +95,6 @@ class HistoricDetailsPage extends StatelessWidget {
                     )),
               ),
             )
-            
 
             //...getSections(accreditations)
             // .map((e) => buildListView(e.accreditations, e.title))
