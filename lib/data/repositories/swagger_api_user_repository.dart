@@ -78,9 +78,8 @@ class SwaggerApiUserRepository implements UserRepository {
 
     if (respostaRegister.statusCode == 201) {
       return true;
-    } else {
-      return false;
-    }
+    } else {}
+    return false;
   }
 
   @override
@@ -197,9 +196,8 @@ class SwaggerApiUserRepository implements UserRepository {
 
     if (respostaPatchUserRegister.statusCode == 200) {
       return true;
-    } else {
-      return false;
-    }
+    } else {}
+    return false;
   }
 
   @override
@@ -225,9 +223,8 @@ class SwaggerApiUserRepository implements UserRepository {
 
     if (respostaPatchAddressRegister.statusCode == 200) {
       return true;
-    } else {
-      return false;
-    }
+    } else {}
+    return false;
   }
 
   @override

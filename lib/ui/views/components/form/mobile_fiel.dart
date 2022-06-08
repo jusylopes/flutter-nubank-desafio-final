@@ -17,7 +17,7 @@ class MobileField extends StatelessWidget {
         FilteringTextInputFormatter.digitsOnly,
         Mask.generic(
           masks: ['######-####'],
-          hashtag: Hashtag.numbers, 
+          hashtag: Hashtag.numbers,
         ),
       ],
       decoration: const InputDecoration(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
+import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
@@ -31,12 +33,13 @@ class _HistoricPageState extends State<HistoricPage> {
             child: FutureBuilder<List>(
               future: userRepository.getUserAccreditation(),
               builder: (context, AsyncSnapshot snapshot) {
-                if (!snapshot.hasData) {
-                  return const Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: CircularProgressIndicator(),
-                    );
-                } else {
+                // if (!snapshot.hasData) {
+                //   return const Padding(
+                //     padding: EdgeInsets.all(10.0),
+                //     child: CircularProgressIndicator(),
+                //   );
+                // } else
+                if (snapshot.hasData.toString().isEmpty) {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -91,7 +94,28 @@ class _HistoricPageState extends State<HistoricPage> {
                       ),
                     ],
                   );
+                } else {
+                  const CircularProgressIndicator();
                 }
+                return Center(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 80),
+                      SizedBox(
+                        height: 120,
+                        child: Lottie.network(
+                            'https://assets4.lottiefiles.com/packages/lf20_ddxv3rxw.json'),
+                      ),
+                      const SizedBox(height: 50),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(Strings.alertHistoryc,
+                            style: LasTextStyle.txtHistorycDetails,
+                            textAlign: TextAlign.center),
+                      ),
+                    ],
+                  ),
+                );
               },
             ),
           ),

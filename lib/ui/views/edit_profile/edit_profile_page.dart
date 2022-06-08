@@ -52,7 +52,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _complementController = TextEditingController();
   final _cepRepository = CepRepository();
   String? fullName = 'carregando...';
-  var inputFormat = DateFormat('dd/MM/yyyy');
+  // var inputFormat = DateFormat('dd/MM/yyyy');
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
 
@@ -90,13 +90,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
     neighborhood = address.district;
     city = address.city;
     state = address.state;
-
     _nameController.text = fullName.toString();
     _cpfController.text = cpf.toString();
     _emailController.text = email.toString();
+    _rgController.text = rg.toString();
+    date != null ? _dateController.text = date.toString() : '';
     _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
     adjustDateInitial();
-    _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
     cep != null ? _cepController.text = cep.toString() : '';
@@ -110,6 +110,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
         : '';
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
+    setState(() {
+      _nameController.text;
+      _dateController.text;
+    });
   }
 
   void validateSuccess() async {
@@ -185,6 +189,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   void initState() {
     super.initState();
     loadUser();
+    _nameController;
   }
 
   void showAlertPatch() {
