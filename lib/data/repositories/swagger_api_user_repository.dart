@@ -1,8 +1,12 @@
 import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
+
+import 'package:http/http.dart' as http;
+
 import 'package:projeto_final/data/entity/accreditation/get/get_details.dart';
+
 import 'package:projeto_final/data/entity/accreditation/get/get_user_accreditation.dart';
-import 'package:projeto_final/data/entity/accreditation/post/accreditation_entity.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_contacts.dart';
@@ -10,8 +14,9 @@ import 'package:projeto_final/data/entity/user/get/get_user_details.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_address_register.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_contacts_register_entity.dart';
 import 'package:projeto_final/data/entity/user/patch/patch_user_register_entity.dart';
-import 'package:projeto_final/data/entity/user/post/register_entity.dart';
 import 'package:projeto_final/data/entity/user/post/login_entity.dart';
+import 'package:projeto_final/data/entity/user/post/register_entity.dart';
+import 'package:projeto_final/data/erros/usuario_nao_autorizado_erro.dart';
 import 'package:projeto_final/data/repositories/user_repository.dart';
 import 'package:projeto_final/external/login_mapper.dart';
 import 'package:projeto_final/external/patch_address_register_mapper.dart';
@@ -19,7 +24,8 @@ import 'package:projeto_final/external/patch_contacts_register_mapper.dart';
 import 'package:projeto_final/external/patch_user_register_mapper.dart';
 import 'package:projeto_final/external/register_mapper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:http/http.dart' as http;
+
+//
 
 class SwaggerApiUserRepository implements UserRepository {
   @override
@@ -30,6 +36,15 @@ class SwaggerApiUserRepository implements UserRepository {
       url,
       body: LoginMapper.toReplitMap(login),
     );
+
+    if (respostaLogin.statusCode == 401) {
+      throw UsuarioNaoAutorizado('Email ou senha incorreta');
+    }
+    if (respostaLogin.statusCode == 404) {
+      throw UsuarioNaoAutorizado(BaseErrorMessenger.Http_404('pagina'));
+    }
+
+
     if (respostaLogin.statusCode == 201) {
       var urlRefresh =
           Uri.parse('https://cubos-las-api.herokuapp.com/token/refresh');
@@ -60,6 +75,13 @@ class SwaggerApiUserRepository implements UserRepository {
       url,
       body: RegisterMapper.toReplitMap(register),
     );
+    if (respostaRegister.statusCode == 400) {
+      throw (BaseErrorMessenger.Http_400('Má requisição'));
+    }
+    if (respostaRegister.statusCode == 409) {
+      throw (BaseErrorMessenger.Http_409('Email ou CPF já cadastrado'));
+    }
+
     if (respostaRegister.statusCode == 201) {
       debugPrint('Registro OK');
       return true;
@@ -81,6 +103,13 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    switch (respostaGetUser.statusCode) {
+      case 401:
+        throw UsuarioNaoAutorizado('Não autorizado');
+
+      default:
+        break;
+    }
     final json = jsonDecode(respostaGetUser.body);
     final user = GetUserDetails(
       id: json['id'],
@@ -91,32 +120,41 @@ class SwaggerApiUserRepository implements UserRepository {
       birthDate: json['birthDate'],
       createdAt: json['createdAt'],
     );
+
+    debugPrint('Usuario encontrado');
+
     return user;
   }
 
   @override
   Future<GetAddressDetails> getAddressDetails() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    var token = sharedPreferences.getString('token');
-    var urlUser = Uri.parse('https://cubos-las-api.herokuapp.com/user/address');
-    var respostaGetDetails = await http.get(
-      urlUser,
-      headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'Authorization': 'Bearer $token',
-      },
-    );
-    final json = jsonDecode(respostaGetDetails.body);
-    final address = GetAddressDetails(
-      cep: json['cep'],
-      street: json['street'],
-      number: json['number'],
-      complement: json['complement'],
-      district: json['district'],
-      city: json['city'],
-      state: json['state'],
-    );
-    return address;
+    try {
+      var token = sharedPreferences.getString('token');
+      var urlUser =
+          Uri.parse('https://cubos-las-api.herokuapp.com/user/address');
+      var respostaGetDetails = await http.get(
+        urlUser,
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': 'Bearer $token',
+        },
+      );
+      final json = jsonDecode(respostaGetDetails.body);
+      final address = GetAddressDetails(
+        cep: json['cep'],
+        street: json['street'],
+        number: json['number'],
+        complement: json['complement'],
+        district: json['district'],
+        city: json['city'],
+        state: json['state'],
+      );
+      // print(json);
+      return address;
+    } catch (e) {
+      throw UsuarioNaoAutorizado('Não Autorizado');
+    }
   }
 
   @override
@@ -132,6 +170,14 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    switch (respostaGetContacts.statusCode) {
+      case 401:
+        throw UsuarioNaoAutorizado('Não autorizado');
+
+      default:
+        break;
+    }
+
     final json = jsonDecode(respostaGetContacts.body);
     final contacts = GetUserContacts(
       email: json['email'],
@@ -154,8 +200,19 @@ class SwaggerApiUserRepository implements UserRepository {
       },
       body: PatchUserRegisterMapper.toReplitMap(patchUserRegister),
     );
+    if (respostaPatchUserRegister.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não Autorizado'));
+    }
+
+    if (respostaPatchUserRegister.statusCode == 400) {
+      throw (BaseErrorMessenger.Http_400('Má requisição'));
+    }
+    if (respostaPatchUserRegister.statusCode == 409) {
+      throw (BaseErrorMessenger.Http_409('Email ou CPF já cadastrado'));
+    }
+
     if (respostaPatchUserRegister.statusCode == 200) {
-      debugPrint('Patch Register OK');
+      debugPrint('Atualizado com sucesso');
       return true;
     } else {
       debugPrint('Deu erro no Patch User Register');
@@ -176,6 +233,14 @@ class SwaggerApiUserRepository implements UserRepository {
       },
       body: PatchAddressRegisterMapper.toReplitMap(patchAddressRegister),
     );
+    if (respostaPatchAddressRegister.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não Autorizado'));
+    }
+
+    if (respostaPatchAddressRegister.statusCode == 400) {
+      throw (BaseErrorMessenger.Http_400('Má requisição'));
+    }
+
     if (respostaPatchAddressRegister.statusCode == 200) {
       debugPrint('Patch Address OK');
       return true;
@@ -198,8 +263,20 @@ class SwaggerApiUserRepository implements UserRepository {
       },
       body: PatchContactsRegisterMapper.toReplitMap(patchContactsRegister),
     );
+    if (respostaPatchContactsRegister.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não Autorizado'));
+    }
+
+    if (respostaPatchContactsRegister.statusCode == 400) {
+      throw (BaseErrorMessenger.Http_400('Má requisição'));
+    }
+
+    if (respostaPatchContactsRegister.statusCode == 409) {
+      throw (AdressErrorMessenger.Http_409('Email já cadastrado'));
+    }
+
     if (respostaPatchContactsRegister.statusCode == 200) {
-      debugPrint('Patch Registro Contacts OK');
+      debugPrint('Contatos atualizados com sucesso');
       return true;
     } else {
       debugPrint('Deu merda no Patch Contacts');
@@ -219,6 +296,13 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    switch (respostaGetAllEvents.statusCode) {
+      case 401:
+        throw UsuarioNaoAutorizado('Não autorizado');
+
+      default:
+        break;
+    }
 
     var responseEvents = json.decode(respostaGetAllEvents.body);
 
@@ -250,6 +334,12 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    if (respostaSpecificEvent.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não autorizado'));
+    }
+    if (respostaSpecificEvent.statusCode == 404) {
+      throw (EventsErrorMessenger.Http_404('Itém não encontrado'));
+    }
 
     var json = jsonDecode(respostaSpecificEvent.body);
 
@@ -278,6 +368,16 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+
+    if (respostaEventStatus.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não autorizado'));
+    }
+    // if (respostaEventStatus.statusCode == 200) {
+    //   debugPrint('Sucesso');
+
+    print(eventStatus);
+
+
     var json = jsonDecode(respostaEventStatus.body);
 
     final status = GetEvent(
@@ -308,6 +408,18 @@ class SwaggerApiUserRepository implements UserRepository {
       body: {'id': eventId},
     );
     var json = jsonDecode(respostaAccreditation.body);
+
+    if (respostaAccreditation.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não autorizado'));
+    }
+    if (respostaAccreditation.statusCode == 404) {
+      throw (AcreditationErrorMessenger.Http_404(
+          'Não encontrado o ID do evento'));
+    }
+
+    print(json);
+
+
     if (respostaAccreditation.statusCode == 201) {
       debugPrint('Acredditation Ok');
       return true;
@@ -329,6 +441,10 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+    if (respostaGetUserAccreditation.statusCode == 401) {
+      throw (BaseErrorMessenger.Http_401('Não autorizado'));
+    }
+
     final responseEvents = jsonDecode(respostaGetUserAccreditation.body);
     List<GetUserAccreditation> accreditadeds = [];
     for (var json in responseEvents) {

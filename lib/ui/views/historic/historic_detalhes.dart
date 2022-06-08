@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../resources/las_colors.dart';
 import '../components/custom_bar_container.dart';
@@ -6,7 +7,7 @@ import '../components/custom_bar_container.dart';
 class HistoricDetailsPage extends StatelessWidget {
   const HistoricDetailsPage({Key? key}) : super(key: key);
 
-  //Nao finalizada, imagem de teste
+  //Falta pouco pra terminar
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class HistoricDetailsPage extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Image.asset(
-                    'assets/images/festa.jpg',
+                    'assets/images/cardEvent1.jpg',
                     fit: BoxFit.cover,
                     height: 209,
                     width: 315,
@@ -60,15 +61,39 @@ class HistoricDetailsPage extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            Container(
-              color: LasColors.buttonColor,
-              child: ListTile(
-                  title: const Text('Baixar'),
-                  onTap: () {},
-                  leading: const Icon(
-                    Icons.download,
-                  )),
+            Center(
+              child: SizedBox(
+                width: 259,
+                height: 50,
+                child: ElevatedButton(
+                    onPressed: () async {
+                      const url =
+                          'http://www.africau.edu/images/default/sample.pdf';
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: LasColors.buttonColor,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Icon(Icons.download),
+                        const Center(
+                          child: Text('BAIXAR',
+                              style: TextStyle(
+                                  color: LasColors.txtAppBarProfile,
+                                  fontWeight: FontWeight.w500)),
+                        ),
+                        Container(),
+                      ],
+                    )),
+              ),
             )
+            
 
             //...getSections(accreditations)
             // .map((e) => buildListView(e.accreditations, e.title))
