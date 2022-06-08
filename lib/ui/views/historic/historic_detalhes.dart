@@ -4,7 +4,9 @@ import '../../../resources/las_colors.dart';
 import '../components/custom_bar_container.dart';
 
 class HistoricDetailsPage extends StatelessWidget {
-  const HistoricDetailsPage({Key? key}) : super(key: key);
+  final int eventId;
+
+  const HistoricDetailsPage({super.key, required this.eventId});
 
   //Nao finalizada, imagem de teste
 

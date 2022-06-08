@@ -55,7 +55,7 @@ class InicialPage extends StatelessWidget {
                               style: LasTextStyle.loginCreate,
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.pushNamed(context, Routes.historic);
+                                  Navigator.pushNamed(context, Routes.register);
                                 })
                         ],
                       ),

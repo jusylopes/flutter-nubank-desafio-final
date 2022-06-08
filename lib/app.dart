@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: LasColors.colorBackgroundColor,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Roboto'),
-      initialRoute: Routes.home,
+      initialRoute: Routes.splash,
       routes: {
         Routes.splash: (context) => const SplashPage(),
         Routes.inicial: (context) => const InicialPage(),
@@ -47,9 +47,15 @@ class MyApp extends StatelessWidget {
           final args = ModalRoute.of(context)!.settings.arguments as Map;
           return EventDetailsPage(id: args['id']);
         },
-        Routes.accreditation: (context) => const AccreditationPage(),
+        Routes.accreditation: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map;
+          return AccreditationPage(eventId: args['eventId']);
+        },
         Routes.historic: (context) => const HistoricPage2(),
-        Routes.historicDetails: (context) => const HistoricDetailsPage(),
+        Routes.historicDetails: (context) {
+          final args = ModalRoute.of(context)!.settings.arguments as Map;
+          return HistoricDetailsPage(eventId: args['eventId']);
+        },
         Routes.contact: (context) => const ContactPage(),
       },
       localizationsDelegates: const [

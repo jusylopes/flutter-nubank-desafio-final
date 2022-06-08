@@ -50,11 +50,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _stateController = TextEditingController();
   final _cityController = TextEditingController();
   final _complementController = TextEditingController();
-  final _cepRepository = CepRepository();
-  String? resultado;
-  // File? imageProfile;
-  String? fullName = 'carregando...';
-  var inputFormat = DateFormat('dd/MM/yyyy');
+  final _cepRepository = CepRepository();   
+  String? fullName = 'carregando...'; 
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
 
@@ -94,17 +91,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
     city = address.city;
     state = address.state;
 
-    // controller recebendo dados das variaveis
-    // setState(() {
+    // controller recebendo dados das variaveis   
     _nameController.text = fullName.toString();
     _cpfController.text = cpf.toString();
-    _emailController.text = email.toString();
-    _rgController.text =
-        rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
-    _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
-
-    print(_dateController);
-
+    _emailController.text = email.toString();   
+    _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');   
+    _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
     cep != null ? _cepController.text = cep.toString() : '';
@@ -118,7 +110,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
         : '';
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
-    // });
+
   }
 
   void validateSuccess() async {
@@ -135,7 +127,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
           rg: _rgController.text,
-          //API SÓ ACC DATA ANO/MES/DIA
+
           birthDate: _dateController.text.replaceAll("/", "-"),
         ),
       );
@@ -167,9 +159,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       //   currentFocus.unfocus();
       // }
 
+     
       if (validateUserSucess &&
           validateContactsSucess &&
           validateAddressSucess) {
+        //para retirar erro de gap
+        if (!mounted) return;
+
         showAlertPatch();
       } else {
         showAlertPatchError();

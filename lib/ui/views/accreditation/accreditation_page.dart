@@ -11,7 +11,8 @@ import 'package:url_launcher/url_launcher.dart';
 var url = 'http://www.africau.edu/images/default/sample.pdf';
 
 class AccreditationPage extends StatefulWidget {
-  const AccreditationPage({super.key});
+  final int eventId;
+  const AccreditationPage({super.key, required this.eventId});
 
   @override
   State<AccreditationPage> createState() => _AccreditationPageState();
