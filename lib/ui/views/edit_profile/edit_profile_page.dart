@@ -70,6 +70,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
       complement;
   int? number;
 
+  void adjustDate() {
+    List<String> campos = _dateController.text.split('/');
+    int dia = int.parse(campos[0]);
+    int mes = int.parse(campos[1]);
+    int ano = int.parse(campos[2]);
+    _dateController.text = '$ano-$mes-${dia}T00:00:00.000Z';
+    debugPrint(_dateController.text);
+  }
+
   void loadUser() async {
     final user = await userRepository.getUserDetails();
     final address = await userRepository.getAddressDetails();
@@ -121,6 +130,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
     });
 
     if (_formKey.currentState!.validate()) {
+      adjustDate();
+      // List<String> campos = _dateController.text.split('/');
+      // int dia = int.parse(campos[0]);
+      // int mes = int.parse(campos[1]);
+      // int ano = int.parse(campos[2]);
+      // String birthDate = '$ano-$mes-$dia';
       //comentado - parar de subir teclado
       // FocusScopeNode currentFocus = FocusScope.of(context);
       bool validateUserSucess = await userRepository.patchUserRegister(
@@ -159,6 +174,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       // if (!currentFocus.hasPrimaryFocus) {
       //   currentFocus.unfocus();
       // }
+      loadUser();
 
       if (validateUserSucess &&
           validateContactsSucess &&
