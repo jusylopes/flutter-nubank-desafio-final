@@ -93,7 +93,7 @@ buildListView(List<Accreditation> list, String year) {
                 final accreditation = list[index];
                 return GestureDetector(
                   onTap: () {
-                    print(index);
+                    
                   },
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 2, 10, 2),

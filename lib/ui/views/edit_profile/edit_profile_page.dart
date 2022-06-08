@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 import 'package:mask/mask/mask.dart';
 import 'package:mask/models/hashtag_is.dart';
@@ -11,7 +13,6 @@ import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter/services.dart';
-import 'package:intl/intl.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';

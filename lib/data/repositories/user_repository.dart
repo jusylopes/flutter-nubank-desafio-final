@@ -1,6 +1,5 @@
 import 'package:projeto_final/data/entity/accreditation/get/get_details.dart';
 import 'package:projeto_final/data/entity/accreditation/get/get_user_accreditation.dart';
-import 'package:projeto_final/data/entity/accreditation/post/accreditation_entity.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
 import 'package:projeto_final/data/entity/user/get/get_user_contacts.dart';
