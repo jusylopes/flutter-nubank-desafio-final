@@ -12,29 +12,29 @@ import 'api_historic_cred.dart';
 //   return finalList;
 // }
 
-List<HistoricSection> getSections(List<Accreditation> list) {
-  List<HistoricSection> finalList = [];
-  for (var element in list) {
-    if (finalList
-        .any((section) => section.title == element.date.year.toString())) {
-      final section = finalList.firstWhere(
-          (section) => section.title == element.date.year.toString());
-      section.accreditations.add(element);
-    } else {
-      final section = HistoricSection(
-          accreditations: [element], title: element.date.year.toString());
-      finalList.add(section);
-    }
-  }
+//List<HistoricSection> getSections(List<Accreditation> list) {
+  // List<HistoricSection> finalList = [];
+  // for (var element in list) {
+  //   if (finalList
+  //       .any((section) => section.title == element.date.year.toString())) {
+  //     final section = finalList.firstWhere(
+  //         (section) => section.title == element.date.year.toString());
+  //     section.accreditations.add(element);
+  //   } else {
+  //     final section = HistoricSection(
+  //         accreditations: [element], title: element.date.year.toString());
+  //     finalList.add(section);
+  //   }
+  // }
 
-  return finalList;
-}
+//   return finalList;
+// }
 
-class HistoricSection {
-  List<Accreditation> accreditations;
-  String title;
-  HistoricSection({
-    required this.accreditations,
-    required this.title,
-  });
-}
+// class HistoricSection {
+//   List<Accreditation> accreditations;
+//   String title;
+//   HistoricSection({
+//     required this.accreditations,
+//     required this.title,
+//   });
+// }
