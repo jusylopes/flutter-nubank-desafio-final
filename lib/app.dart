@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Roboto'),
       initialRoute: Routes.splash,
       routes: {
-        Routes.splash: (context) => const SplashPage(),
+        
         Routes.inicial: (context) => const InicialPage(),
         Routes.login: (context) => const LoginPage(),
         Routes.register: (context) => const RegisterPage(),
