@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/app.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/ui/router/routers.dart';
@@ -113,17 +114,22 @@ class _EventPageState extends State<EventPage> {
                                         ),
                                         //IR PARA DETALHES DO EVENTO
                                         onPressed: () async {
-                                          Navigator.push(
+                                          Navigator.pushNamed(
                                             context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EventDetailsPage(
-                                                // index vai ser id do evento, retirar o 2
-                                                index: snapshot.data[index].id,
-                                              ),
-                                            ),
+                                            Routes.eventDetails,
+                                            arguments: snapshot.data[index].id,
                                           );
-                                          print(snapshot.data[index].id);
+
+                                          // Navigator.push(
+                                          //   context,
+                                          //   MaterialPageRoute(
+                                          //     builder: (context) =>
+                                          //         EventDetailsPage(
+                                          //       // index vai ser id do evento, retirar o 2
+                                          //       index: snapshot.data[index].id,
+                                          //     ),
+                                          //   ),
+                                          // );
                                         },
                                         child: const Text('DETALHAR'),
                                       ),

@@ -1,7 +1,11 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+
 import 'package:http/http.dart' as http;
+
+import 'package:projeto_final/data/entity/accreditation/get/get_details.dart';
+
 import 'package:projeto_final/data/entity/accreditation/get/get_user_accreditation.dart';
 import 'package:projeto_final/data/entity/eventos/get/get_events.dart';
 import 'package:projeto_final/data/entity/user/get/get_address_details.dart';
@@ -32,15 +36,24 @@ class SwaggerApiUserRepository implements UserRepository {
       url,
       body: LoginMapper.toReplitMap(login),
     );
+
     if (respostaLogin.statusCode == 401) {
       throw UsuarioNaoAutorizado('Email ou senha incorreta');
     }
     if (respostaLogin.statusCode == 404) {
       throw UsuarioNaoAutorizado(BaseErrorMessenger.Http_404('pagina'));
     }
+
+
     if (respostaLogin.statusCode == 201) {
-      await sharedPreferences.setString(
-          'token', '${jsonDecode(respostaLogin.body)["token"]}');
+      var urlRefresh =
+          Uri.parse('https://cubos-las-api.herokuapp.com/token/refresh');
+      var respostaRefreshToken = await http.put(
+        urlRefresh,
+        body: {'hash': '${jsonDecode(respostaLogin.body)["token"]}'},
+      );
+      await sharedPreferences.setString('token',
+          '${jsonDecode(respostaRefreshToken.body)["generatedToken"]}');
       return true;
     } else {
       return false;
@@ -339,8 +352,6 @@ class SwaggerApiUserRepository implements UserRepository {
       endDate: json['endDate'],
       status: json['status'],
     );
-    print(event.description);
-
     return event;
   }
 
@@ -357,6 +368,7 @@ class SwaggerApiUserRepository implements UserRepository {
         'Authorization': 'Bearer $token',
       },
     );
+
     if (respostaEventStatus.statusCode == 401) {
       throw (BaseErrorMessenger.Http_401('Não autorizado'));
     }
@@ -364,6 +376,7 @@ class SwaggerApiUserRepository implements UserRepository {
     //   debugPrint('Sucesso');
 
     print(eventStatus);
+
 
     var json = jsonDecode(respostaEventStatus.body);
 
@@ -376,13 +389,12 @@ class SwaggerApiUserRepository implements UserRepository {
       endDate: json['endDate'],
       status: json['status'],
     );
-    print(status.description);
 
     return status;
   }
 
   @override
-  Future<bool> accreditation(String eventId) async {
+  Future<bool> accreditation(int eventId) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     var token = sharedPreferences.getString('token');
     var url =
@@ -390,11 +402,13 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaAccreditation = await http.post(
       url,
       headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
       },
       body: {'id': eventId},
     );
     var json = jsonDecode(respostaAccreditation.body);
+
     if (respostaAccreditation.statusCode == 401) {
       throw (BaseErrorMessenger.Http_401('Não autorizado'));
     }
@@ -404,8 +418,10 @@ class SwaggerApiUserRepository implements UserRepository {
     }
 
     print(json);
+
+
     if (respostaAccreditation.statusCode == 201) {
-      print('Acredditation Ok');
+      debugPrint('Acredditation Ok');
       return true;
     } else {
       return false;
@@ -421,6 +437,7 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaGetUserAccreditation = await http.get(
       urlUserAccreditation,
       headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
       },
     );
@@ -431,16 +448,33 @@ class SwaggerApiUserRepository implements UserRepository {
     final responseEvents = jsonDecode(respostaGetUserAccreditation.body);
     List<GetUserAccreditation> accreditadeds = [];
     for (var json in responseEvents) {
-      GetUserAccreditation accreditaded = GetUserAccreditation(
-        id: json['id'],
-        location: json['location'],
-        salesType: json['salesType'],
-        status: json['status'],
-        accreditedAt: json['accreditedAt'],
-        event: json['event'],
-      );
+      GetUserAccreditation accreditaded = GetUserAccreditation.fromJson(json);
       accreditadeds.add(accreditaded);
     }
+    debugPrint(accreditadeds[12].event?.name);
     return accreditadeds;
+  }
+
+  @override
+  Future<List<GetAccreditadedDetails>> accreditadedDetails(int eventId) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    var token = sharedPreferences.getString('token');
+    var urlAccreditadedDetails = Uri.parse(
+        'https://cubos-las-api.herokuapp.com/accreditation/$eventId/check');
+    var respostaAccreditadedDetails = await http.get(
+      urlAccreditadedDetails,
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+    final responseAccreditadedDetails =
+        jsonDecode(respostaAccreditadedDetails.body);
+    List<GetAccreditadedDetails> details = [];
+    for (var json in responseAccreditadedDetails) {
+      GetAccreditadedDetails detail = GetAccreditadedDetails.fromJson(json);
+      details.add(detail);
+    }
+    return details;
   }
 }

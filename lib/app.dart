@@ -45,11 +45,16 @@ class MyApp extends StatelessWidget {
               child: const HomePage(),
             ),
         Routes.event: (context) => const EventPage(),
+
         Routes.eventDetails: (context) => const EventDetailsPage(
               index: 2,
+
+        Routes.eventDetails: (context) => EventDetailsPage(
+            // index: 2,
+
             ),
         Routes.accreditation: (context) => const AccreditationPage(),
-        Routes.historic: (context) => const HistoricPage2(),
+        Routes.historic: (context) => const HistoricPage(),
         Routes.historicDetails: (context) => const HistoricDetailsPage(),
         Routes.contact: (context) => const ContactPage(),
       },
