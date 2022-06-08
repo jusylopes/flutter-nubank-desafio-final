@@ -147,14 +147,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
           birthDate: _dateController.text.replaceAll("/", "-"),
         ),
       );
-
       bool validateContactsSucess = await userRepository
           .patchContactsRegister(PatchContactsRegisterEntity(
         email: _emailController.text,
         mobilePhone: _mobileController.text.replaceAll("-", ""),
-        phone: _phoneController.text.replaceAll("-", ""),
+        phone: _phoneController.text.replaceAll("-", "")
+              //.replaceAll("(", "")
+              //.replaceAll(")", "")
+              //.replaceAll("-", "")
+              //.replaceAll("#", "")
+              //.replaceAll(" ", ""),
       ));
-
       bool validateAddressSucess =
           await userRepository.patchAddressRegister(PatchAddressRegisterEntity(
         cep: _cepController.text.replaceAll("#", "").replaceAll("-", ""),
@@ -165,12 +168,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         city: _cityController.text,
         state: _stateController.text,
       ));
-
-      //await userRepository.getUserDetails();
-      // final list = await userRepository.getAllEvents();
-      // print(list);
-      // loadUser();
-
       // if (!currentFocus.hasPrimaryFocus) {
       //   currentFocus.unfocus();
       // }
