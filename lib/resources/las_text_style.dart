@@ -194,19 +194,19 @@ abstract class LasTextStyle {
   );
 
   static const txtTitleYear = TextStyle(
-    fontWeight: FontWeight.w300,
-    fontSize: 14.0,
-    color: LasColors.txtEventPage,
+    fontWeight: FontWeight.w500,
+    fontSize: 16.0,
+    color: LasColors.textRegisterPage,
   );
 
-static const txtHistorycError = TextStyle(
+  static const txtHistorycError = TextStyle(
     fontWeight: FontWeight.w300,
     fontSize: 14.0,
     color: LasColors.txtAlertWidget,
   );
 
-static const txtHistorycDetails = TextStyle(
-    fontWeight: FontWeight.w700,
+  static const txtHistorycDetails = TextStyle(
+    fontWeight: FontWeight.w600,
     fontSize: 24.0,
     color: LasColors.txtAlertWidget,
   );
@@ -220,9 +220,9 @@ static const txtHistorycDetails = TextStyle(
     fontSize: 15.0,
     color: LasColors.txtHistorycPage,
   );
-
-
-
- 
-
+  static const txtHistorycDetailsTitleRow = TextStyle(
+    fontWeight: FontWeight.w500,
+    fontSize: 16.0,
+    color: LasColors.txtDetailsTitleRow,
+  );
 }

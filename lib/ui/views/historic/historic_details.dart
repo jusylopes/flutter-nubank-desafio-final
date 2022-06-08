@@ -51,7 +51,7 @@ class _HistoricDetailsPageState extends State<HistoricDetailsPage> {
                         } else {
                           return Column(
                             children: [
-                              const SizedBox(height: 20.0),
+                              const SizedBox(height: 25.0),
                               Container(
                                 height: 250.0,
                                 width: 350.0,
@@ -65,41 +65,73 @@ class _HistoricDetailsPageState extends State<HistoricDetailsPage> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 20),
+                              const SizedBox(height: 25.0),
                               Container(
                                 padding: const EdgeInsets.only(left: 30),
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  '${snapshot.data.name}',
-                                  style: LasTextStyle.txteventCardTitle,
+                                  '${snapshot.data.name}'.toUpperCase(),
+                                  style: LasTextStyle.txtHistorycDetails,
                                 ),
                               ),
-                              Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 30, vertical: 5),
-                                  alignment: Alignment.topLeft,
-                                  child: Text(
-                                    '${snapshot.data.description}',
-                                    style: LasTextStyle.txteventCardBody,
-                                    maxLines: 3,
-                                    overflow: TextOverflow.ellipsis,
-                                  )),
-                              Container(
-                                padding: const EdgeInsets.only(top: 30),
-                                alignment: Alignment.bottomCenter,
-                                child: ButtonWidget(
-                                    colorButton: LasColors.buttonColor,
-                                    textButton: 'BAIXAR',
-                                    onPressed: () async {
-                                      const url =
-                                          'http://www.africau.edu/images/default/sample.pdf';
-                                      if (await canLaunch(url)) {
-                                        await launch(url);
-                                      } else {
-                                        throw 'Could not launch $url';
-                                      }
-                                    }),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 30.0),
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: 25.0),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: const [
+                                        Text('NOME:',
+                                            style: LasTextStyle
+                                                .txtHistorycDetailsTitleRow),
+                                        SizedBox(width: 50),
+                                        Text('NOME DO AMBULANTE:',
+                                            style: LasTextStyle
+                                                .txtHistorycDetailsBody),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 15),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: const [
+                                        Text('LOCAL:',
+                                            style: LasTextStyle
+                                                .txtHistorycDetailsTitleRow),
+                                        SizedBox(width: 50),
+                                        Text('NOME DO AMBULANTE:',
+                                            style: LasTextStyle
+                                                .txtHistorycDetailsBody),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 15),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: const [
+                                        Text('STATUS:',
+                                            style: LasTextStyle
+                                                .txtHistorycDetailsTitleRow),
+                                        SizedBox(width: 50),
+                                        Text('NOME DO AMBULANTE:',
+                                            style: LasTextStyle
+                                                .txtHistorycDetailsBody),
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
+                              const SizedBox(height:130),
+                              ButtonWidget(
+                                  colorButton: LasColors.buttonColor,
+                                  textButton: 'BAIXAR',
+                                  onPressed: () async {
+                                    const url =
+                                        'http://www.africau.edu/images/default/sample.pdf';
+                                    launch(url);
+                                  }),
                             ],
                           );
                         }
