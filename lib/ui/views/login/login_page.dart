@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
       if (validateSucess) {
         //para retirar erro de gap
         if (!mounted) return;
-        Navigator.of(context).popAndPushNamed(Routes.home);
+        Navigator.of(context).popAndPushNamed(Routes.historic);
       } else {
         _cpfController.clear();
         _passwordController.clear();

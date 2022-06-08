@@ -15,18 +15,18 @@
 //     }
 //   },
 
-class Accreditation {
-  final int id;
-  final String name;
-  final String description;
-  final String imageUrl;
-  final DateTime date;
+// class Accreditation {
+//   final int id;
+//   final String name;
+//   final String description;
+//   final String imageUrl;
+//   final DateTime date;
 
-  Accreditation({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.imageUrl,
-    required this.date,
-  });
-}
+//   Accreditation({
+//     required this.id,
+//     required this.name,
+//     required this.description,
+//     required this.imageUrl,
+//     required this.date,
+//   });
+// }
