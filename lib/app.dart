@@ -18,12 +18,8 @@ import 'package:projeto_final/ui/views/inicial/inicial_page.dart';
 import 'package:projeto_final/ui/views/login/login_page.dart';
 import 'package:projeto_final/ui/views/register/register_page.dart';
 import 'package:projeto_final/ui/views/splash/splash_page.dart';
-
-<<<<<<< HEAD
-=======
 import 'data/repositories/swagger_api_user_repository.dart';
 
->>>>>>> feature/dev
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
