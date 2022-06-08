@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field
-
 import 'package:flutter/material.dart';
 import 'package:mask/mask/mask.dart';
 import 'package:mask/models/hashtag_is.dart';
@@ -13,6 +11,7 @@ import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
@@ -51,8 +50,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
   final _stateController = TextEditingController();
   final _cityController = TextEditingController();
   final _complementController = TextEditingController();
-  final _cepRepository = CepRepository();   
-  String? fullName = 'carregando...'; 
+  final _cepRepository = CepRepository();
+  String? resultado;
+  // File? imageProfile;
+  String? fullName = 'carregando...';
+  var inputFormat = DateFormat('dd/MM/yyyy');
   Color _colorButton = LasColors.buttonColor;
   String _textButton = Strings.buttonRegister;
 
@@ -69,15 +71,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       city,
       complement;
   int? number;
-
-  void adjustDate() {
-    List<String> campos = _dateController.text.split('/');
-    int dia = int.parse(campos[0]);
-    int mes = int.parse(campos[1]);
-    int ano = int.parse(campos[2]);
-    _dateController.text = '$ano-$mes-${dia}T00:00:00.000Z';
-    debugPrint(_dateController.text);
-  }
 
   void loadUser() async {
     final user = await userRepository.getUserDetails();
@@ -101,11 +94,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
     city = address.city;
     state = address.state;
 
-    // controller recebendo dados das variaveis   
+    // controller recebendo dados das variaveis
+    // setState(() {
     _nameController.text = fullName.toString();
     _cpfController.text = cpf.toString();
-    _emailController.text = email.toString();   
-    _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');   
+    _emailController.text = email.toString();
+    // rg.toString().replaceAll('SSP', '').replaceAll('BA', '');
+    _dateController.text = date.toString().replaceAll('T00:00:00.000Z', '');
+    adjustDateInitial();
+    // print(_dateController);
     _rgController.text = rg.toString();
     phone != null ? _phoneController.text = phone.toString() : '';
     mobile != null ? _mobileController.text = mobile.toString() : '';
@@ -120,7 +117,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         : '';
     state != null ? _stateController.text = state.toString() : '';
     city != null ? _cityController.text = city.toString() : '';
-
   }
 
   void validateSuccess() async {
@@ -130,12 +126,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     });
 
     if (_formKey.currentState!.validate()) {
-      adjustDate();
-      // List<String> campos = _dateController.text.split('/');
-      // int dia = int.parse(campos[0]);
-      // int mes = int.parse(campos[1]);
-      // int ano = int.parse(campos[2]);
-      // String birthDate = '$ano-$mes-$dia';
+      adjustDateFinal();
       //comentado - parar de subir teclado
       // FocusScopeNode currentFocus = FocusScope.of(context);
       bool validateUserSucess = await userRepository.patchUserRegister(
@@ -143,21 +134,23 @@ class _EditProfilePageState extends State<EditProfilePage> {
           fullName: _nameController.text,
           cpf: _cpfController.text.replaceAll(".", "").replaceAll("-", ""),
           rg: _rgController.text,
-
           birthDate: _dateController.text.replaceAll("/", "-"),
+          email: _emailController.text,
         ),
       );
-      bool validateContactsSucess = await userRepository
-          .patchContactsRegister(PatchContactsRegisterEntity(
-        email: _emailController.text,
-        mobilePhone: _mobileController.text.replaceAll("-", ""),
-        phone: _phoneController.text.replaceAll("-", "")
-              //.replaceAll("(", "")
-              //.replaceAll(")", "")
-              //.replaceAll("-", "")
-              //.replaceAll("#", "")
-              //.replaceAll(" ", ""),
-      ));
+      bool validateContactsSucess = await userRepository.patchContactsRegister(
+        PatchContactsRegisterEntity(
+            email: _emailController.text,
+            mobilePhone: _mobileController.text.replaceAll("-", ""),
+            phone: _phoneController.text
+                // .replaceAll("(", "")
+                // .replaceAll(")", "")
+                .replaceAll("-", "")
+                .replaceAll("#", "")
+            // .replaceAll(" ", ""),
+            ),
+      );
+
       bool validateAddressSucess =
           await userRepository.patchAddressRegister(PatchAddressRegisterEntity(
         cep: _cepController.text.replaceAll("#", "").replaceAll("-", ""),
@@ -395,5 +388,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
         )
       ],
     );
+  }
+
+  void adjustDateInitial() {
+    List<String> campos = _dateController.text.split('-');
+    int dia = int.parse(campos[2]);
+    int mes = int.parse(campos[1]);
+    int ano = int.parse(campos[0]);
+    _dateController.text = '$dia-$mes-$ano'.replaceAll('-', '/');
+  }
+
+  void adjustDateFinal() {
+    List<String> campos = _dateController.text.split('/');
+    int dia = int.parse(campos[0]);
+    int mes = int.parse(campos[1]);
+    int ano = int.parse(campos[2]);
+    _dateController.text = '$ano-$mes-${dia}T00:00:00.000Z';
   }
 }

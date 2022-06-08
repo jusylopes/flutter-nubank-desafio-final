@@ -16,7 +16,6 @@ class HistoricPage extends StatefulWidget {
 
 class _HistoricPageState extends State<HistoricPage> {
   final userRepository = SwaggerApiUserRepository();
-  bool credenciado = true;
 
   @override
   Widget build(BuildContext context) {
@@ -32,29 +31,31 @@ class _HistoricPageState extends State<HistoricPage> {
           ),
           body: SafeArea(
             child: FutureBuilder<List>(
-              future: userRepository.getAllEvents(),
+              future: userRepository.getUserAccreditation(),
               builder: (context, AsyncSnapshot snapshot) {
                 if (!snapshot.hasData) {
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Center(
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 50),
-                          SizedBox(
-                            height: 120,
-                            child: Lottie.network(
-                                'https://assets4.lottiefiles.com/packages/lf20_ddxv3rxw.json'),
-                          ),
-                          const SizedBox(height: 50),
-                          const Text(Strings.alertHistoryc,
-                              style: LasTextStyle.txtHistorycDetails,
-                              textAlign: TextAlign.center),
-                        ],
-                      ),
-                    ),
+                  return const Padding(
+                    padding: EdgeInsets.all(10.0),
+                    child: CircularProgressIndicator(),
+                    // child: Center(
+                    //   child: Column(
+                    //     children: [
+                    //       const SizedBox(height: 50),
+                    //       SizedBox(
+                    //         height: 120,
+                    //         child: Lottie.network(
+                    //             'https://assets4.lottiefiles.com/packages/lf20_ddxv3rxw.json'),
+                    //       ),
+                    //       const SizedBox(height: 50),
+                    //       const Text(Strings.alertHistoryc,
+                    //           style: LasTextStyle.txtHistorycDetails,
+                    //           textAlign: TextAlign.center),
+                    //     ],
+                    //   ),
+                    // ),
                   );
-                } else {
+                }                
+                else {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -81,16 +82,16 @@ class _HistoricPageState extends State<HistoricPage> {
                                       const EdgeInsets.symmetric(vertical: 1.0),
                                   color: Colors.white,
                                   child: ListTile(
-                                    leading: const CircleAvatar(
+                                    leading: CircleAvatar(
                                       backgroundImage: NetworkImage(
-                                          'https://classic.exame.com/wp-content/uploads/2020/07/carnaval-20202-rio-divulgacao-riotur.jpg?quality=70&strip'),
+                                          '${snapshot.data[index].event.imageUrl}'),
                                     ),
                                     title: Text(
-                                      '${snapshot.data[index].name}',
+                                      '${snapshot.data[index].event.name}',
                                       style: LasTextStyle.txtTitlePageHistoryc,
                                     ),
                                     subtitle: Text(
-                                        '${snapshot.data[index].description}',
+                                        '${snapshot.data[index].event.description}',
                                         style:
                                             LasTextStyle.txtHistorycDetailsDesc,
                                         maxLines: 1,
@@ -106,7 +107,7 @@ class _HistoricPageState extends State<HistoricPage> {
                       ),
                     ],
                   );
-                }
+                } 
               },
             ),
           ),

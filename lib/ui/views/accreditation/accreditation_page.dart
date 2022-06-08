@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_colors.dart';
 import 'package:projeto_final/resources/las_strings.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
+import 'package:projeto_final/ui/router/routers.dart';
 import 'package:projeto_final/ui/views/components/alert_dialog.dart';
 import 'package:projeto_final/ui/views/components/app_bar.dart';
 import 'package:projeto_final/ui/views/components/background.dart';
@@ -11,7 +13,12 @@ import 'package:url_launcher/url_launcher.dart';
 var url = 'http://www.africau.edu/images/default/sample.pdf';
 
 class AccreditationPage extends StatefulWidget {
-  const AccreditationPage({super.key});
+  // final int id;
+
+  const AccreditationPage({
+    super.key,
+    // required this.id,
+  });
 
   @override
   State<AccreditationPage> createState() => _AccreditationPageState();
@@ -21,32 +28,39 @@ class _AccreditationPageState extends State<AccreditationPage> {
   bool isChecked = false;
   Color _colorButton = LasColors.buttonColorAwait;
   String _textButton = 'CREDENCIAR';
-
-  void showAlertSuccess() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => const Alert(
-            bodyAlert: Strings.txtmsgconfirmAccreditation,
-            txtButton: Strings.buttonOk));
-
-    setState(() {
-      _colorButton = LasColors.buttonColor;
-      _textButton = 'CREDENCIADO';
-    });
-  }
-
-  void showAlertErro() {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) => const Alert(
-            bodyAlert: 'Aceite o termo de participação.',
-            txtButton: Strings.buttonOk));
-  }
+  final userRepository = SwaggerApiUserRepository();
 
   @override
   Widget build(BuildContext context) {
+    final id = ModalRoute.of(context)!.settings.arguments as int;
+    void showAlertSuccess() async {
+      final accreditation = await userRepository.accreditation(id);
+      Navigator.of(context).pushNamed(
+        Routes.home,
+        arguments: id,
+      );
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => const Alert(
+              bodyAlert: Strings.txtmsgconfirmAccreditation,
+              txtButton: Strings.buttonOk));
+
+      setState(() {
+        _colorButton = LasColors.buttonColor;
+        _textButton = 'CREDENCIADO';
+      });
+    }
+
+    void showAlertErro() {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => const Alert(
+              bodyAlert: 'Aceite o termo de participação.',
+              txtButton: Strings.buttonOk));
+    }
+
     return Stack(children: [
       const BackgroundPage(),
       Scaffold(

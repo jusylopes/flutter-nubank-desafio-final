@@ -11,11 +11,11 @@ import 'package:projeto_final/ui/views/components/background.dart';
 import 'package:projeto_final/ui/views/components/button_widget.dart';
 
 class EventDetailsPage extends StatefulWidget {
-  // final int index;
+  // final int id;
 
   const EventDetailsPage({
     super.key,
-    // required this.index,
+    // required this.id,
   });
 
   @override
@@ -24,16 +24,7 @@ class EventDetailsPage extends StatefulWidget {
 
 class _EventDetailsPageState extends State<EventDetailsPage> {
   final userRepository = SwaggerApiUserRepository();
-  bool profileCompleted = true;
-
-  void completedPerfil() async {
-    if (profileCompleted) {
-      Navigator.popAndPushNamed(context, Routes.accreditation);
-    }
-    if (!profileCompleted) {
-      showAlertError();
-    }
-  }
+  late bool profileCompleted;
 
   void showAlertError() {
     showDialog(
@@ -78,9 +69,9 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                                 width: 350.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
-                                  image: const DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/cardEvent1.jpg'),
+                                  image: DecorationImage(
+                                    image: NetworkImage(
+                                        '${snapshot.data.imageUrl}'),
                                     fit: BoxFit.cover,
                                     alignment: Alignment.topCenter,
                                   ),
@@ -111,7 +102,21 @@ class _EventDetailsPageState extends State<EventDetailsPage> {
                                 child: ButtonWidget(
                                   colorButton: LasColors.buttonColor,
                                   textButton: 'CREDENCIAR',
-                                  onPressed: completedPerfil,
+                                  onPressed: () async {
+                                    final userDetails =
+                                        await userRepository.getUserDetails();
+                                    if (userDetails.rg != null) {
+                                      // profileCompleted = true;
+
+                                    } else {
+                                      // profileCompleted = false;
+                                      showAlertError();
+                                    }
+                                    Navigator.of(context).pushNamed(
+                                      Routes.accreditation,
+                                      arguments: snapshot.data.id as int,
+                                    );
+                                  },
                                 ),
                               ),
                             ],

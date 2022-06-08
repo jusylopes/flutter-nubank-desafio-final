@@ -44,7 +44,6 @@ class SwaggerApiUserRepository implements UserRepository {
       throw UsuarioNaoAutorizado(BaseErrorMessenger.Http_404('pagina'));
     }
 
-
     if (respostaLogin.statusCode == 201) {
       var urlRefresh =
           Uri.parse('https://cubos-las-api.herokuapp.com/token/refresh');
@@ -204,9 +203,9 @@ class SwaggerApiUserRepository implements UserRepository {
       throw (BaseErrorMessenger.Http_401('Não Autorizado'));
     }
 
-    if (respostaPatchUserRegister.statusCode == 400) {
-      throw (BaseErrorMessenger.Http_400('Má requisição'));
-    }
+    // if (respostaPatchUserRegister.statusCode == 400) {
+    //   throw (BaseErrorMessenger.Http_400('Má requisição'));
+    // }
     if (respostaPatchUserRegister.statusCode == 409) {
       throw (BaseErrorMessenger.Http_409('Email ou CPF já cadastrado'));
     }
@@ -377,7 +376,6 @@ class SwaggerApiUserRepository implements UserRepository {
 
     print(eventStatus);
 
-
     var json = jsonDecode(respostaEventStatus.body);
 
     final status = GetEvent(
@@ -402,10 +400,10 @@ class SwaggerApiUserRepository implements UserRepository {
     var respostaAccreditation = await http.post(
       url,
       headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
+        // 'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
       },
-      body: {'id': eventId},
+      body: {'id': '$eventId'},
     );
     var json = jsonDecode(respostaAccreditation.body);
 
@@ -418,7 +416,6 @@ class SwaggerApiUserRepository implements UserRepository {
     }
 
     print(json);
-
 
     if (respostaAccreditation.statusCode == 201) {
       debugPrint('Acredditation Ok');

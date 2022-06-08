@@ -7,7 +7,7 @@ class PatchUserRegisterMapper {
       "fullName": patchUserRegister.fullName,
       "rg": patchUserRegister.rg,
       "cpf": patchUserRegister.cpf,
-      //"email": patchUserRegister.email,
+      "email": patchUserRegister.email,
       // "profilePictureUrl": patchUserRegister.profilePictureUrl,
       "birthDate": patchUserRegister.birthDate,
     };
