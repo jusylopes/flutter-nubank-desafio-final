@@ -10,9 +10,11 @@ import 'package:projeto_final/ui/views/contact/contact_page.dart';
 import 'package:projeto_final/ui/views/edit_profile/edit_profile_page.dart';
 import 'package:projeto_final/ui/views/event/event_page.dart';
 import 'package:projeto_final/ui/views/event/event_page_details.dart';
-import 'package:projeto_final/ui/views/historic/historic_detalhes.dart';
-import 'package:projeto_final/ui/views/historic/historic_padge2.dart';
+import 'package:projeto_final/ui/views/historic/historic_details.dart';
+import 'package:projeto_final/ui/views/historic/historic_page.dart';
+import 'package:projeto_final/ui/views/historic/historic_page.dart';
 import 'package:projeto_final/ui/views/home/cubit/home_cubit.dart';
+import 'package:projeto_final/ui/views/historic/historic_detalhes.dart';
 import 'package:projeto_final/ui/views/home/home_page.dart';
 import 'package:projeto_final/ui/views/inicial/inicial_page.dart';
 import 'package:projeto_final/ui/views/login/login_page.dart';
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Roboto'),
       initialRoute: Routes.splash,
       routes: {
-        
+        Routes.splash: (context) => const SplashPage(),
         Routes.inicial: (context) => const InicialPage(),
         Routes.login: (context) => const LoginPage(),
         Routes.register: (context) => const RegisterPage(),
@@ -43,19 +45,10 @@ class MyApp extends StatelessWidget {
               child: const HomePage(),
             ),
         Routes.event: (context) => const EventPage(),
-        Routes.eventDetails: (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as Map;
-          return EventDetailsPage(id: args['id']);
-        },
-        Routes.accreditation: (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as Map;
-          return AccreditationPage(eventId: args['eventId']);
-        },
-        Routes.historic: (context) => const HistoricPage2(),
-        Routes.historicDetails: (context) {
-          final args = ModalRoute.of(context)!.settings.arguments as Map;
-          return HistoricDetailsPage(eventId: args['eventId']);
-        },
+        Routes.eventDetails: (context) => const EventDetailsPage(),
+        Routes.accreditation: (context) => const AccreditationPage(),
+        Routes.historic: (context) => const HistoricPage(),
+        Routes.historicDetails: (context) => const HistoricDetailsPage(),
         Routes.contact: (context) => const ContactPage(),
       },
       localizationsDelegates: const [
