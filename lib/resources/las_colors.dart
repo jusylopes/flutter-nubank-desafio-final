@@ -27,4 +27,5 @@ abstract class LasColors {
   static const Color txtCardHomePage = Color(0XFF0175b4);
   static const Color txtEventPage = Color(0XFF555770);
   static const Color txtHistorycPage = Color(0XFF8E90A6);
+  static const Color txtDetailsTitleRow = Color(0XFF8E90A6);
 }

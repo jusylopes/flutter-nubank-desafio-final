@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:projeto_final/data/repositories/swagger_api_user_repository.dart';
 import 'package:projeto_final/resources/las_text_style.dart';
 import 'package:projeto_final/ui/router/routers.dart';
@@ -30,21 +31,42 @@ class _HistoricPageState extends State<HistoricPage> {
             ),
           ),
           body: SafeArea(
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 50,
-                ),
-                Expanded(
-                  child: FutureBuilder<List>(
-                    future: userRepository.getAllEvents(),
-                    builder: (context, AsyncSnapshot snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(
-                            child: Text(Strings.alertHistoryc,
-                                style: LasTextStyle.txtHistorycError));
-                      } else {
-                        return Padding(
+            child: FutureBuilder<List>(
+              future: userRepository.getAllEvents(),
+              builder: (context, AsyncSnapshot snapshot) {
+                if (!snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Center(
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 50),
+                          SizedBox(
+                            height: 120,
+                            child: Lottie.network(
+                                'https://assets4.lottiefiles.com/packages/lf20_ddxv3rxw.json'),
+                          ),
+                          const SizedBox(height: 50),
+                          const Text(Strings.alertHistoryc,
+                              style: LasTextStyle.txtHistorycDetails,
+                              textAlign: TextAlign.center),
+                        ],
+                      ),
+                    ),
+                  );
+                } else {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.only(left: 16),
+                        child: Text(
+                          '2020',
+                          style: LasTextStyle.txtTitleYear,
+                        ),
+                      ),
+                      Expanded(
+                        child: Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: ListView.builder(
                               itemCount: snapshot.data.length,
@@ -80,12 +102,12 @@ class _HistoricPageState extends State<HistoricPage> {
                                   ),
                                 );
                               }),
-                        );
-                      }
-                    },
-                  ),
-                ),
-              ],
+                        ),
+                      ),
+                    ],
+                  );
+                }
+              },
             ),
           ),
         ),
