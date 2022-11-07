@@ -76,3 +76,15 @@ Estes itens não são obrigatórios, porém desejáveis.
 - Documentação da API disponível no Swagger (https://bit.ly/3yRGEVR)
 - Link Termo de Participação PDF (http://www.africau.edu/images/default/sample.pdf)
 - Número do Whatsapp vocês que escolhe!!!
+
+
+ ### 🚀 Team
+<table>
+  <tr>
+  <td align="center"><a href="https://github.com/AliceSoaresEng"><img src="https://avatars.githubusercontent.com/u/71588383?v=4" width="60px;"/><br /><sub><b>Alice Soares</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/Nkaia"><img src="https://avatars.githubusercontent.com/u/85366480?v=4" width="60px;"/><br /><sub><b>Daiane Santos</b></sub></a><br /></td>
+         <td align="center"><a href="https://github.com/DaniiPereiira"><img src="https://avatars.githubusercontent.com/u/95453839?v=4" width="60px;"/><br /><sub><b>Dani Pereira</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/isaiaspires"><img src="https://avatars.githubusercontent.com/u/95889740?v=4" width="60px;"/><br /><sub><b>Isaias Pires</b></sub></a><br /></td>
+        <td align="center"><a href="https://github.com/jusylopes"><img  src="https://avatars.githubusercontent.com/u/95923104?v=4" width="60px;"/><br /><sub><b>Jusy Lopes</b></sub></a><br /></td>     
+  </tr>
+</table>
